@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title> Theme Configuration Setup </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-segment swipeGesture="true">
+    <ion-segment-button contentId="first">
+      <ion-label>Home Page</ion-label>
+    </ion-segment-button>
+    <ion-segment-button contentId="second">
+      <ion-label>Next Page</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <ion-segment-view>
+    <ion-segment-content id="first">
+      <form (ngSubmit)="onHomePageSetup()" [formGroup]="homeSetupForm">
+        <ion-label class="ion-padding">Header Options</ion-label>
+        <ion-grid>
+          <ion-row>
+            @for (option of headerOptions; track $index) {
+            <ion-col sizeXs="12" sizeSm="6" sizeMd="3">
+              <ion-card
+                button
+                (click)="onSelectHeader(option.code)"
+                [class.selected]="homeSetupForm.value.headercode===option.code"
+              >
+                <img [src]="option.image" width="100%" />
+                <ion-card-content>
+                  <strong>{{option.code}}</strong>
+                  <p>{{option.title}}</p>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+            }
+          </ion-row>
+        </ion-grid>
+
+        <ion-label class="ion-padding">Content Options</ion-label>
+        <ion-grid>
+          <ion-row>
+            @for (option of contentOptions; track $index) {
+            <ion-col sizeXs="12" sizeSm="6" sizeMd="3">
+              <ion-card
+                button
+                (click)="onSelectContent(option.code)"
+                [class.selected]="homeSetupForm.value.contentcode===option.code"
+              >
+                <img [src]="option.image" width="100%" />
+                <ion-card-content>
+                  <strong>{{option.code}}</strong>
+                  <p>{{option.title}}</p>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+            }
+          </ion-row>
+        </ion-grid>
+
+        <ion-button type="submit" color="success" expand="block">
+          Submit
+        </ion-button>
+      </form>
+    </ion-segment-content>
+    <ion-segment-content id="second"> </ion-segment-content>
+  </ion-segment-view>
+</ion-content>

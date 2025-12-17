@@ -1,0 +1,11 @@
+<div class="filter-scroll">
+  @for (filter of filters; track $index) {
+  <ion-button
+    fill="solid"
+    size="large"
+    color="primary"
+    class="ion-align-self-center"
+    >{{ filter.name }}</ion-button
+  >
+  }
+</div>

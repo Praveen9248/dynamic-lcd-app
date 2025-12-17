@@ -1,0 +1,11 @@
+<swiper-container
+  class="slides-container"
+  [loop]="slides.length > 0"
+  slides-per-view="1"
+  autoplay-delay="1000"
+>
+  @for (slide of slides; track $index) {
+
+  <swiper-slide class="slide-item"><img [src]="slide?.img" /></swiper-slide>
+  }
+</swiper-container>

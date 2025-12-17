@@ -1,0 +1,17 @@
+<ion-grid>
+  <ion-row>
+    @for (filter of filters; track $index) {
+    <ion-col
+      sizeSm="12"
+      sizeXs="12"
+      sizeMd="6"
+      sizeLg="3"
+      class="ion-align-self-center"
+    >
+      <ion-button color="success" size="large" fill="solid">
+        {{ filter.name }}
+      </ion-button>
+    </ion-col>
+    }
+  </ion-row>
+</ion-grid>

@@ -1,20 +1,23 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
+<ion-header>
+  @if (headerCode()==='0001') {
+  <app-header1></app-header1>
+  }@else if (headerCode()==='0010') {
+  <app-header2></app-header2>
+  }@else if (headerCode()==='0100') {
+  <app-header3></app-header3>
+  }@else{
+  <app-header4></app-header4>
+  }
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+<ion-content>
+  @if (contentCode()==='0002') {
+  <app-content1></app-content1>
+  }@else if (contentCode()==='0020') {
+  <app-content2></app-content2>
+  }@else if (contentCode()==='0200') {
+  <app-content3></app-content3>
+  }@else{
+  <app-content4></app-content4>
+  }
 </ion-content>
