@@ -8,6 +8,5 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Content4Component implements OnInit {
   constructor() {}
-
   ngOnInit() {}
 }

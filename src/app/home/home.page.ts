@@ -7,14 +7,14 @@ import { Component, signal } from '@angular/core';
   standalone: false,
 })
 export class HomePage {
-  headerCode = signal<string>('0001');
-  contentCode = signal<string>('0002');
+  headerCode = signal<string>('');
+  contentCode = signal<string>('');
 
   ngOnInit() {
     if (localStorage.getItem('layoutOptions')) {
-      console.log(true);
+      // console.log(true);
       let res = JSON.parse(localStorage.getItem('layoutOptions')!);
-      console.log(res);
+      // console.log(res);
       this.headerCode.set(res.homePageLayout.headercode);
       this.contentCode.set(res.homePageLayout.contentcode);
     }

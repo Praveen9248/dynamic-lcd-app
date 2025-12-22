@@ -13,6 +13,7 @@ import { Content2Component } from '../components/content/content2/content2.compo
 import { Content3Component } from '../components/content/content3/content3.component';
 import { Content4Component } from '../components/content/content4/content4.component';
 import { content1Module } from '../components/content/content1/content1.module';
+import { CustomizedButtonComponent } from '../components/customized-button/customized-button.component';
 
 @NgModule({
   imports: [
@@ -31,6 +32,7 @@ import { content1Module } from '../components/content/content1/content1.module';
     Content2Component,
     Content3Component,
     Content4Component,
+    CustomizedButtonComponent,
   ],
 })
 export class HomePageModule {}

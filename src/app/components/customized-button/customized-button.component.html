@@ -1,0 +1,32 @@
+<ion-card
+  button
+  class="dynamic-btn"
+  [ngStyle]="{
+    width: buttonConfig.width,
+    height: buttonConfig.height,
+    'border-radius': buttonConfig.borderRadius,
+    border: buttonConfig.border,
+    background:
+      buttonType === 'text-only' ? buttonData.background : 'transparent'
+  }"
+>
+  @if (buttonType==='image-only' || buttonType==='textImage') {
+  <img class="btn-image" [src]="buttonData.imageUrl" alt="" />
+  }
+
+  <!-- make sure such that it works only for text and text image parts -->
+  @if(buttonType==='text-only' || buttonType==='textImage'){
+
+  <div class="overlay-wrapper" [ngClass]="['h-' + hPos, 'v-' + vPos]">
+    <ion-text
+      class="overlay-text"
+      [ngStyle]="{
+        'font-size': buttonConfig.fontSize,
+        color: buttonConfig.color
+      }"
+    >
+      <ng-content></ng-content>
+    </ion-text>
+  </div>
+  }
+</ion-card>

@@ -6,6 +6,8 @@
 >
   @for (slide of slides; track $index) {
 
-  <swiper-slide class="slide-item"><img [src]="slide?.img" /></swiper-slide>
+  <swiper-slide class="slide-item"
+    ><img [src]="slide?.img" class="slide-img"
+  /></swiper-slide>
   }
 </swiper-container>

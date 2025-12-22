@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { SetupPageRoutingModule } from './setup-routing.module';
 
 import { SetupPage } from './setup.page';
+import { QRCodeComponent } from 'angularx-qrcode';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { SetupPage } from './setup.page';
     IonicModule,
     SetupPageRoutingModule,
     ReactiveFormsModule,
+    QRCodeComponent,
   ],
   declarations: [SetupPage],
 })
