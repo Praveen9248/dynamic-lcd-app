@@ -1,3 +1,11 @@
-<p>
-  content2-component works!
-</p>
+<div class="options-wrapper">
+  @for (opt of Options; track $index) {
+  <app-dynamic-button
+    [buttonData]="{ imageUrl: opt.imageUrl }"
+    buttonType="textImage"
+    vPos="bottom"
+    hPos="center"
+    >{{ opt.name }}</app-dynamic-button
+  >
+  }
+</div>

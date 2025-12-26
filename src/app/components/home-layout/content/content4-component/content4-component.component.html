@@ -1,3 +1,8 @@
-<p>
-  content4-component works!
-</p>
+<div class="btnContainer">
+  <app-dynamic-button
+    buttonType="text-only"
+    [buttonData]="{ background: 'yellow' }"
+    (click)="handleClick()"
+    >abc</app-dynamic-button
+  >
+</div>

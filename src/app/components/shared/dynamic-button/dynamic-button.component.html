@@ -1,0 +1,11 @@
+<ion-card button class="dynamicBtn" [ngStyle]="dynamicStyles">
+  @if (buttonType==='image-only' || buttonType==='textImage') {
+  <ion-img [src]="buttonData?.imageUrl" [alt]="" class="imgBtn"></ion-img>
+  } @if (buttonType==='text-only' || buttonType==='textImage') {
+  <div class="overlay-wrapper" [ngClass]="['h-' + hPos, 'v-' + vPos]">
+    <ion-text>
+      <ng-content></ng-content>
+    </ion-text>
+  </div>
+  }
+</ion-card>

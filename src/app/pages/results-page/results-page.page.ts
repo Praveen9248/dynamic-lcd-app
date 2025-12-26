@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, signal } from '@angular/core';
+import { ResultComponentCodeMap } from 'src/app/mappings/resultComponentCodeMap';
 
 @Component({
   selector: 'app-results-page',
@@ -7,7 +9,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./results-page.page.scss'],
 })
 export class ResultsPagePage implements OnInit {
-  constructor() {}
+  resultComponent = signal<any>('');
+  constructor(private httpClient: HttpClient) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.httpClient
+      .get<any>('assets/configuration/resultPageConfiguration.json')
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.resultComponent.set(ResultComponentCodeMap[res.resultCode]);
+        },
+      });
+  }
 }

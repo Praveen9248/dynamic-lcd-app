@@ -1,3 +1,15 @@
-<p>
-  content3-component works!
-</p>
+<ion-grid class="ion-padding">
+  <ion-row>
+    @for (opt of Options; track $index) {
+    <ion-col sizeXs="12" sizeSm="12" sizeMd="6" sizeLg="4" sizeXl="3">
+      <app-dynamic-button
+        buttonType="textImage"
+        [buttonData]="{ imageUrl: opt.imageUrl }"
+        vPos="bottom"
+        hPos="center"
+        >{{ opt.name }}</app-dynamic-button
+      >
+    </ion-col>
+    }
+  </ion-row>
+</ion-grid>

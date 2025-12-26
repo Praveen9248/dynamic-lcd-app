@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-content4-component',
@@ -6,8 +7,10 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './content4-component.component.html',
   styleUrls: ['./content4-component.component.scss'],
 })
-export class Content4ComponentComponent implements OnInit {
-  constructor() {}
+export class Content4ComponentComponent {
+  constructor(private router: Router) {}
 
-  ngOnInit() {}
+  handleClick() {
+    this.router.navigate(['dynamic-page']);
+  }
 }

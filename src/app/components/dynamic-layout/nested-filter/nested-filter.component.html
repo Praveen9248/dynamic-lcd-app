@@ -1,0 +1,12 @@
+<div class="filter-container">
+  @for (item of filters; track $index) {
+  <app-dynamic-button
+    buttonType="textImage"
+    [buttonData]="{ imageUrl: 'https://picsum.photos/500' }"
+    vPos="bottom"
+    hPos="center"
+    (click)="handleClick()"
+    >abc</app-dynamic-button
+  >
+  }
+</div>

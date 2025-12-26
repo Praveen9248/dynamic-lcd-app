@@ -1,0 +1,19 @@
+ion-img{
+    width: 50%;
+}
+
+.result-wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+ion-card{
+    flex: 1;
+}
+
+.product-list{
+    height: 620px;
+    overflow-y: auto;
+}

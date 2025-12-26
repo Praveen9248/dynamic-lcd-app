@@ -1,0 +1,77 @@
+<div class="result-wrapper">
+  <ion-img
+    [src]="
+      'https://image2url.com/r2/bucket2/images/1766742408529-bea64a50-5f20-4d51-a472-b5ba79ddcee0.png'
+    "
+    alt="random-location"
+  >
+  </ion-img>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Products of particular filter</ion-card-title>
+      <ion-card-subtitle>check out the categories</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-segment>
+        <ion-segment-button value="all" contentId="all">
+          <ion-label>All</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="sectionA" contentId="sectionA">
+          <ion-label>section A</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="sectionB" contentId="sectionB">
+          <ion-label>section B</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+
+      <ion-segment-view>
+        <ion-segment-content id="all">
+          <div class="product-list">
+            @for (prod of products; track $index) {
+
+            <ion-item>
+              <ion-thumbnail
+                ><ion-img [src]="prod.imageUrl"></ion-img
+              ></ion-thumbnail>
+              <ion-text
+                ><h1>{{ prod.name }}</h1></ion-text
+              >
+              <ion-button slot="end" color="danger">Blink LED</ion-button>
+            </ion-item>
+            }
+          </div></ion-segment-content
+        >
+        <ion-segment-content id="sectionA">
+          <div class="product-list">
+            @for (prod of sectionAProducts; track $index) {
+            <ion-item>
+              <ion-thumbnail
+                ><ion-img [src]="prod.imageUrl"></ion-img
+              ></ion-thumbnail>
+              <ion-text
+                ><h1>{{ prod.name }}</h1></ion-text
+              >
+              <ion-button slot="end" color="danger">Blink LED</ion-button>
+            </ion-item>
+            }
+          </div>
+        </ion-segment-content>
+        <ion-segment-content id="sectionB">
+          <div class="product-list">
+            @for (prod of sectionBProducts; track $index) {
+            <ion-item>
+              <ion-thumbnail
+                ><ion-img [src]="prod.imageUrl"></ion-img
+              ></ion-thumbnail>
+              <ion-text
+                ><h1>{{ prod.name }}</h1></ion-text
+              >
+              <ion-button slot="end" color="danger">Blink LED</ion-button>
+            </ion-item>
+            }
+          </div></ion-segment-content
+        >
+      </ion-segment-view>
+    </ion-card-content>
+  </ion-card>
+</div>

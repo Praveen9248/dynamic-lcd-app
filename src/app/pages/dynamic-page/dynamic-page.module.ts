@@ -7,10 +7,9 @@ import { IonicModule } from '@ionic/angular';
 import { DynamicPagePageRoutingModule } from './dynamic-page-routing.module';
 
 import { DynamicPagePage } from './dynamic-page.page';
-import { Header1ComponentComponent } from 'src/app/components/home-layout/header/header1-component/header1-component.component';
-import { Header2ComponentComponent } from 'src/app/components/home-layout/header/header2-component/header2-component.component';
-import { Header3ComponentComponent } from 'src/app/components/home-layout/header/header3-component/header3-component.component';
-import { Content1ComponentComponent } from 'src/app/components/home-layout/content/content1-component/content1-component.component';
+import { NestedFilterComponent } from 'src/app/components/dynamic-layout/nested-filter/nested-filter.component';
+import { DynamicButtonComponent } from 'src/app/components/shared/dynamic-button/dynamic-button.component';
+import { DynamicButtonModule } from 'src/app/components/shared/dynamic-button/dynamic-button.module';
 
 @NgModule({
   imports: [
@@ -18,13 +17,9 @@ import { Content1ComponentComponent } from 'src/app/components/home-layout/conte
     FormsModule,
     IonicModule,
     DynamicPagePageRoutingModule,
+    DynamicButtonModule,
   ],
-  declarations: [
-    DynamicPagePage,
-    Header1ComponentComponent,
-    Header2ComponentComponent,
-    Header3ComponentComponent,
-    Content1ComponentComponent,
-  ],
+
+  declarations: [DynamicPagePage, NestedFilterComponent],
 })
 export class DynamicPagePageModule {}
