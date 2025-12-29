@@ -14,13 +14,17 @@ export class DynamicButtonComponent {
     border: string;
     fontSize: string;
     color: string;
+    textTransform: string;
+    fontWeight: string;
   } = {
     width: '300px',
     height: '200px',
     borderRadius: '40px',
     border: '4px solid white',
-    color: 'red',
-    fontSize: '60px',
+    color: 'pink',
+    fontSize: 'x-large',
+    textTransform: 'uppercase',
+    fontWeight: '900',
   };
   @Input() buttonType!: any;
   @Input() buttonData!: any;
@@ -34,6 +38,9 @@ export class DynamicButtonComponent {
       'border-radius': this.buttonConfig.borderRadius,
       border: this.buttonConfig.border,
       color: this.buttonConfig.color,
+      'font-size': this.buttonConfig.fontSize,
+      'text-transform': this.buttonConfig.textTransform,
+      'font-weight': this.buttonConfig.fontWeight,
       background:
         this.buttonType === 'text-only'
           ? this.buttonData.background

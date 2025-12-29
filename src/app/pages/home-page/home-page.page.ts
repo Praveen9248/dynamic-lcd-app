@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { ContentCodeMap } from 'src/app/mappings/contentCodeMap';
 import { HeaderCodeMap } from 'src/app/mappings/headerCodeMap';
+import { PageFlowService } from 'src/app/services/pageFlow/page-flow-service';
 
 @Component({
   selector: 'app-home-page',
@@ -9,26 +9,16 @@ import { HeaderCodeMap } from 'src/app/mappings/headerCodeMap';
   templateUrl: './home-page.page.html',
   styleUrls: ['./home-page.page.scss'],
 })
-export class HomePagePage implements OnInit {
-  headerComponent = signal<any>('');
-  contentComponent = signal<any>('');
+export class HomePagePage {
+  pageFlowService = inject(PageFlowService);
 
-  constructor(private httpClient: HttpClient) {}
+  headerComponent = computed(() => {
+    const code = this.pageFlowService.homeHeaderCode();
+    return code ? HeaderCodeMap[code] : null;
+  });
 
-  ngOnInit() {
-    this.httpClient
-      .get<any>('assets/configuration/homePageConfiguration.json')
-      .subscribe({
-        next: (res) => {
-          this.headerComponent.set(HeaderCodeMap[res.headerCode]);
-          this.contentComponent.set(ContentCodeMap[res.contentCode]);
-        },
-        error: (err) => {
-          console.log(err);
-        },
-        complete: () => {
-          console.log('codes fetched from api!!');
-        },
-      });
-  }
+  contentComponent = computed(() => {
+    const code = this.pageFlowService.homeContentCode();
+    return code ? ContentCodeMap[code] : null;
+  });
 }

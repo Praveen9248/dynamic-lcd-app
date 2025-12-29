@@ -1,3 +1,29 @@
-<p>
-  list-filter works!
-</p>
+<div class="results-wrapper">
+  <img src="https://picsum.photos/id/27/960/540" alt="" class="side-banner" />
+  <ion-card class="side-container">
+    <ion-card-header> Product Filters </ion-card-header>
+    @for (item of items; track $index) {
+    <ion-chip>{{ item }}</ion-chip>
+    }
+    <ion-card-content class="handle-scroll">
+      <ion-grid>
+        <ion-row>
+          @for (item of items; track $index) {
+          <ion-col sizeXs="4" size="">
+            <ion-card>
+              <img src="https://picsum.photos/200/200" alt="" />
+              <ion-card-header>
+                <ion-card-title>abc</ion-card-title>
+                <ion-card-subtitle>abc</ion-card-subtitle>
+              </ion-card-header>
+              <ion-card-content>
+                <ion-text><h1>price $123</h1></ion-text>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          }
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</div>

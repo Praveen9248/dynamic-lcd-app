@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { PageFlowService } from 'src/app/services/pageFlow/page-flow-service';
 
 @Component({
   selector: 'app-nested-filter',
@@ -8,10 +9,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./nested-filter.component.scss'],
 })
 export class NestedFilterComponent {
-  constructor(private router: Router) {}
+  pageFlowService = inject(PageFlowService);
+
   filters = ['mens', 'womens', 'kids', 'old-age', 'baby-clothes'];
 
   handleClick() {
-    this.router.navigate(['results-page']);
+    this.pageFlowService.goToNextPage();
   }
 }

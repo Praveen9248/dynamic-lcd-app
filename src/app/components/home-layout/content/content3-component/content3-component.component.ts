@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { PageFlowService } from 'src/app/services/pageFlow/page-flow-service';
 
 @Component({
   selector: 'app-content3-component',
@@ -7,6 +8,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./content3-component.component.scss'],
 })
 export class Content3ComponentComponent {
+  pageFlowService = inject(PageFlowService);
+
   Options = [
     {
       name: 'Traditional wear',
@@ -54,4 +57,8 @@ export class Content3ComponentComponent {
         'https://image2url.com/r2/bucket2/images/1766731480219-b3f3d999-67ca-4e2a-ab08-23a62110fca6.png',
     },
   ];
+
+  onFilter() {
+    this.pageFlowService.goToNextPage();
+  }
 }

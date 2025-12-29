@@ -1,5 +1,10 @@
-<swiper-container [loop]="slides.length > 0" autoplay-delay="1000">
-  @for (slide of slides; track $index) {
-  <swiper-slide><ion-img [src]="slide.imgUrl"></ion-img></swiper-slide>
-  }
-</swiper-container>
+<div class="slides-overlay-wrapper">
+  <swiper-container [loop]="slides.length > 0" autoplay-delay="1000">
+    @for (slide of slides; track $index) {
+    <swiper-slide class="slide">
+      <ion-img [src]="slide.imgUrl"></ion-img>
+    </swiper-slide>
+    }
+  </swiper-container>
+  <ion-button class="startBtn" (click)="onStart()">start</ion-button>
+</div>

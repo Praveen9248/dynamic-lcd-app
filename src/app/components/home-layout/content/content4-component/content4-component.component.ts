@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { PageFlowService } from 'src/app/services/pageFlow/page-flow-service';
 
 @Component({
   selector: 'app-content4-component',
@@ -8,9 +9,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./content4-component.component.scss'],
 })
 export class Content4ComponentComponent {
-  constructor(private router: Router) {}
+  pageFlowService = inject(PageFlowService);
 
   handleClick() {
-    this.router.navigate(['dynamic-page']);
+    this.pageFlowService.goToNextPage();
   }
 }

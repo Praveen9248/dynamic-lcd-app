@@ -1,8 +1,26 @@
 {
   "layoutConfigured": true,
   "flow": {
-    "home": {},
-    "intermediate": {},
-    "result": {}
+    "home": {
+      "data":{
+        "headerCode":"H1000",
+        "contentCode":"C1000"
+      },
+      "nextPage":"intermediate",
+      "prevPage":null
+    },
+    "intermediate": {
+      "enabled": true,
+      "pages": ["F001", "F002", "F003"],
+      "nextPage": "result",
+      "prevPage": "home"
+    },
+    "result": {
+      "data":{
+        "resultCode":"R0001"
+      },
+      "nextPage":null,
+      "prevPage":"intermediate"
+    }
   }
 }

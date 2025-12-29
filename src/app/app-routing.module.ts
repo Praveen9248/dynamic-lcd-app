@@ -3,21 +3,21 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'home-page',
+    path: 'home',
     loadChildren: () =>
       import('./pages/home-page/home-page.module').then(
         (m) => m.HomePagePageModule
       ),
   },
   {
-    path: 'dynamic-page',
+    path: 'intermediate',
     loadChildren: () =>
       import('./pages/dynamic-page/dynamic-page.module').then(
         (m) => m.DynamicPagePageModule
       ),
   },
   {
-    path: 'results-page',
+    path: 'result',
     loadChildren: () =>
       import('./pages/results-page/results-page.module').then(
         (m) => m.ResultsPagePageModule
@@ -25,8 +25,16 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home-page',
+    redirectTo: 'home',
     pathMatch: 'full',
+  },
+
+  {
+    path: 'layout-setup',
+    loadChildren: () =>
+      import('./pages/layout-setup/layout-setup.module').then(
+        (m) => m.LayoutSetupPageModule
+      ),
   },
 ];
 

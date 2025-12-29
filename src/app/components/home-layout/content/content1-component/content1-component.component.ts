@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { PageFlowService } from 'src/app/services/pageFlow/page-flow-service';
 import { register } from 'swiper/element/bundle';
 
 register();
@@ -9,24 +11,30 @@ register();
   styleUrls: ['./content1-component.component.scss'],
 })
 export class Content1ComponentComponent {
+  pageFlowService = inject(PageFlowService);
+
   slides = [
     {
-      imgUrl: 'https://picsum.photos/id/1/1200/700',
+      imgUrl: 'https://picsum.photos/id/30/1920/480',
     },
     {
-      imgUrl: 'https://picsum.photos/id/2/1200/700',
+      imgUrl: 'https://picsum.photos/id/29/1920/480',
     },
     {
-      imgUrl: 'https://picsum.photos/id/3/1200/700',
+      imgUrl: 'https://picsum.photos/id/20/1920/480',
     },
     {
-      imgUrl: 'https://picsum.photos/id/4/1200/700',
+      imgUrl: 'https://picsum.photos/id/24/1920/480',
     },
     {
-      imgUrl: 'https://picsum.photos/id/5/1200/700',
+      imgUrl: 'https://picsum.photos/id/25/1920/480',
     },
     {
-      imgUrl: 'https://picsum.photos/id/6/1200/700',
+      imgUrl: 'https://picsum.photos/id/26/1920/480',
     },
   ];
+
+  onStart() {
+    this.pageFlowService.goToNextPage();
+  }
 }
