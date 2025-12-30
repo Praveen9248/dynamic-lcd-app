@@ -3,6 +3,7 @@
     @for (opt of Options; track $index) {
     <ion-col sizeXs="12" sizeSm="12" sizeMd="6" sizeLg="4" sizeXl="3">
       <app-dynamic-button
+        style="display: block; width: fit-content; margin: 0 auto"
         buttonType="textImage"
         [buttonData]="{ imageUrl: opt.imageUrl }"
         vPos="bottom"

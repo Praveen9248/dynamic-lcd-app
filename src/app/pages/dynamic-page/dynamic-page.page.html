@@ -1,3 +1,14 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-text-center"
+      >{{this.currentPage()?.data?.title}}</ion-title
+    >
+  </ion-toolbar>
+</ion-header>
 <ion-content>
-  <app-nested-filter></app-nested-filter>
+  <ng-template #dynamicView></ng-template>
 </ion-content>
+<ion-footer class="ion-text-center">
+  <ion-button (click)="goToPrevPage()">back</ion-button>
+  <ion-button (click)="goToHome()">Home</ion-button>
+</ion-footer>

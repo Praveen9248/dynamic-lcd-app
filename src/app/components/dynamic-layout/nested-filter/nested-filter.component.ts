@@ -1,5 +1,4 @@
-import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { PageFlowService } from 'src/app/services/pageFlow/page-flow-service';
 
 @Component({
@@ -10,10 +9,15 @@ import { PageFlowService } from 'src/app/services/pageFlow/page-flow-service';
 })
 export class NestedFilterComponent {
   pageFlowService = inject(PageFlowService);
+  @Input() title!: string;
+  @Output() action = new EventEmitter<any>();
 
   filters = ['mens', 'womens', 'kids', 'old-age', 'baby-clothes'];
 
-  handleClick() {
-    this.pageFlowService.goToNextPage();
+  handleFilter(filter: any) {
+    this.action.emit({
+      type: 'filter selected',
+      payload: filter,
+    });
   }
 }

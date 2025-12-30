@@ -3,15 +3,15 @@
   "flow": {
     "home": {
       "data":{
-        "headerCode":"H1000",
-        "contentCode":"C1000"
+        "headerCode":"H0001",
+        "contentCode":"C0010"
       },
       "nextPage":"intermediate",
       "prevPage":null
     },
     "intermediate": {
       "enabled": true,
-      "pages": ["F001", "F002", "F003"],
+      "pages": [{"data":{"code":"F0001","title":"Category Filter"}}],
       "nextPage": "result",
       "prevPage": "home"
     },

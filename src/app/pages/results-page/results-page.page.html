@@ -1,3 +1,12 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-text-center">Results</ion-title>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
   <ng-container *ngComponentOutlet="resultComponent()"></ng-container>
 </ion-content>
+<ion-footer class="ion-text-center">
+  <ion-button (click)="goPrevPage()">Go Back</ion-button>
+  <ion-button (click)="goHome()">Home</ion-button>
+</ion-footer>

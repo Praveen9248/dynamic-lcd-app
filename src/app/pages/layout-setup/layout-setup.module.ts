@@ -8,13 +8,16 @@ import { LayoutSetupPageRoutingModule } from './layout-setup-routing.module';
 
 import { LayoutSetupPage } from './layout-setup.page';
 
+import { QRCodeComponent } from 'angularx-qrcode';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    LayoutSetupPageRoutingModule
+    LayoutSetupPageRoutingModule,
+    QRCodeComponent,
   ],
-  declarations: [LayoutSetupPage]
+  declarations: [LayoutSetupPage],
 })
 export class LayoutSetupPageModule {}

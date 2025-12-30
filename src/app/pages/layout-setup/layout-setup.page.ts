@@ -9,4 +9,9 @@ import { PageFlowService } from 'src/app/services/pageFlow/page-flow-service';
 })
 export class LayoutSetupPage {
   pageFlowService = inject(PageFlowService);
+
+  deviceCredentials: string = JSON.stringify({
+    deviceId: 'LCD-SOLUM-123',
+    passKey: 'SOLUM-IND-KA',
+  });
 }

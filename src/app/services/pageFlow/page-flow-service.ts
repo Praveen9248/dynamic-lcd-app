@@ -6,12 +6,17 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class PageFlowService {
-  private flowConfig = signal<any>(null);
+  flowConfig = signal<any>(null);
+
   router = inject(Router);
+
   httpClient = inject(HttpClient);
+
   currentPageKey = signal<
     'home' | 'intermediate' | 'result' | 'layout-setup' | null
   >(null);
+
+  currentIntermediateIdx = signal(0);
 
   layoutConfigurationStatus = computed(
     () => this.flowConfig()?.layoutConfigured
@@ -48,7 +53,40 @@ export class PageFlowService {
 
   goToNextPage() {
     let nextPageKey = this.flowConfig()?.flow[this.currentPageKey()!]?.nextPage;
+    if (nextPageKey === 'intermediate') {
+      if (this.flowConfig()?.flow[nextPageKey]?.enabled === false) {
+        this.router.navigate(['result']);
+        this.currentPageKey.set(nextPageKey);
+        return;
+      }
+    }
     this.router.navigate([nextPageKey]);
     this.currentPageKey.set(nextPageKey);
+  }
+
+  goToPrevPage() {
+    const currentPage = this.currentPageKey();
+
+    if (currentPage === 'intermediate') {
+      if (this.currentIntermediateIdx() > 0) {
+        // console.log('working');
+        this.currentIntermediateIdx.update((i) => i - 1);
+        return;
+      }
+      this.goToHomePage();
+      return;
+    }
+
+    if (currentPage === 'result') {
+      this.router.navigate(['intermediate']);
+      this.currentPageKey.set('intermediate');
+      return;
+    }
+  }
+
+  goToHomePage() {
+    this.currentIntermediateIdx.set(0);
+    this.router.navigate(['home']);
+    this.currentPageKey.set('home');
   }
 }

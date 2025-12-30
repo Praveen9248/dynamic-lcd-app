@@ -3,5 +3,5 @@ import { LocationFilterComponent } from '../components/results-layout/location-f
 
 export const ResultComponentCodeMap: Record<any, any> = {
   R0001: LocationFilterComponent,
-  R0002: ListFilterComponent,
+  R0010: ListFilterComponent,
 };

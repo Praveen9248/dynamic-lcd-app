@@ -1,20 +1,19 @@
 .side-banner{
-    width:50%;
+    width: 20%;
+    height: 100%;
 }
 
 .results-wrapper{
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
-    height: 540px;
+    height: 100%
 }
 
 .side-container{
     flex: auto;
+    margin:0;
 }
 
 .handle-scroll{
-    overflow-y: scroll;
-    height: 540px;
+    overflow-y: auto;
 }

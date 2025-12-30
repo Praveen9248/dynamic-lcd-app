@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { ResultComponentCodeMap } from 'src/app/mappings/resultComponentCodeMap';
+import { PageFlowService } from 'src/app/services/pageFlow/page-flow-service';
 
 @Component({
   selector: 'app-results-page',
@@ -8,18 +9,20 @@ import { ResultComponentCodeMap } from 'src/app/mappings/resultComponentCodeMap'
   templateUrl: './results-page.page.html',
   styleUrls: ['./results-page.page.scss'],
 })
-export class ResultsPagePage implements OnInit {
-  resultComponent = signal<any>('');
-  constructor(private httpClient: HttpClient) {}
+export class ResultsPagePage {
+  pageFlowService = inject(PageFlowService);
 
-  ngOnInit() {
-    this.httpClient
-      .get<any>('assets/configuration/resultPageConfiguration.json')
-      .subscribe({
-        next: (res) => {
-          console.log(res);
-          this.resultComponent.set(ResultComponentCodeMap[res.resultCode]);
-        },
-      });
+  resultComponent = computed(() => {
+    let code =
+      this.pageFlowService.flowConfig()?.flow?.result?.data?.resultCode;
+    return code ? ResultComponentCodeMap[code] : null;
+  });
+
+  goPrevPage() {
+    this.pageFlowService.goToPrevPage();
+  }
+
+  goHome() {
+    this.pageFlowService.goToHomePage();
   }
 }
