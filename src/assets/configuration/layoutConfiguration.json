@@ -4,7 +4,7 @@
     "home": {
       "data":{
         "headerCode":"H0001",
-        "contentCode":"C0010"
+        "contentCode":"C0001"
       },
       "nextPage":"intermediate",
       "prevPage":null
@@ -17,7 +17,7 @@
     },
     "result": {
       "data":{
-        "resultCode":"R0001"
+        "resultCode":"R0010"
       },
       "nextPage":null,
       "prevPage":"intermediate"
