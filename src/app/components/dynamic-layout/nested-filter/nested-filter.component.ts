@@ -12,7 +12,15 @@ export class NestedFilterComponent {
   @Input() title!: string;
   @Output() action = new EventEmitter<any>();
 
-  filters = ['mens', 'womens', 'kids', 'old-age', 'baby-clothes'];
+  filters = [
+    'mens',
+    'womens',
+    'kids',
+    'old-age',
+    'baby-clothes',
+    'shoes',
+    'sweaters',
+  ];
 
   handleFilter(filter: any) {
     this.action.emit({

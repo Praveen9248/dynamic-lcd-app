@@ -9,3 +9,7 @@
    height: 100%;
   -webkit-overflow-scrolling: touch;
 }
+
+.options-wrapper::-webkit-scrollbar{
+  display: none;
+}

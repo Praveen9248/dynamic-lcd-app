@@ -4,20 +4,20 @@
     "home": {
       "data":{
         "headerCode":"H0001",
-        "contentCode":"C0001"
+        "contentCode":"C0010"
       },
       "nextPage":"intermediate",
       "prevPage":null
     },
     "intermediate": {
       "enabled": true,
-      "pages": [{"data":{"code":"F0001","title":"Category Filter"}}],
+      "pages": [{"data":{"code":"F0001","title":"Category Filter"}},{"data":{"code":"F0001","title":"Brand Filter"}},{"data":{"code":"F0001","title":"Rating Filter"}}],
       "nextPage": "result",
       "prevPage": "home"
     },
     "result": {
       "data":{
-        "resultCode":"R0010"
+        "resultCode":"R0001"
       },
       "nextPage":null,
       "prevPage":"intermediate"

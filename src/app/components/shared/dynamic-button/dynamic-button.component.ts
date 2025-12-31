@@ -21,7 +21,7 @@ export class DynamicButtonComponent {
     height: '200px',
     borderRadius: '40px',
     border: '4px solid white',
-    color: 'pink',
+    color: 'yellow',
     fontSize: 'x-large',
     textTransform: 'uppercase',
     fontWeight: '900',
@@ -41,6 +41,7 @@ export class DynamicButtonComponent {
       'font-size': this.buttonConfig.fontSize,
       'text-transform': this.buttonConfig.textTransform,
       'font-weight': this.buttonConfig.fontWeight,
+
       background:
         this.buttonType === 'text-only'
           ? this.buttonData.background

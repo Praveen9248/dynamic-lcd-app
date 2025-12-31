@@ -1,7 +1,13 @@
 .filter-container{
     display: flex;
     flex-direction: row;
-    justify-content: center;
     align-items: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
     min-height: 100%;
+}
+
+.filter-container::-webkit-scrollbar {
+  display: none;
 }
