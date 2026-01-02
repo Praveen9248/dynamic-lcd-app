@@ -1,0 +1,32 @@
+{
+    "homePage": {
+        "headerContainer":{
+            "data":{
+                "title":"Touch Finding Solution",
+                "caption":"Your vision, now interactive.",
+                "logo": "https://image2url.com/r2/default/images/1767335054231-ca9fcfcd-8398-475f-95ce-f5bad3f3f35b.png"
+            },
+            "style":{
+                "backgroundColor":"#3880ff",
+                "position":"left"
+            }
+        },
+        "contentContainer":{
+            "data":{
+                "primaryCategory":[
+                    "Red Wine", "White Wine", "Sparkling Wine"
+                ],
+                "primarySlides":[
+                    "https://image2url.com/r2/default/images/1767336148276-6c610cc1-d229-4751-a556-3a9745d00600.png",
+                    "https://image2url.com/r2/default/images/1767336238747-233fe854-1c83-47ce-bf7d-7fe01b102e37.png",
+                    "https://image2url.com/r2/default/images/1767336304399-cd5eda6e-3ceb-4159-8bfc-c303bfca2775.png",
+                    "https://image2url.com/r2/default/images/1767336358802-0bed1102-dd76-449a-a4fd-54bc375b8166.png"
+                ]
+            },
+            "style":{
+                "backgroundColor":"white",
+                "backgroundImage":"https://image2url.com/r2/default/images/1767335729055-091cf9c6-06b8-4304-94b9-c8744d96162a.jpg"
+            }
+        }
+    }
+}

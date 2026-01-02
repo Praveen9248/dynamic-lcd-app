@@ -1,12 +1,19 @@
-<div class="options-wrapper">
-  @for (opt of Options; track $index) {
+<div
+  class="options-wrapper"
+  [style.background-image]="
+    'url(' + homeContext()?.contentData?.style?.backgroundImage + ')'
+  "
+  style="background-repeat: no-repeat; background-size: cover"
+>
+  @for (opt of homeContext()?.contentData?.data?.primaryCategory; track $index)
+  {
   <app-dynamic-button
-    [buttonData]="{ imageUrl: opt.imageUrl }"
-    buttonType="textImage"
+    [buttonData]="{ background: 'pink' }"
+    buttonType="text-only"
     vPos="bottom"
     hPos="center"
     (click)="onFilter()"
-    >{{ opt.name }}</app-dynamic-button
+    >{{ opt }}</app-dynamic-button
   >
   }
 </div>

@@ -1,8 +1,12 @@
 <div class="slides-overlay-wrapper">
-  <swiper-container [loop]="slides.length > 0" autoplay-delay="1000">
-    @for (slide of slides; track $index) {
+  <swiper-container
+    [loop]="homeContext()?.contentData?.data?.primarySlides?.length > 0"
+    autoplay-delay="1000"
+  >
+    @for (slide of homeContext()?.contentData?.data?.primarySlides; track
+    $index) {
     <swiper-slide class="slide">
-      <ion-img [src]="slide.imgUrl"></ion-img>
+      <ion-img [src]="slide"></ion-img>
     </swiper-slide>
     }
   </swiper-container>

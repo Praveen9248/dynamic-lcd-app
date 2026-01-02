@@ -17,7 +17,6 @@ import { Content3ComponentComponent } from 'src/app/components/home-layout/conte
 import { Content4ComponentComponent } from 'src/app/components/home-layout/content/content4-component/content4-component.component';
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { DynamicButtonComponent } from 'src/app/components/shared/dynamic-button/dynamic-button.component';
 import { DynamicButtonModule } from 'src/app/components/shared/dynamic-button/dynamic-button.module';
 
 @NgModule({

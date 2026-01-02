@@ -3,7 +3,7 @@
   "flow": {
     "home": {
       "data":{
-        "headerCode":"H0001",
+        "headerCode":"H0100",
         "contentCode":"C0010"
       },
       "nextPage":"intermediate",

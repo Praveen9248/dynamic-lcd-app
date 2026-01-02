@@ -1,8 +1,13 @@
-<ion-toolbar color="primary">
-  <ion-img src="https://picsum.photos/500" slot="start"> </ion-img>
+<ion-toolbar
+  [style.--background]="homeContext()?.headerData?.style?.backgroundColor"
+>
+  <ion-img [src]="homeContext()?.headerData?.data?.logo" slot="start">
+  </ion-img>
   <ion-title class="ion-text-center">
     <ion-text class="ion-text-center">
-      <div class="title">Header 3 Title</div>
+      <div class="title">
+        {{ homeContext()?.headerData?.data?.title }}
+      </div>
     </ion-text>
   </ion-title>
 </ion-toolbar>
