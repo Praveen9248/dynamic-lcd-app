@@ -1,8 +1,14 @@
-<div class="btnContainer">
+<div
+  class="btnContainer"
+  [style.background-image]="
+    'url(' + homeContext()?.contentData?.style?.backgroundImage + ')'
+  "
+  style="background-repeat: no-repeat; background-size: cover"
+>
   <app-dynamic-button
     buttonType="text-only"
-    [buttonData]="{ background: 'yellow' }"
+    [buttonData]="{ background: 'pink' }"
     (click)="handleClick()"
-    >abc</app-dynamic-button
+    >Start</app-dynamic-button
   >
 </div>

@@ -3,7 +3,7 @@
   "flow": {
     "home": {
       "data":{
-        "headerCode":"H0100",
+        "headerCode":"H0001",
         "contentCode":"C0010"
       },
       "nextPage":"intermediate",
@@ -11,7 +11,7 @@
     },
     "intermediate": {
       "enabled": true,
-      "pages": [{"data":{"code":"F0001","title":"Category Filter"}},{"data":{"code":"F0001","title":"Brand Filter"}},{"data":{"code":"F0001","title":"Rating Filter"}}],
+      "pages": [{"data":{"code":"F0001","title":"Country Filter"}},{"data":{"code":"F0001","title":"Type Filter"}},{"data":{"code":"F0001","title":"Body Type Filter"}}],
       "nextPage": "result",
       "prevPage": "home"
     },

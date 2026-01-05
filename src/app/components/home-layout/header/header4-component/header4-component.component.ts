@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { HOME_CONTEXT } from 'src/app/services/contexts/home-context-token';
 
 @Component({
   selector: 'app-header4-component',
@@ -6,8 +7,6 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './header4-component.component.html',
   styleUrls: ['./header4-component.component.scss'],
 })
-export class Header4ComponentComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
+export class Header4ComponentComponent {
+  homeContext = inject(HOME_CONTEXT);
 }

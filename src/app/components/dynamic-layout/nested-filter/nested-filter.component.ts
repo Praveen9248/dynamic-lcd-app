@@ -1,4 +1,12 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import {
+  Component,
+  computed,
+  EventEmitter,
+  inject,
+  Input,
+  Output,
+} from '@angular/core';
+import { NESTED_CONTEXT } from 'src/app/services/contexts/intermediateFilterContext/nested-context-token';
 import { PageFlowService } from 'src/app/services/pageFlow/page-flow-service';
 
 @Component({
@@ -12,15 +20,7 @@ export class NestedFilterComponent {
   @Input() title!: string;
   @Output() action = new EventEmitter<any>();
 
-  filters = [
-    'mens',
-    'womens',
-    'kids',
-    'old-age',
-    'baby-clothes',
-    'shoes',
-    'sweaters',
-  ];
+  nestedContext = inject(NESTED_CONTEXT);
 
   handleFilter(filter: any) {
     this.action.emit({

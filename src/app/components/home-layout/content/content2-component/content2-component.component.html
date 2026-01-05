@@ -5,15 +5,20 @@
   "
   style="background-repeat: no-repeat; background-size: cover"
 >
-  @for (opt of homeContext()?.contentData?.data?.primaryCategory; track $index)
-  {
-  <app-dynamic-button
-    [buttonData]="{ background: 'pink' }"
-    buttonType="text-only"
-    vPos="bottom"
-    hPos="center"
-    (click)="onFilter()"
-    >{{ opt }}</app-dynamic-button
-  >
-  }
+  <div class="options-inner">
+    @for (opt of homeContext()?.contentData?.data?.primaryCategory; track
+    $index) {
+    <app-dynamic-button
+      [buttonData]="{
+        background: opt?.data?.background,
+        imageUrl: opt?.data?.imageUrl
+      }"
+      [buttonType]="opt?.type"
+      vPos="bottom"
+      hPos="center"
+      (click)="onFilter()"
+      >{{ opt?.value }}</app-dynamic-button
+    >
+    }
+  </div>
 </div>

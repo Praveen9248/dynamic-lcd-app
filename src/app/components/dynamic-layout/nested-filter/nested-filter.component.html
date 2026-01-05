@@ -1,12 +1,20 @@
-<div class="filter-container">
-  @for (item of filters; track $index) {
-  <app-dynamic-button
-    buttonType="textImage"
-    [buttonData]="{ imageUrl: 'https://picsum.photos/500' }"
-    vPos="bottom"
-    hPos="center"
-    (click)="handleFilter(item)"
-    >{{ item }}</app-dynamic-button
-  >
-  }
+<div
+  class="filter-wrapper"
+  [style.background-image]="
+    'url(' + nestedContext()?.intermediateStyle.backgroundImage + ')'
+  "
+  style="background-repeat: no-repeat; background-size: cover"
+>
+  <div class="filter-inner">
+    @for (item of nestedContext()?.intermediateData; track $index) {
+    <app-dynamic-button
+      [buttonType]="item.type"
+      [buttonData]="{ background: item.data.background }"
+      vPos="bottom"
+      hPos="center"
+      (click)="handleFilter(item)"
+      >{{ item.value }}</app-dynamic-button
+    >
+    }
+  </div>
 </div>

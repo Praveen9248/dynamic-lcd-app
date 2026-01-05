@@ -6,9 +6,13 @@ import {
   ViewContainerRef,
   ComponentRef,
   effect,
+  Injector,
 } from '@angular/core';
 
 import { FilterCodeMap } from 'src/app/mappings/filterCodeMap';
+import { IntermediateContextService } from 'src/app/services/contexts/intermediateFilterContext/nested-context-service';
+import { NESTED_CONTEXT } from 'src/app/services/contexts/intermediateFilterContext/nested-context-token';
+import { DataService } from 'src/app/services/data/data-service';
 import { PageFlowService } from 'src/app/services/pageFlow/page-flow-service';
 
 @Component({
@@ -19,6 +23,9 @@ import { PageFlowService } from 'src/app/services/pageFlow/page-flow-service';
 })
 export class DynamicPagePage {
   pageFlowService = inject(PageFlowService);
+  dataService = inject(DataService);
+  intermediateContextService = inject(IntermediateContextService);
+  injector = inject(Injector);
 
   @ViewChild('dynamicView', {
     read: ViewContainerRef,
@@ -42,6 +49,10 @@ export class DynamicPagePage {
     return FilterCodeMap[code];
   });
 
+  intermediatePageData = computed(
+    () => this.dataService.dataConfig()?.intermediatePage
+  );
+
   constructor() {
     effect(() => {
       const component = this.currentComponent();
@@ -49,14 +60,38 @@ export class DynamicPagePage {
         this.loadComponent(component);
       }
     });
+
+    effect(() => {
+      if (!this.intermediatePageData()) {
+        return;
+      }
+      let code = this.pageFlowService.currentIntermediateIdx();
+      this.intermediateContextService.setIntermediateContext({
+        data: this.intermediatePageData()?.data[code],
+        style: this.intermediatePageData()?.style,
+      });
+    });
+  }
+
+  private createContextInjector() {
+    return Injector.create({
+      providers: [
+        {
+          provide: NESTED_CONTEXT,
+          useValue: this.intermediateContextService.context,
+        },
+      ],
+      parent: this.injector,
+    });
   }
 
   private loadComponent(component: any) {
     this.vcr.clear();
+    this.componentRef = this.vcr.createComponent(component, {
+      injector: this.createContextInjector(),
+    });
 
-    this.componentRef = this.vcr.createComponent(component);
-
-    // this.componentRef.instance.title = this.currentPage()?.data?.title;
+    this.componentRef.instance.title = this.currentPage()?.data?.title;
 
     if (this.componentRef.instance.action) {
       this.componentRef.instance.action.subscribe((action: any) => {
@@ -77,7 +112,6 @@ export class DynamicPagePage {
   }
 
   handleFilterNavigate(action: any) {
-    // console.log(action);
     this.goNextStep();
   }
 

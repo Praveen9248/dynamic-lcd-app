@@ -1,7 +1,9 @@
-<ion-toolbar color="primary">
+<ion-toolbar
+  [style.--background]="homeContext()?.headerData?.style?.backgroundColor"
+>
   <ion-title class="ion-text-center">
     <ion-text>
-      <div class="title">Header 4 Title</div>
+      <div class="title">{{ homeContext()?.headerData?.data?.title }}</div>
     </ion-text>
   </ion-title>
 </ion-toolbar>
