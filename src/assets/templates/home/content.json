@@ -1,0 +1,10 @@
+{
+    "dataSource":{
+        "url":"assests/data/products/categories.json"
+    },
+    "buttonConfig":{"type":"textImage"},
+    "uiConfig":{
+        "backgroundColor":"#252352",
+        "backgroundImageUrl":"https://image2url.com/r2/default/images/1767335729055-091cf9c6-06b8-4304-94b9-c8744d96162a.jpg"
+    }
+}

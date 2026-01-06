@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
+import { RESULTS_CONTEXT } from 'src/app/services/contexts/resultsContext/results-context-token';
 
 @Component({
   selector: 'app-list-filter',
@@ -7,7 +8,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./list-filter.component.scss'],
 })
 export class ListFilterComponent {
-  category = ['random', 'clothing', 'drinks', 'foodies'];
-  brands = ['z', 'y', 'x', 'w'];
-  items = ['random', 'clothing', 'drinks', 'foodies', 'games', 'kids-wear'];
+  resultContext = inject(RESULTS_CONTEXT);
+  filterData = signal<any>(null);
+
+  ngOnInit() {
+    this.filterData.set(this.resultContext()?.resultsData?.results);
+  }
+
+  onFilter(parameter: any) {
+    this.filterData.set(
+      this.resultContext()?.resultsData?.results.filter(
+        (product: any) => product.origin === parameter
+      )
+    );
+  }
 }

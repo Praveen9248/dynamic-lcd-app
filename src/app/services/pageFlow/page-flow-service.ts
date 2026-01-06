@@ -53,10 +53,11 @@ export class PageFlowService {
 
   goToNextPage() {
     let nextPageKey = this.flowConfig()?.flow[this.currentPageKey()!]?.nextPage;
+    console.log(nextPageKey);
     if (nextPageKey === 'intermediate') {
       if (this.flowConfig()?.flow[nextPageKey]?.enabled === false) {
         this.router.navigate(['result']);
-        this.currentPageKey.set(nextPageKey);
+        this.currentPageKey.set('result');
         return;
       }
     }
@@ -69,7 +70,6 @@ export class PageFlowService {
 
     if (currentPage === 'intermediate') {
       if (this.currentIntermediateIdx() > 0) {
-        // console.log('working');
         this.currentIntermediateIdx.update((i) => i - 1);
         return;
       }
@@ -78,6 +78,11 @@ export class PageFlowService {
     }
 
     if (currentPage === 'result') {
+      if (this.flowConfig()?.flow['intermediate']?.enabled === false) {
+        this.router.navigate(['home']);
+        this.currentPageKey.set('home');
+        return;
+      }
       this.router.navigate(['intermediate']);
       this.currentPageKey.set('intermediate');
       return;

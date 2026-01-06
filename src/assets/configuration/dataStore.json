@@ -116,6 +116,95 @@
         }
     },
     "resultPage":{
-
+      "data":{
+        "map":"https://image2url.com/r2/bucket2/images/1766742408529-bea64a50-5f20-4d51-a472-b5ba79ddcee0.png",
+        "results":[{
+          "id": "ww_001",
+          "name": "Jacob’s Creek Chardonnay",
+          "grape": "Chardonnay",
+          "origin": "Australia"
+        },
+        {
+          "id": "ww_002",
+          "name": "Sula Sauvignon Blanc",
+          "grape": "Sauvignon Blanc",
+          "origin": "India"
+        },
+        {
+          "id": "ww_003",
+          "name": "Yellow Tail Pinot Grigio",
+          "grape": "Pinot Grigio",
+          "origin": "Australia"
+        },
+        {
+          "id": "ww_004",
+          "name": "Barefoot Moscato",
+          "grape": "Moscato",
+          "origin": "USA"
+        },
+        {
+          "id": "ww_005",
+          "name": "Beringer White Zinfandel",
+          "grape": "Zinfandel",
+          "origin": "USA"
+        },{
+          "id": "rw_001",
+          "name": "Sula Shiraz",
+          "grape": "Shiraz",
+          "origin": "India"
+        },
+        {
+          "id": "rw_002",
+          "name": "Jacob’s Creek Cabernet Sauvignon",
+          "grape": "Cabernet Sauvignon",
+          "origin": "Australia"
+        },
+        {
+          "id": "rw_003",
+          "name": "Yellow Tail Merlot",
+          "grape": "Merlot",
+          "origin": "Australia"
+        },
+        {
+          "id": "rw_004",
+          "name": "Barefoot Pinot Noir",
+          "grape": "Pinot Noir",
+          "origin": "USA"},{
+          "id": "rw_005",
+          "name": "Hardys Shiraz",
+          "grape": "Shiraz",
+          "origin": "Australia"
+        },{
+          "id": "sw_001",
+          "name": "Moët & Chandon Brut",
+          "type": "Champagne",
+          "origin": "France"
+        },
+        {
+          "id": "sw_002",
+          "name": "Martini Prosecco",
+          "type": "Prosecco",
+          "origin": "Italy"
+        },
+        {
+          "id": "sw_003",
+          "name": "Freixenet Cava",
+          "type": "Cava",
+          "origin": "Spain"
+        },
+        {
+          "id": "sw_004",
+          "name": "Sula Brut Tropicale",
+          "type": "Brut Sparkling",
+          "origin": "India"
+        },
+        {
+          "id": "sw_005",
+          "name": "Jacob’s Creek Sparkling Chardonnay",
+          "type": "Sparkling Chardonnay",
+          "origin": "Australia"
+        }],
+        "filters":["Australia","India","USA","France","Italy","Spain"]
+      }
     }
 }

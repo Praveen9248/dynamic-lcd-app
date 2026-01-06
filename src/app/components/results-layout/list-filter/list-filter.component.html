@@ -4,8 +4,8 @@
     <ion-card-header class="filter-chips">
       <ion-card-title>Product Filters</ion-card-title>
       <ion-card-subtitle>
-        @for (item of items; track $index) {
-        <ion-chip>{{ item }}</ion-chip>
+        @for (item of resultContext()?.resultsData?.filters; track $index) {
+        <ion-chip (click)="onFilter(item)">{{ item }}</ion-chip>
         }
       </ion-card-subtitle>
     </ion-card-header>
@@ -13,17 +13,21 @@
     <ion-card-content class="handle-scroll">
       <ion-grid>
         <ion-row>
-          @for (item of items; track $index) {
+          @for (item of filterData(); track $index) {
           <ion-col sizeXs="3" sizeMd="4">
             <ion-card>
-              <img src="https://picsum.photos/200/200" alt="" />
+              <img src="https://picsum.photos/200/200" alt="" width="100%" />
               <ion-card-header>
-                <ion-card-title>abc</ion-card-title>
-                <ion-card-subtitle>abc</ion-card-subtitle>
+                <ion-card-title>{{ item.name }}</ion-card-title>
+                <ion-card-subtitle>{{ item.grape }}</ion-card-subtitle>
               </ion-card-header>
               <ion-card-content>
+                <ion-text
+                  ><h1>Origin : {{ item.origin }}</h1></ion-text
+                >
                 <ion-text><h1>price $123</h1></ion-text>
               </ion-card-content>
+              <ion-button color="danger">Blink LED</ion-button>
             </ion-card>
           </ion-col>
           }

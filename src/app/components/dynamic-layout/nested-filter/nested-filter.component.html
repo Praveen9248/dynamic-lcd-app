@@ -12,7 +12,7 @@
       [buttonData]="{ background: item.data.background }"
       vPos="bottom"
       hPos="center"
-      (click)="handleFilter(item)"
+      (click)="handleFilter(item.value)"
       >{{ item.value }}</app-dynamic-button
     >
     }

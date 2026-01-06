@@ -17,22 +17,25 @@
         <ion-segment-button value="all" contentId="all">
           <ion-label>All</ion-label>
         </ion-segment-button>
-        <ion-segment-button value="sectionA" contentId="sectionA">
-          <ion-label>section A</ion-label>
+        <ion-segment-button value="India" contentId="sectionA">
+          <ion-label>India</ion-label>
         </ion-segment-button>
-        <ion-segment-button value="sectionB" contentId="sectionB">
-          <ion-label>section B</ion-label>
+        <ion-segment-button value="USA" contentId="sectionB">
+          <ion-label>USA</ion-label>
         </ion-segment-button>
       </ion-segment>
 
       <ion-segment-view>
         <ion-segment-content id="all">
           <div class="product-list">
-            @for (prod of products; track $index) {
+            @for (prod of resultsContext()?.resultsData?.results; track $index)
+            {
 
             <ion-item>
               <ion-thumbnail
-                ><ion-img [src]="prod.imageUrl"></ion-img
+                ><ion-img
+                  [src]="'https://picsum.photos/id/' + $index + '/500'"
+                ></ion-img
               ></ion-thumbnail>
               <ion-text
                 ><h1>{{ prod.name }}</h1></ion-text
@@ -47,7 +50,9 @@
             @for (prod of sectionAProducts; track $index) {
             <ion-item>
               <ion-thumbnail
-                ><ion-img [src]="prod.imageUrl"></ion-img
+                ><ion-img
+                  [src]="'https://picsum.photos/id/' + $index + '/500'"
+                ></ion-img
               ></ion-thumbnail>
               <ion-text
                 ><h1>{{ prod.name }}</h1></ion-text
@@ -62,7 +67,9 @@
             @for (prod of sectionBProducts; track $index) {
             <ion-item>
               <ion-thumbnail
-                ><ion-img [src]="prod.imageUrl"></ion-img
+                ><ion-img
+                  [src]="'https://picsum.photos/id/' + $index + '/500'"
+                ></ion-img
               ></ion-thumbnail>
               <ion-text
                 ><h1>{{ prod.name }}</h1></ion-text
