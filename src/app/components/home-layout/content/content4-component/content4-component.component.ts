@@ -1,6 +1,5 @@
-import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { HOME_CONTEXT } from 'src/app/services/contexts/home-context-token';
+import { Component, computed, inject } from '@angular/core';
+import { ApiDataService } from 'src/app/services/api/api-data-service';
 import { PageFlowService } from 'src/app/services/pageFlow/page-flow-service';
 
 @Component({
@@ -11,7 +10,9 @@ import { PageFlowService } from 'src/app/services/pageFlow/page-flow-service';
 })
 export class Content4ComponentComponent {
   pageFlowService = inject(PageFlowService);
-  homeContext = inject(HOME_CONTEXT);
+  apiDataService = inject(ApiDataService);
+
+  contentDataSource = computed(() => this.apiDataService.homeContentData());
 
   handleClick() {
     this.pageFlowService.goToNextPage();

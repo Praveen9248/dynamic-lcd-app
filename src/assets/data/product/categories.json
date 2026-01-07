@@ -6,14 +6,14 @@
             "icon":"https://image2url.com/r2/bucket2/images/1767593523540-575f4ab4-c8c1-49ea-92b3-e1a6c1301e0c.png",
             "attributes":[
                 "country",
-                "Body",
+                "body",
                 "sweetness"
             ]
         },
         {
             "id":"Electronics",
             "label":"Electronics",
-            "icon":"https://image2url.com/r2/bucket2/images/1767593523540-575f4ab4-c8c1-49ea-92b3-e1a6c1301e0c.png",
+            "icon":"https://image2url.com/r2/bucket1/images/1767775042189-e96b702b-f1f9-49e6-af82-95f198ff01b3.png",
             "attributes":[
                 "wireless",
                 "noiseCancellation"

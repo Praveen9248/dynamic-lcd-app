@@ -1,19 +1,21 @@
 <div
   class="filter-wrapper"
   [style.background-image]="
-    'url(' + nestedContext()?.intermediateStyle.backgroundImage + ')'
+    'url(' + intermediateDataSource()?.uiConfig?.backgroundImageUrl + ')'
   "
   style="background-repeat: no-repeat; background-size: cover"
 >
   <div class="filter-inner">
-    @for (item of nestedContext()?.intermediateData; track $index) {
+    @for (attribute of attributes(); track $index) {
     <app-dynamic-button
-      [buttonType]="item.type"
-      [buttonData]="{ background: item.data.background }"
+      [buttonType]="intermediateDataSource()?.buttonConfig?.type"
+      [buttonData]="{
+        background: intermediateDataSource()?.buttonConfig?.background
+      }"
       vPos="bottom"
       hPos="center"
-      (click)="handleFilter(item.value)"
-      >{{ item.value }}</app-dynamic-button
+      (click)="handleFilter(attribute?.id)"
+      >{{ attribute?.label }}</app-dynamic-button
     >
     }
   </div>

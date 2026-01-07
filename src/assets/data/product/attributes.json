@@ -24,15 +24,15 @@
     "wireless":{
         "label":"Wireless",
         "options":[
-            {"id":"Yes","label":"Yes"},
-            {"id":"No","label":"No"}
+            {"id":true,"label":"true"},
+            {"id":false,"label":"false"}
         ]
     },
     "noiseCancellation":{
         "label":"Noise Cancellation",
         "options":[
-            {"id":"Yes","label":"Yes"},
-            {"id":"No","label":"No"}
+            {"id":true,"label":"true"},
+            {"id":false,"label":"false"}
         ]
     }
 }

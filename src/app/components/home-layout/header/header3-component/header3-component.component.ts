@@ -1,5 +1,5 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { HOME_CONTEXT } from 'src/app/services/contexts/home-context-token';
+import { Component, computed, inject } from '@angular/core';
+import { ApiDataService } from 'src/app/services/api/api-data-service';
 
 @Component({
   selector: 'app-header3-component',
@@ -8,5 +8,7 @@ import { HOME_CONTEXT } from 'src/app/services/contexts/home-context-token';
   styleUrls: ['./header3-component.component.scss'],
 })
 export class Header3ComponentComponent {
-  homeContext = inject(HOME_CONTEXT);
+  apiDataService = inject(ApiDataService);
+
+  headerDataSource = computed(() => this.apiDataService.homeHeaderData());
 }

@@ -21,7 +21,7 @@ export class DynamicButtonComponent {
     height: '200px',
     borderRadius: '40px',
     border: '4px solid white',
-    color: 'yellow',
+    color: '#CD5C5C',
     fontSize: 'x-large',
     textTransform: 'uppercase',
     fontWeight: '900',

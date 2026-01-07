@@ -8,11 +8,12 @@ import {
   effect,
   Injector,
 } from '@angular/core';
+import { switchMap, tap } from 'rxjs';
 
 import { FilterCodeMap } from 'src/app/mappings/filterCodeMap';
-import { IntermediateContextService } from 'src/app/services/contexts/intermediateFilterContext/nested-context-service';
-import { NESTED_CONTEXT } from 'src/app/services/contexts/intermediateFilterContext/nested-context-token';
-import { DataService } from 'src/app/services/data/data-service';
+import { ApiDataService } from 'src/app/services/api/api-data-service';
+import { ProductsContextService } from 'src/app/services/contexts/productsContext/products-context-service';
+import { PRODUCTS_CONTEXT } from 'src/app/services/contexts/productsContext/products-context-token';
 import { PageFlowService } from 'src/app/services/pageFlow/page-flow-service';
 
 @Component({
@@ -23,8 +24,8 @@ import { PageFlowService } from 'src/app/services/pageFlow/page-flow-service';
 })
 export class DynamicPagePage {
   pageFlowService = inject(PageFlowService);
-  dataService = inject(DataService);
-  intermediateContextService = inject(IntermediateContextService);
+  apiDataService = inject(ApiDataService);
+  productsContextService = inject(ProductsContextService);
   injector = inject(Injector);
 
   @ViewChild('dynamicView', {
@@ -35,50 +36,75 @@ export class DynamicPagePage {
 
   private componentRef?: ComponentRef<any>;
 
-  IntermediatePages = computed(
-    () => this.pageFlowService.flowConfig()?.flow?.intermediate?.pages ?? []
+  selectedCategoryAttributes = computed(() =>
+    this.productsContextService.selectedCategoryAttributes()
   );
 
-  currentPage = computed(
+  currentAttributePageKey = computed(
     () =>
-      this.IntermediatePages()[this.pageFlowService.currentIntermediateIdx()]
+      this.selectedCategoryAttributes()[
+        this.pageFlowService.currentIntermediateIdx()
+      ]
   );
 
-  currentComponent = computed(() => {
-    let code = this.currentPage()?.data?.code;
+  currentAttributePageComponent = computed(() => {
+    let code = 'F0001';
     return FilterCodeMap[code];
   });
 
-  intermediatePageData = computed(
-    () => this.dataService.dataConfig()?.intermediatePage
-  );
-
   constructor() {
     effect(() => {
-      const component = this.currentComponent();
+      const component = this.currentAttributePageComponent();
       if (component) {
         this.loadComponent(component);
       }
     });
 
     effect(() => {
-      if (!this.intermediatePageData()) {
+      if (!this.selectedCategoryAttributes()) {
         return;
       }
-      let code = this.pageFlowService.currentIntermediateIdx();
-      this.intermediateContextService.setIntermediateContext({
-        data: this.intermediatePageData()?.data[code],
-        style: this.intermediatePageData()?.style,
-      });
+
+      let idx = this.pageFlowService.currentIntermediateIdx();
+      let attributeContext = this.productsContextService.attributesContext();
+      let attributeKeys = this.selectedCategoryAttributes();
+
+      if (!attributeContext || !attributeKeys?.length) {
+        return;
+      }
+
+      let selectedAttributeKey = attributeKeys[idx];
+
+      if (!selectedAttributeKey) {
+        return;
+      }
+
+      let attributeData = attributeContext[selectedAttributeKey];
+      this.productsContextService.setcurrentAttributePageData(attributeData);
     });
+  }
+
+  ngOnInit() {
+    this.apiDataService
+      .getIntermediateData()
+      .pipe(
+        tap((res) => this.apiDataService.intermediateData.set(res)),
+        switchMap((res) =>
+          this.apiDataService.getAttributes(res.dataSource.url)
+        ),
+        tap((attributes) =>
+          this.productsContextService.setAttributesContext(attributes)
+        )
+      )
+      .subscribe();
   }
 
   private createContextInjector() {
     return Injector.create({
       providers: [
         {
-          provide: NESTED_CONTEXT,
-          useValue: this.intermediateContextService.context,
+          provide: PRODUCTS_CONTEXT,
+          useValue: this.productsContextService,
         },
       ],
       parent: this.injector,
@@ -91,8 +117,6 @@ export class DynamicPagePage {
       injector: this.createContextInjector(),
     });
 
-    this.componentRef.instance.title = this.currentPage()?.data?.title;
-
     if (this.componentRef.instance.action) {
       this.componentRef.instance.action.subscribe((action: any) => {
         this.handleFilterNavigate(action);
@@ -103,7 +127,7 @@ export class DynamicPagePage {
   goNextStep() {
     if (
       this.pageFlowService.currentIntermediateIdx() <
-      this.IntermediatePages().length - 1
+      this.selectedCategoryAttributes().length - 1
     ) {
       this.pageFlowService.currentIntermediateIdx.update((i) => i + 1);
     } else {

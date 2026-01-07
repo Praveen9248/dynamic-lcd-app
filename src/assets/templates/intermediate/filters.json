@@ -1,9 +1,10 @@
 {
     "dataSource":{
-        "url":"assests/data/products/attributes.json"
+        "url":"assets/data/product/attributes.json"
     },
     "buttonConfig":{
-        "type":"text-only"
+        "type":"text-only",
+        "background":"#212412"
     },
     "uiConfig":{
         "backgroundColor":"#242131",

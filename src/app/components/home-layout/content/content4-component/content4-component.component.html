@@ -1,13 +1,13 @@
 <div
   class="btnContainer"
   [style.background-image]="
-    'url(' + homeContext()?.contentData?.style?.backgroundImage + ')'
+    'url(' + contentDataSource()?.uiConfig?.backgroundImageUrl + ')'
   "
   style="background-repeat: no-repeat; background-size: cover"
 >
   <app-dynamic-button
-    buttonType="text-only"
-    [buttonData]="{ background: 'pink' }"
+    [buttonType]="contentDataSource()?.buttonConfig?.type"
+    [buttonData]="{ background: contentDataSource()?.buttonConfig?.background }"
     (click)="handleClick()"
     >Start</app-dynamic-button
   >

@@ -1,5 +1,13 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
-import { NESTED_CONTEXT } from 'src/app/services/contexts/intermediateFilterContext/nested-context-token';
+import {
+  Component,
+  computed,
+  EventEmitter,
+  inject,
+  Output,
+} from '@angular/core';
+import { ApiDataService } from 'src/app/services/api/api-data-service';
+import { ProductsContextService } from 'src/app/services/contexts/productsContext/products-context-service';
+import { PRODUCTS_CONTEXT } from 'src/app/services/contexts/productsContext/products-context-token';
 import { PageFlowService } from 'src/app/services/pageFlow/page-flow-service';
 
 @Component({
@@ -10,10 +18,17 @@ import { PageFlowService } from 'src/app/services/pageFlow/page-flow-service';
 })
 export class NestedFilterComponent {
   pageFlowService = inject(PageFlowService);
-  @Input() title!: string;
+  apiDataService = inject(ApiDataService);
+  productsContext = inject<ProductsContextService>(PRODUCTS_CONTEXT);
   @Output() action = new EventEmitter<any>();
 
-  nestedContext = inject(NESTED_CONTEXT);
+  attributes = computed(
+    () => this.productsContext.currentAttributePageData()?.options
+  );
+
+  intermediateDataSource = computed(() =>
+    this.apiDataService.intermediateData()
+  );
 
   handleFilter(filter: any) {
     this.action.emit({

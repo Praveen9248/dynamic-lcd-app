@@ -1,0 +1,48 @@
+{
+    "products":[
+        {
+            "id":1,
+            "name": "Cabernet Sauvignon Reserve",
+            "category": "Wine",
+            "brand": "Solum Cellars",
+            "price": 24.99,
+            "attributes": {
+                "country": "Chile",
+                "sweetness": "Semi Dry",
+                "body": "Full"
+            },
+            "location":"https://image2url.com/r2/bucket2/images/1766742408529-bea64a50-5f20-4d51-a472-b5ba79ddcee0.png",
+            "imageUrl":"https://picsum.photos/400",
+            "inStock":true
+        },
+        {
+            "id":2,
+            "name": "Sauvignon Blanc Classic",
+            "category": "Wine",
+            "brand": "Solum Vineyards",
+            "price": 18.49,
+             "attributes": {
+                "country": "United States",
+                "sweetness": "Dry",
+                "body": "Light"
+            },
+            "location":"https://image2url.com/r2/bucket2/images/1766742408529-bea64a50-5f20-4d51-a472-b5ba79ddcee0.png",
+            "imageUrl":"https://picsum.photos/400",
+            "inStock":true
+        },
+        {
+            "id": 3,
+            "name": "Apple AirPods Pro",
+            "category": "Electronics",
+            "brand": "Apple",
+            "price": 249.00,
+            "attributes": {
+                "wireless": true,
+                "noiseCancellation": true
+            },
+            "location":"https://image2url.com/r2/bucket2/images/1766742408529-bea64a50-5f20-4d51-a472-b5ba79ddcee0.png",
+            "imageUrl":"https://picsum.photos/400",
+            "inStock":true
+        }
+    ]
+}

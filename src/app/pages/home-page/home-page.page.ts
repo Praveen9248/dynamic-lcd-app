@@ -1,19 +1,22 @@
 import {
   Component,
   ComponentRef,
-  computed,
   effect,
   inject,
   Injector,
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
+
+import { switchMap, tap } from 'rxjs';
 import { ContentCodeMap } from 'src/app/mappings/contentCodeMap';
 import { HeaderCodeMap } from 'src/app/mappings/headerCodeMap';
-import { HomeContextService } from 'src/app/services/contexts/home-context-service';
-import { HOME_CONTEXT } from 'src/app/services/contexts/home-context-token';
-import { DataService } from 'src/app/services/data/data-service';
+
+import { ProductsContextService } from 'src/app/services/contexts/productsContext/products-context-service';
+import { PRODUCTS_CONTEXT } from 'src/app/services/contexts/productsContext/products-context-token';
+
 import { PageFlowService } from 'src/app/services/pageFlow/page-flow-service';
+import { ApiDataService } from 'src/app/services/api/api-data-service';
 
 @Component({
   selector: 'app-home-page',
@@ -23,8 +26,8 @@ import { PageFlowService } from 'src/app/services/pageFlow/page-flow-service';
 })
 export class HomePagePage {
   pageFlowService = inject(PageFlowService);
-  dataService = inject(DataService);
-  homeContextService = inject(HomeContextService);
+  apiDataService = inject(ApiDataService);
+  productsContextService = inject(ProductsContextService);
   injector = inject(Injector);
 
   @ViewChild('headerHost', { read: ViewContainerRef })
@@ -36,18 +39,7 @@ export class HomePagePage {
   private headerRef?: ComponentRef<any>;
   private contentRef?: ComponentRef<any>;
 
-  homePageData = computed(() => this.dataService.dataConfig()?.homePage);
-
   constructor() {
-    effect(() => {
-      if (!this.homePageData()) {
-        // console.log('this is running as per my assumption');
-        return;
-      }
-
-      this.homeContextService.setHomeContext(this.homePageData());
-    });
-
     effect(() => {
       const headerCode = this.pageFlowService.homeHeaderCode();
       const contentCode = this.pageFlowService.homeContentCode();
@@ -60,10 +52,33 @@ export class HomePagePage {
     });
   }
 
+  ngOnInit() {
+    this.apiDataService
+      .getHomeHeader()
+      .pipe(tap((res) => this.apiDataService.homeHeaderData.set(res)))
+      .subscribe();
+
+    this.apiDataService
+      .getHomeContent()
+      .pipe(
+        tap((res) => this.apiDataService.homeContentData.set(res)),
+        switchMap((res) =>
+          this.apiDataService.getCategories(res.dataSource.url)
+        ),
+        tap((categories) =>
+          this.productsContextService.setCategoryContext(categories)
+        )
+      )
+      .subscribe();
+  }
+
   private createContextInjector() {
     return Injector.create({
       providers: [
-        { provide: HOME_CONTEXT, useValue: this.homeContextService.context },
+        {
+          provide: PRODUCTS_CONTEXT,
+          useValue: this.productsContextService,
+        },
       ],
       parent: this.injector,
     });
@@ -72,9 +87,7 @@ export class HomePagePage {
   renderHeader(code: any) {
     let headerComponent = HeaderCodeMap[code];
     this.headerVcr.clear();
-    this.headerRef = this.headerVcr.createComponent(headerComponent, {
-      injector: this.createContextInjector(),
-    });
+    this.headerRef = this.headerVcr.createComponent(headerComponent);
   }
 
   renderContent(code: any) {
