@@ -1,0 +1,119 @@
+{
+    "categories":[
+        {
+            "id":"Wine",
+            "label":"Wine",
+            "icon":"https://image2url.com/r2/bucket2/images/1767593523540-575f4ab4-c8c1-49ea-92b3-e1a6c1301e0c.png",
+            "attributes":[
+                "country",
+                "body",
+                "sweetness"
+            ],
+            "location":"https://image2url.com/r2/bucket1/images/1767863662103-54cbdb90-ab14-4677-84dc-d4b810ee3a18.png"
+        },
+        {
+            "id":"Electronics",
+            "label":"Electronics",
+            "icon":"https://image2url.com/r2/bucket1/images/1767873730507-ff8dfb7d-6b17-4589-8a74-892a86e1fdd3.png",
+            "attributes":[
+                "wireless",
+                "noiseCancellation"
+            ],
+            "location":"https://image2url.com/r2/bucket2/images/1767863553534-bddd1abb-8521-425d-b291-8e4ba1c5007b.png"
+        }
+    ],
+    "attributes": [
+        {
+            "id": "country",
+            "label": "Country",
+
+            "options": [
+            { "id": "Chile", "label": "Chile" },
+            { "id": "United States", "label": "United States" }
+            ]
+        },
+        {
+            "id": "body",
+            "label": "Body",
+
+            "options": [
+            { "id": "Light", "label": "Light" },
+            { "id": "Medium", "label": "Medium" },
+            { "id": "Full", "label": "Full" }
+            ]
+        },
+        {
+            "id": "sweetness",
+            "label": "Sweetness",
+
+            "options": [
+            { "id": "Dry", "label": "Dry" },
+            { "id": "Semi Dry", "label": "Semi Dry" }
+            ]
+        },
+        {
+            "id": "wireless",
+            "label": "Wireless",
+
+            "options": [
+            { "id": true, "label": "Yes" },
+            { "id": false, "label": "No" }
+            ]
+        },
+        {
+            "id": "noiseCancellation",
+            "label": "Noise Cancellation",
+
+            "options": [
+            { "id": true, "label": "Yes" },
+            { "id": false, "label": "No" }
+            ]
+        }
+    ],
+    "products":[
+        {
+            "id":1,
+            "name": "Cabernet Sauvignon Reserve",
+            "category": "Wine",
+            "brand": "Solum Cellars",
+            "price": 24.99,
+            "attributes": {
+                "country": "Chile",
+                "sweetness": "Semi Dry",
+                "body": "Full"
+            },
+            "location":"https://image2url.com/r2/bucket2/images/1766742408529-bea64a50-5f20-4d51-a472-b5ba79ddcee0.png",
+            "imageUrl":"https://image2url.com/r2/bucket2/images/1767872192966-17affe8a-07a4-4177-a696-cbbb29a4a5db.png",
+            "inStock":true
+        },
+        {
+            "id":2,
+            "name": "Sauvignon Blanc Classic",
+            "category": "Wine",
+            "brand": "Solum Vineyards",
+            "price": 18.49,
+             "attributes": {
+                "country": "United States",
+                "sweetness": "Dry",
+                "body": "Light" 
+            },
+            "location":"https://image2url.com/r2/bucket2/images/1766742408529-bea64a50-5f20-4d51-a472-b5ba79ddcee0.png",
+            "imageUrl":"https://image2url.com/r2/bucket2/images/1767872113652-36b67a98-3044-4f26-b5c3-d2c4ff8432f3.png",
+            "inStock":true
+        },
+        {
+            "id": 3,
+            "name": "Apple AirPods Pro",
+            "category": "Electronics",
+            "brand": "Apple",
+            "price": 249.00,
+            "attributes": {
+                "wireless": true,
+                "noiseCancellation": true
+            },
+            "location":"https://image2url.com/r2/bucket2/images/1766742408529-bea64a50-5f20-4d51-a472-b5ba79ddcee0.png",
+            "imageUrl":"https://image2url.com/r2/bucket3/images/1767872160840-091b93f4-a3fe-4a66-8641-f8b2ef6a3bae.png",
+            "inStock":true
+        }
+    ]
+}

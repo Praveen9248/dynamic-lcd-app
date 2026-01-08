@@ -1,20 +1,18 @@
 <div
   class="options-wrapper"
-  [style.background-image]="
-    'url(' + sourceData()?.uiConfig?.backgroundImageUrl + ')'
-  "
+  [style.background-image]="'url(' + contentUiData()?.backgroundImageUrl + ')'"
   style="background-repeat: no-repeat; background-size: cover"
 >
   <div class="options-inner">
     @for (cat of categories(); track $index) {
     <app-dynamic-button
       [buttonData]="{
-        background: sourceData()?.buttonConfig?.background,
+        background: contentButtonConfigData()?.background,
         imageUrl: cat?.icon
       }"
-      [buttonType]="sourceData()?.buttonConfig?.type"
-      vPos="bottom"
-      hPos="center"
+      [buttonType]="contentButtonConfigData()?.type"
+      vPos="top"
+      hPos="left"
       (click)="onFilter(cat?.id)"
       >{{ cat?.label }}</app-dynamic-button
     >

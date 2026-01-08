@@ -1,8 +1,8 @@
 import { Component, computed, inject } from '@angular/core';
-import { ApiDataService } from 'src/app/services/api/api-data-service';
 import { ProductsContextService } from 'src/app/services/contexts/productsContext/products-context-service';
 import { PRODUCTS_CONTEXT } from 'src/app/services/contexts/productsContext/products-context-token';
 import { PageFlowService } from 'src/app/services/pageFlow/page-flow-service';
+import { UiConfigService } from 'src/app/services/uiConfig/ui-config-service';
 
 @Component({
   selector: 'app-content2-component',
@@ -12,23 +12,32 @@ import { PageFlowService } from 'src/app/services/pageFlow/page-flow-service';
 })
 export class Content2ComponentComponent {
   pageFlowService = inject(PageFlowService);
-  apiDataService = inject(ApiDataService);
+  uiConfigDataService = inject(UiConfigService);
   productsContext = inject<ProductsContextService>(PRODUCTS_CONTEXT);
 
-  sourceData = computed(() => this.apiDataService.homeContentData());
-
-  categories = computed(
-    () => this.productsContext.categoryContext()?.categories ?? []
+  contentUiData = computed(
+    () => this.uiConfigDataService.uiConfigData()?.home?.content?.uiConfig
   );
+
+  contentButtonConfigData = computed(
+    () => this.uiConfigDataService.uiConfigData()?.home?.content?.buttonConfig
+  );
+
+  categories = computed(() => this.productsContext.categoryContext() ?? []);
 
   onFilter(category: string) {
     this.productsContext.selectedCategory.set(category);
     let categoryInfo = this.productsContext
       .categoryContext()
-      .categories.find((cat: any) => cat.id === category);
+      .find((cat: any) => cat.id === category);
     this.productsContext.selectedCategoryAttributes.set(
       categoryInfo?.attributes
     );
+
+    this.pageFlowService.intermediateAttributeStatus.set(
+      categoryInfo?.attributes?.length ? true : false
+    );
+    this.productsContext.categoryFilter.set(category);
     this.pageFlowService.goToNextPage();
   }
 }

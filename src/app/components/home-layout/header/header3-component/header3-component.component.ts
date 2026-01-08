@@ -1,5 +1,6 @@
 import { Component, computed, inject } from '@angular/core';
 import { ApiDataService } from 'src/app/services/api/api-data-service';
+import { UiConfigService } from 'src/app/services/uiConfig/ui-config-service';
 
 @Component({
   selector: 'app-header3-component',
@@ -8,7 +9,13 @@ import { ApiDataService } from 'src/app/services/api/api-data-service';
   styleUrls: ['./header3-component.component.scss'],
 })
 export class Header3ComponentComponent {
-  apiDataService = inject(ApiDataService);
+  uiConfigDataService = inject(UiConfigService);
 
-  headerDataSource = computed(() => this.apiDataService.homeHeaderData());
+  headerData = computed(
+    () => this.uiConfigDataService.uiConfigData()?.home?.header?.data
+  );
+
+  headerUiData = computed(
+    () => this.uiConfigDataService.uiConfigData()?.home?.header?.uiConfig
+  );
 }

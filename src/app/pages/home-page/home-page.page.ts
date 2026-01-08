@@ -8,7 +8,6 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 
-import { switchMap, tap } from 'rxjs';
 import { ContentCodeMap } from 'src/app/mappings/contentCodeMap';
 import { HeaderCodeMap } from 'src/app/mappings/headerCodeMap';
 
@@ -17,6 +16,7 @@ import { PRODUCTS_CONTEXT } from 'src/app/services/contexts/productsContext/prod
 
 import { PageFlowService } from 'src/app/services/pageFlow/page-flow-service';
 import { ApiDataService } from 'src/app/services/api/api-data-service';
+import { UiConfigService } from 'src/app/services/uiConfig/ui-config-service';
 
 @Component({
   selector: 'app-home-page',
@@ -28,6 +28,7 @@ export class HomePagePage {
   pageFlowService = inject(PageFlowService);
   apiDataService = inject(ApiDataService);
   productsContextService = inject(ProductsContextService);
+  uiConfigDataService = inject(UiConfigService);
   injector = inject(Injector);
 
   @ViewChild('headerHost', { read: ViewContainerRef })
@@ -53,23 +54,17 @@ export class HomePagePage {
   }
 
   ngOnInit() {
-    this.apiDataService
-      .getHomeHeader()
-      .pipe(tap((res) => this.apiDataService.homeHeaderData.set(res)))
-      .subscribe();
+    this.uiConfigDataService.fetchUiConfigData().subscribe({
+      next: (res) => this.uiConfigDataService.uiConfigData.set(res),
+    });
 
-    this.apiDataService
-      .getHomeContent()
-      .pipe(
-        tap((res) => this.apiDataService.homeContentData.set(res)),
-        switchMap((res) =>
-          this.apiDataService.getCategories(res.dataSource.url)
-        ),
-        tap((categories) =>
-          this.productsContextService.setCategoryContext(categories)
-        )
-      )
-      .subscribe();
+    this.apiDataService.fetchData().subscribe({
+      next: (res) => {
+        this.productsContextService.setCategoryContext(res.categories);
+        this.productsContextService.setAttributesContext(res.attributes);
+        this.productsContextService.setProductsContext(res.products);
+      },
+    });
   }
 
   private createContextInjector() {

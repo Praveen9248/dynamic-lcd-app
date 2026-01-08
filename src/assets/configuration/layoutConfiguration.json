@@ -4,14 +4,14 @@
     "home": {
       "data":{
         "headerCode":"H0001",
-        "contentCode":"C0010"
+        "contentCode":"C0001"
       },
       "nextPage":"intermediate",
       "prevPage":null
     },
     "intermediate": {
       "enabled": true,
-      "pages": [{"data":{"code":"F0001","title":"Country Filter"}},{"data":{"code":"F0001","title":"Type Filter"}},{"data":{"code":"F0001","title":"Body Type Filter"}}],
+      "pages": {"code":"F0001"},
       "nextPage": "result",
       "prevPage": "home"
     },

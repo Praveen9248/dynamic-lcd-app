@@ -2,7 +2,9 @@
   <swiper-container [loop]="[1, 2, 3].length > 0" autoplay-delay="1000">
     @for (slide of [1,2,3,4]; track $index) {
     <swiper-slide class="slide">
-      <ion-img [src]="slide"></ion-img>
+      <ion-img
+        [src]="'https://picsum.photos/id/' + $index + '/1920/900'"
+      ></ion-img>
     </swiper-slide>
     }
   </swiper-container>

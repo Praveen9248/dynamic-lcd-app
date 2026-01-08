@@ -5,10 +5,10 @@ import {
   inject,
   Output,
 } from '@angular/core';
-import { ApiDataService } from 'src/app/services/api/api-data-service';
 import { ProductsContextService } from 'src/app/services/contexts/productsContext/products-context-service';
 import { PRODUCTS_CONTEXT } from 'src/app/services/contexts/productsContext/products-context-token';
 import { PageFlowService } from 'src/app/services/pageFlow/page-flow-service';
+import { UiConfigService } from 'src/app/services/uiConfig/ui-config-service';
 
 @Component({
   selector: 'app-nested-filter',
@@ -18,22 +18,26 @@ import { PageFlowService } from 'src/app/services/pageFlow/page-flow-service';
 })
 export class NestedFilterComponent {
   pageFlowService = inject(PageFlowService);
-  apiDataService = inject(ApiDataService);
   productsContext = inject<ProductsContextService>(PRODUCTS_CONTEXT);
+  uiConfigDataService = inject(UiConfigService);
   @Output() action = new EventEmitter<any>();
+
+  contentUiData = computed(
+    () => this.uiConfigDataService.uiConfigData()?.intermediate?.uiConfig
+  );
+
+  contentButtonConfigData = computed(
+    () => this.uiConfigDataService.uiConfigData()?.intermediate?.buttonConfig
+  );
 
   attributes = computed(
     () => this.productsContext.currentAttributePageData()?.options
   );
 
-  intermediateDataSource = computed(() =>
-    this.apiDataService.intermediateData()
-  );
-
-  handleFilter(filter: any) {
+  handleFilter(attribute: any) {
     this.action.emit({
       type: 'filter selected',
-      payload: filter,
+      payload: attribute,
     });
   }
 }

@@ -1,16 +1,14 @@
 <div
   class="filter-wrapper"
-  [style.background-image]="
-    'url(' + intermediateDataSource()?.uiConfig?.backgroundImageUrl + ')'
-  "
+  [style.background-image]="'url(' + contentUiData()?.backgroundImageUrl + ')'"
   style="background-repeat: no-repeat; background-size: cover"
 >
   <div class="filter-inner">
     @for (attribute of attributes(); track $index) {
     <app-dynamic-button
-      [buttonType]="intermediateDataSource()?.buttonConfig?.type"
+      [buttonType]="contentButtonConfigData()?.type"
       [buttonData]="{
-        background: intermediateDataSource()?.buttonConfig?.background
+        background: contentButtonConfigData()?.background
       }"
       vPos="bottom"
       hPos="center"

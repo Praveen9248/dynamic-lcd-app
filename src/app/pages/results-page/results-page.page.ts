@@ -9,9 +9,9 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { ResultComponentCodeMap } from 'src/app/mappings/resultComponentCodeMap';
-import { ResultsContextService } from 'src/app/services/contexts/resultsContext/results-context-service';
-import { RESULTS_CONTEXT } from 'src/app/services/contexts/resultsContext/results-context-token';
-import { DataService } from 'src/app/services/data/data-service';
+import { ApiDataService } from 'src/app/services/api/api-data-service';
+import { ProductsContextService } from 'src/app/services/contexts/productsContext/products-context-service';
+import { PRODUCTS_CONTEXT } from 'src/app/services/contexts/productsContext/products-context-token';
 import { PageFlowService } from 'src/app/services/pageFlow/page-flow-service';
 
 @Component({
@@ -22,8 +22,8 @@ import { PageFlowService } from 'src/app/services/pageFlow/page-flow-service';
 })
 export class ResultsPagePage {
   pageFlowService = inject(PageFlowService);
-  dataService = inject(DataService);
-  resultsContextService = inject(ResultsContextService);
+  productsContextService = inject(ProductsContextService);
+  apiDataService = inject(ApiDataService);
   injector = inject(Injector);
 
   @ViewChild('resultHost', { read: ViewContainerRef, static: true })
@@ -37,20 +37,13 @@ export class ResultsPagePage {
     return ResultComponentCodeMap[code];
   });
 
-  ResultPageData = computed(() => this.dataService.dataConfig()?.resultPage);
-
   constructor() {
+    this.productsContextService.applyNestedFilter();
     effect(() => {
       if (!this.resultComponent()) {
         return;
       }
       this.loadComponent(this.resultComponent());
-    });
-
-    effect(() => {
-      if (!this.ResultPageData()) return;
-
-      this.resultsContextService.setResultsContext(this.ResultPageData()?.data);
     });
   }
 
@@ -58,8 +51,8 @@ export class ResultsPagePage {
     return Injector.create({
       providers: [
         {
-          provide: RESULTS_CONTEXT,
-          useValue: this.resultsContextService.context,
+          provide: PRODUCTS_CONTEXT,
+          useValue: this.productsContextService,
         },
       ],
       parent: this.injector,
@@ -75,10 +68,14 @@ export class ResultsPagePage {
   }
 
   goPrevPage() {
+    if (this.productsContextService.attributeFilterList().length > 0) {
+      this.productsContextService.attributeFilterList().pop();
+    }
     this.pageFlowService.goToPrevPage();
   }
 
   goHome() {
+    this.productsContextService.attributeFilterList.set([]);
     this.pageFlowService.goToHomePage();
   }
 }

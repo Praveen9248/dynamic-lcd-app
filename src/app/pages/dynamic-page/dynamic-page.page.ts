@@ -8,13 +8,13 @@ import {
   effect,
   Injector,
 } from '@angular/core';
-import { switchMap, tap } from 'rxjs';
 
 import { FilterCodeMap } from 'src/app/mappings/filterCodeMap';
 import { ApiDataService } from 'src/app/services/api/api-data-service';
 import { ProductsContextService } from 'src/app/services/contexts/productsContext/products-context-service';
 import { PRODUCTS_CONTEXT } from 'src/app/services/contexts/productsContext/products-context-token';
 import { PageFlowService } from 'src/app/services/pageFlow/page-flow-service';
+import { UiConfigService } from 'src/app/services/uiConfig/ui-config-service';
 
 @Component({
   selector: 'app-dynamic-page',
@@ -24,9 +24,9 @@ import { PageFlowService } from 'src/app/services/pageFlow/page-flow-service';
 })
 export class DynamicPagePage {
   pageFlowService = inject(PageFlowService);
-  apiDataService = inject(ApiDataService);
   productsContextService = inject(ProductsContextService);
   injector = inject(Injector);
+  apiDataService = inject(ApiDataService);
 
   @ViewChild('dynamicView', {
     read: ViewContainerRef,
@@ -36,13 +36,9 @@ export class DynamicPagePage {
 
   private componentRef?: ComponentRef<any>;
 
-  selectedCategoryAttributes = computed(() =>
-    this.productsContextService.selectedCategoryAttributes()
-  );
-
   currentAttributePageKey = computed(
     () =>
-      this.selectedCategoryAttributes()[
+      this.productsContextService.selectedCategoryAttributes()[
         this.pageFlowService.currentIntermediateIdx()
       ]
   );
@@ -61,42 +57,32 @@ export class DynamicPagePage {
     });
 
     effect(() => {
-      if (!this.selectedCategoryAttributes()) {
+      if (!this.productsContextService.selectedCategoryAttributes()) {
         return;
       }
 
       let idx = this.pageFlowService.currentIntermediateIdx();
-      let attributeContext = this.productsContextService.attributesContext();
-      let attributeKeys = this.selectedCategoryAttributes();
+      let attributeContext = this.productsContextService.attributesContext(); //array of attribute objects full info
+      let attributeKeys =
+        this.productsContextService.selectedCategoryAttributes(); //ids of attributes
 
       if (!attributeContext || !attributeKeys?.length) {
         return;
       }
 
-      let selectedAttributeKey = attributeKeys[idx];
+      let currentAttributeKey = attributeKeys[idx];
 
-      if (!selectedAttributeKey) {
+      if (!currentAttributeKey) {
         return;
       }
 
-      let attributeData = attributeContext[selectedAttributeKey];
-      this.productsContextService.setcurrentAttributePageData(attributeData);
+      let currentAttributeData = attributeContext.find(
+        (att: any) => att.id === currentAttributeKey
+      );
+      this.productsContextService.setcurrentAttributePageData(
+        currentAttributeData
+      );
     });
-  }
-
-  ngOnInit() {
-    this.apiDataService
-      .getIntermediateData()
-      .pipe(
-        tap((res) => this.apiDataService.intermediateData.set(res)),
-        switchMap((res) =>
-          this.apiDataService.getAttributes(res.dataSource.url)
-        ),
-        tap((attributes) =>
-          this.productsContextService.setAttributesContext(attributes)
-        )
-      )
-      .subscribe();
   }
 
   private createContextInjector() {
@@ -127,7 +113,7 @@ export class DynamicPagePage {
   goNextStep() {
     if (
       this.pageFlowService.currentIntermediateIdx() <
-      this.selectedCategoryAttributes().length - 1
+      this.productsContextService.selectedCategoryAttributes().length - 1
     ) {
       this.pageFlowService.currentIntermediateIdx.update((i) => i + 1);
     } else {
@@ -136,14 +122,22 @@ export class DynamicPagePage {
   }
 
   handleFilterNavigate(action: any) {
+    this.productsContextService.attributeFilterList.update((ele) => [
+      ...ele,
+      action.payload,
+    ]);
     this.goNextStep();
   }
 
   goToPrevPage() {
+    if (this.productsContextService.attributeFilterList().length > 0) {
+      this.productsContextService.attributeFilterList().pop();
+    }
     this.pageFlowService.goToPrevPage();
   }
 
   goToHome() {
+    this.productsContextService.attributeFilterList.set([]);
     this.pageFlowService.goToHomePage();
   }
 }

@@ -1,13 +1,11 @@
 <div
   class="btnContainer"
-  [style.background-image]="
-    'url(' + contentDataSource()?.uiConfig?.backgroundImageUrl + ')'
-  "
+  [style.background-image]="'url(' + contentUiData()?.backgroundImageUrl + ')'"
   style="background-repeat: no-repeat; background-size: cover"
 >
   <app-dynamic-button
-    [buttonType]="contentDataSource()?.buttonConfig?.type"
-    [buttonData]="{ background: contentDataSource()?.buttonConfig?.background }"
+    [buttonType]="contentButtonConfigData()?.type"
+    [buttonData]="{ background: contentButtonConfigData()?.background }"
     (click)="handleClick()"
     >Start</app-dynamic-button
   >

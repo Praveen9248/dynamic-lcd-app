@@ -1,5 +1,5 @@
-import { Component, inject } from '@angular/core';
-import { RESULTS_CONTEXT } from 'src/app/services/contexts/resultsContext/results-context-token';
+import { Component, computed, inject } from '@angular/core';
+import { ProductsContextService } from 'src/app/services/contexts/productsContext/products-context-service';
 
 @Component({
   selector: 'app-location-filter',
@@ -8,17 +8,15 @@ import { RESULTS_CONTEXT } from 'src/app/services/contexts/resultsContext/result
   styleUrls: ['./location-filter.component.scss'],
 })
 export class LocationFilterComponent {
-  resultsContext = inject(RESULTS_CONTEXT);
+  productsContextService = inject(ProductsContextService);
 
-  get sectionAProducts() {
-    return this.resultsContext()?.resultsData?.results?.filter(
-      (product: any) => product.origin === 'India'
-    );
-  }
-
-  get sectionBProducts() {
-    return this.resultsContext()?.resultsData?.results?.filter(
-      (product: any) => product.origin === 'USA'
-    );
-  }
+  results = computed(() => this.productsContextService.resultProducts());
+  filters = computed(() => this.productsContextService.attributeFilterList());
+  categoryData = computed(() =>
+    this.productsContextService
+      .categoryContext()
+      .find(
+        (cat: any) => cat.id === this.productsContextService.selectedCategory()
+      )
+  );
 }

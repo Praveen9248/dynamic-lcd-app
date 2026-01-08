@@ -1,11 +1,11 @@
 <div class="results-wrapper">
-  <img src="https://picsum.photos/id/27/960/540" alt="" class="side-banner" />
+  <img [src]="categoryData()?.icon" class="side-banner" />
   <ion-card class="side-container">
     <ion-card-header class="filter-chips">
       <ion-card-title>Product Filters</ion-card-title>
       <ion-card-subtitle>
-        @for (item of resultContext()?.resultsData?.filters; track $index) {
-        <ion-chip (click)="onFilter(item)">{{ item }}</ion-chip>
+        @for (item of filters(); track $index) {
+        <ion-chip>{{ item }}</ion-chip>
         }
       </ion-card-subtitle>
     </ion-card-header>
@@ -13,23 +13,34 @@
     <ion-card-content class="handle-scroll">
       <ion-grid>
         <ion-row>
-          @for (item of filterData(); track $index) {
+          @if (results()?.length>0) { @for (prod of results(); track $index) {
           <ion-col sizeXs="3" sizeMd="4">
             <ion-card>
-              <img src="https://picsum.photos/200/200" alt="" width="100%" />
+              <ion-img
+                [src]="prod?.imageUrl"
+                [alt]=""
+                width="100%"
+                class="productImage"
+              />
               <ion-card-header>
-                <ion-card-title>{{ item.name }}</ion-card-title>
-                <ion-card-subtitle>{{ item.grape }}</ion-card-subtitle>
+                <ion-card-title>{{ prod?.name }}</ion-card-title>
+                <ion-card-subtitle>{{ prod?.brand }}</ion-card-subtitle>
               </ion-card-header>
               <ion-card-content>
                 <ion-text
-                  ><h1>Origin : {{ item.origin }}</h1></ion-text
+                  ><h3>Price : {{ prod?.price }}</h3></ion-text
                 >
-                <ion-text><h1>price $123</h1></ion-text>
+                <ion-chip [color]="prod?.inStock ? 'success' : 'danger'">
+                  {{ prod?.inStock ? "Available" : "NotAvailable" }}</ion-chip
+                >
               </ion-card-content>
-              <ion-button color="danger">Blink LED</ion-button>
+              <ion-button color="danger" expand="block">Blink LED</ion-button>
             </ion-card>
           </ion-col>
+          } }@else {
+          <ion-text color="danger"
+            ><h1>No Products Found for selected filters</h1></ion-text
+          >
           }
         </ion-row>
       </ion-grid>

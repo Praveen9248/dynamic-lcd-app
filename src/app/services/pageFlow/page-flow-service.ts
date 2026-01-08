@@ -18,6 +18,8 @@ export class PageFlowService {
 
   currentIntermediateIdx = signal(0);
 
+  intermediateAttributeStatus = signal<any>(null);
+
   layoutConfigurationStatus = computed(
     () => this.flowConfig()?.layoutConfigured
   );
@@ -53,7 +55,12 @@ export class PageFlowService {
 
   goToNextPage() {
     let nextPageKey = this.flowConfig()?.flow[this.currentPageKey()!]?.nextPage;
-    console.log(nextPageKey);
+    if (!this.intermediateAttributeStatus()) {
+      this.router.navigate(['result']);
+      this.currentPageKey.set('result');
+      return;
+    }
+
     if (nextPageKey === 'intermediate') {
       if (this.flowConfig()?.flow[nextPageKey]?.enabled === false) {
         this.router.navigate(['result']);
@@ -78,9 +85,11 @@ export class PageFlowService {
     }
 
     if (currentPage === 'result') {
-      if (this.flowConfig()?.flow['intermediate']?.enabled === false) {
-        this.router.navigate(['home']);
-        this.currentPageKey.set('home');
+      if (
+        !this.intermediateAttributeStatus() ||
+        this.flowConfig()?.flow['intermediate']?.enabled === false
+      ) {
+        this.goToHomePage();
         return;
       }
       this.router.navigate(['intermediate']);

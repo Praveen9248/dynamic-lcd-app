@@ -1,5 +1,4 @@
-import { Component, computed, inject, OnInit } from '@angular/core';
-import { ApiDataService } from 'src/app/services/api/api-data-service';
+import { Component, inject } from '@angular/core';
 import { PageFlowService } from 'src/app/services/pageFlow/page-flow-service';
 import { register } from 'swiper/element/bundle';
 
@@ -12,9 +11,6 @@ register();
 })
 export class Content1ComponentComponent {
   pageFlowService = inject(PageFlowService);
-  apiDataService = inject(ApiDataService);
-
-  contentDataSource = computed(() => this.apiDataService.homeContentData());
 
   onStart() {
     this.pageFlowService.goToNextPage();

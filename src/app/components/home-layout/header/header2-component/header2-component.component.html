@@ -1,12 +1,10 @@
-<ion-toolbar
-  [style.--background]="headerSourceData()?.uiConfig?.backgroundColor"
->
+<ion-toolbar [style.--background]="headerUiData()?.backgroundColor">
   <ion-title class="ion-text-center">
     <ion-text class="ion-text-center">
       <div class="title-wrapper">
-        <div class="title">{{ headerSourceData()?.dataSource?.title }}</div>
+        <div class="title">{{ headerData()?.title }}</div>
         <div class="caption">
-          {{ headerSourceData()?.dataSource?.caption }}
+          {{ headerData()?.caption }}
         </div>
       </div>
     </ion-text>

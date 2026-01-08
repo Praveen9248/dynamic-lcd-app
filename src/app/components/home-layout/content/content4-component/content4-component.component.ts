@@ -1,6 +1,6 @@
 import { Component, computed, inject } from '@angular/core';
-import { ApiDataService } from 'src/app/services/api/api-data-service';
 import { PageFlowService } from 'src/app/services/pageFlow/page-flow-service';
+import { UiConfigService } from 'src/app/services/uiConfig/ui-config-service';
 
 @Component({
   selector: 'app-content4-component',
@@ -10,9 +10,15 @@ import { PageFlowService } from 'src/app/services/pageFlow/page-flow-service';
 })
 export class Content4ComponentComponent {
   pageFlowService = inject(PageFlowService);
-  apiDataService = inject(ApiDataService);
+  uiConfigDataService = inject(UiConfigService);
 
-  contentDataSource = computed(() => this.apiDataService.homeContentData());
+  contentUiData = computed(
+    () => this.uiConfigDataService.uiConfigData()?.home?.content?.uiConfig
+  );
+
+  contentButtonConfigData = computed(
+    () => this.uiConfigDataService.uiConfigData()?.home?.content?.buttonConfig
+  );
 
   handleClick() {
     this.pageFlowService.goToNextPage();

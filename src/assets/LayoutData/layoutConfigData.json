@@ -1,0 +1,34 @@
+{
+    "home":{
+        "header":{
+            "data":{
+                "title":"Touch Finding Solution",
+                "caption":"Your vision, now interactive.",
+                "logoUrl":"https://image2url.com/r2/default/images/1767335054231-ca9fcfcd-8398-475f-95ce-f5bad3f3f35b.png"
+            },
+            "uiConfig":{
+                "backgroundColor":"#E3C802"
+            }
+        },
+        "content":{
+            "buttonConfig":{
+                "type":"textImage",
+                "background":"#27F5C8"
+            },
+            "uiConfig":{
+                "backgroundColor":"#252352",
+                "backgroundImageUrl":"https://image2url.com/r2/default/images/1767335729055-091cf9c6-06b8-4304-94b9-c8744d96162a.jpg"
+            }
+        }
+    },
+    "intermediate":{
+        "buttonConfig":{
+            "type":"text-only",
+            "background":"#212412"
+        },
+        "uiConfig":{
+            "backgroundColor":"#242131",
+            "backgroundImageUrl":"https://image2url.com/r2/default/images/1767335729055-091cf9c6-06b8-4304-94b9-c8744d96162a.jpg"
+        }
+    }
+}

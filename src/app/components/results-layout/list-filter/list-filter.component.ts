@@ -1,5 +1,5 @@
-import { Component, inject, signal } from '@angular/core';
-import { RESULTS_CONTEXT } from 'src/app/services/contexts/resultsContext/results-context-token';
+import { Component, computed, inject } from '@angular/core';
+import { ProductsContextService } from 'src/app/services/contexts/productsContext/products-context-service';
 
 @Component({
   selector: 'app-list-filter',
@@ -8,18 +8,15 @@ import { RESULTS_CONTEXT } from 'src/app/services/contexts/resultsContext/result
   styleUrls: ['./list-filter.component.scss'],
 })
 export class ListFilterComponent {
-  resultContext = inject(RESULTS_CONTEXT);
-  filterData = signal<any>(null);
+  productsContextService = inject(ProductsContextService);
 
-  ngOnInit() {
-    this.filterData.set(this.resultContext()?.resultsData?.results);
-  }
-
-  onFilter(parameter: any) {
-    this.filterData.set(
-      this.resultContext()?.resultsData?.results.filter(
-        (product: any) => product.origin === parameter
+  results = computed(() => this.productsContextService.resultProducts());
+  filters = computed(() => this.productsContextService.attributeFilterList());
+  categoryData = computed(() =>
+    this.productsContextService
+      .categoryContext()
+      .find(
+        (cat: any) => cat.id === this.productsContextService.selectedCategory()
       )
-    );
-  }
+  );
 }
