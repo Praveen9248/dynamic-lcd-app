@@ -4,20 +4,20 @@
     "home": {
       "data":{
         "headerCode":"H0001",
-        "contentCode":"C0001"
+        "contentCode":"C0010"
       },
       "nextPage":"intermediate",
       "prevPage":null
     },
     "intermediate": {
-      "enabled": true,
+      "enabled": false,
       "pages": {"code":"F0001"},
       "nextPage": "result",
       "prevPage": "home"
     },
     "result": {
       "data":{
-        "resultCode":"R0001"
+        "resultCode":"R0010"
       },
       "nextPage":null,
       "prevPage":"intermediate"

@@ -28,8 +28,8 @@
             "label": "Country",
 
             "options": [
-            { "id": "Chile", "label": "Chile" },
-            { "id": "United States", "label": "United States" }
+                { "id": "Chile", "label": "Chile" },
+                { "id": "United States", "label": "United States" }
             ]
         },
         {

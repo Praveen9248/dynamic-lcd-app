@@ -2,12 +2,16 @@
   <img [src]="categoryData()?.icon" class="side-banner" />
   <ion-card class="side-container">
     <ion-card-header class="filter-chips">
-      <ion-card-title>Product Filters</ion-card-title>
-      <ion-card-subtitle>
-        @for (item of filters(); track $index) {
-        <ion-chip>{{ item }}</ion-chip>
+      <ion-item lines="full">
+        <ion-card-title slot="start">Product Filters</ion-card-title>
+        @if (filters()) {
+        <ion-card-subtitle slot="end">
+          @for (item of filters(); track $index) {
+          <ion-chip>{{ item }}</ion-chip>
+          }
+        </ion-card-subtitle>
         }
-      </ion-card-subtitle>
+      </ion-item>
     </ion-card-header>
 
     <ion-card-content class="handle-scroll">
@@ -23,17 +27,25 @@
                 class="productImage"
               />
               <ion-card-header>
-                <ion-card-title>{{ prod?.name }}</ion-card-title>
-                <ion-card-subtitle>{{ prod?.brand }}</ion-card-subtitle>
+                <ion-item lines="full">
+                  <ion-card-title slot="start">{{ prod?.name }}</ion-card-title>
+                  <ion-chip
+                    [color]="prod?.inStock ? 'success' : 'danger'"
+                    slot="end"
+                  >
+                    {{ prod?.inStock ? "Available" : "NotAvailable" }}</ion-chip
+                  >
+                </ion-item>
+                <ion-item lines="full">
+                  <ion-card-subtitle slot="start">{{
+                    prod?.brand
+                  }}</ion-card-subtitle>
+                  <ion-text slot="end">
+                    <h3>Price : {{ prod?.price }}</h3>
+                  </ion-text>
+                </ion-item>
               </ion-card-header>
-              <ion-card-content>
-                <ion-text
-                  ><h3>Price : {{ prod?.price }}</h3></ion-text
-                >
-                <ion-chip [color]="prod?.inStock ? 'success' : 'danger'">
-                  {{ prod?.inStock ? "Available" : "NotAvailable" }}</ion-chip
-                >
-              </ion-card-content>
+              <ion-card-content> </ion-card-content>
               <ion-button color="danger" expand="block">Blink LED</ion-button>
             </ion-card>
           </ion-col>
