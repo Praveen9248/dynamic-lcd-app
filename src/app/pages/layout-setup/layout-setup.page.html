@@ -1,20 +1,26 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Layout Setup Configuration</ion-title>
+
+    <ion-button slot="end" (click)="onStartServer()">Start </ion-button>
+
+    <ion-button slot="end" (click)="onStopServer()">Stop </ion-button>
   </ion-toolbar>
 </ion-header>
 <ion-content>
+  <ion-text>
+    <h1>{{serverStatus()?.running}}</h1>
+    <h1>{{serverStatus()?.ip}}</h1>
+    <h1>{{serverStatus()?.port}}</h1>
+  </ion-text>
   <ion-card>
-    <qrcode
-      [qrdata]="deviceCredentials"
-      [width]="256"
-      [errorCorrectionLevel]="'M'"
-    ></qrcode>
-
     <ion-card-header>
-      <ion-card-title>Scan this QR Code for homepage Setup</ion-card-title>
+      <ion-card-title
+        >Use the Following credentials for connecting</ion-card-title
+      >
       <ion-card-subtitle
-        >Download the mobile apk for to scan this qr</ion-card-subtitle
+        >Fill the above detail in mobile application for
+        connection</ion-card-subtitle
       >
     </ion-card-header>
   </ion-card>
