@@ -1,27 +1,59 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Layout Setup Configuration</ion-title>
-
-    <ion-button slot="end" (click)="onStartServer()">Start </ion-button>
-
-    <ion-button slot="end" (click)="onStopServer()">Stop </ion-button>
+    @if (!serverStatus()) {
+    <ion-button slot="end" (click)="onStartServer()">Start</ion-button>
+    }@else {
+    <ion-button slot="end" (click)="onStopServer()">Stop</ion-button>
+    }
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-text>
-    <h1>{{serverStatus()?.running}}</h1>
-    <h1>{{serverStatus()?.ip}}</h1>
-    <h1>{{serverStatus()?.port}}</h1>
-  </ion-text>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title
-        >Use the Following credentials for connecting</ion-card-title
-      >
-      <ion-card-subtitle
-        >Fill the above detail in mobile application for
-        connection</ion-card-subtitle
-      >
-    </ion-card-header>
-  </ion-card>
+  <ion-grid>
+    <ion-row>
+      <ion-col sizeXs="12" sizeSm="12">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Connection Detials</ion-card-title>
+            <ion-card-subtitle
+              >below you can find IP and Port values</ion-card-subtitle
+            >
+          </ion-card-header>
+          <ion-card-content>
+            @if (serverInfo()) {
+            <ion-text>
+              <h3>Host IP - {{serverInfo()?.ip}}</h3>
+            </ion-text>
+            <ion-text>
+              <h3>Port - {{serverInfo()?.port}}</h3>
+            </ion-text>
+            <ion-text>
+              <h3>Status - {{serverInfo()?.running}}</h3>
+            </ion-text>
+            <ion-text color="danger">
+              <h3>Progress - {{receiveProgress()}}%</h3>
+            </ion-text>
+            }@else {
+            <ion-text color="danger">
+              please press on the start button to start server
+            </ion-text>
+            }
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        @if (uiConnectionUpdate().length>0) {
+        <ion-list>
+          @for (log of uiConnectionUpdate(); track $index) {
+          <ion-item>{{log}}</ion-item>
+          }
+        </ion-list>
+        }@else{
+        <ion-text color="danger">
+          Click on Start Server button to build the connection and see the logs
+        </ion-text>
+        }
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
