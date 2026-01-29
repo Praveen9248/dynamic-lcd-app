@@ -1,0 +1,7 @@
+{
+  "name": "dynamic-lcd-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
