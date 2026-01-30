@@ -35,3 +35,22 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+
+.lcd-root{
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items:center ;
+    background:black;
+}
+
+#lcd-app{
+    width: 1920px;
+    height: 540px;
+    transform-origin: top left;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}

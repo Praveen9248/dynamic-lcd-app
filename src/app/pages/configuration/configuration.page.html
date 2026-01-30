@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar color="warning">
+    <ion-title>Layout Setup Configuration</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col
+        sizeXs="12"
+        sizeSm="4"
+        class="ion-text-center"
+        [style.background]="'#131343'"
+      >
+        @if (!serverStatus()) {
+        <ion-button (click)="onStartServer()" color="success" shape="round"
+          >Start</ion-button
+        >
+        }@else {
+        <ion-button (click)="onStopServer()" color="danger" shape="round"
+          >Stop</ion-button
+        >
+        } @if (serverInfo()) {
+        <ion-text>
+          <h1>Host IP - {{serverInfo()?.ip}}</h1>
+        </ion-text>
+        <ion-text>
+          <h1>Port - {{serverInfo()?.port}}</h1>
+        </ion-text>
+        <ion-text>
+          <h1>Running - {{serverInfo()?.running}}</h1>
+        </ion-text>
+        <ion-text>
+          <h1>Progress - {{receivedProgress()}}</h1>
+        </ion-text>
+        }@else {
+        <ion-text color="danger">
+          <h1>Not Connected yet. Please Start Server</h1>
+        </ion-text>
+        }
+      </ion-col>
+      <ion-col
+        sizeXs="12"
+        sizeSm="4"
+        class="ion-text-center"
+        color="secondary"
+        [style.background]="'#134313'"
+      >
+        @if (successLogs().length>0) { @for (log of successLogs(); track $index)
+        {
+        <ion-item color="danger">{{log}}</ion-item>
+        } }@else {<ion-text color="success"
+          ><h1>No Logs present. Please start server</h1></ion-text
+        >}
+      </ion-col>
+      <ion-col
+        sizeXs="12"
+        sizeSm="4"
+        class="ion-text-center"
+        [style.background]="'#314331'"
+      >
+        @if (errorLogs().length>0) { @for (err of errorLogs(); track $index) {
+        <ion-item color="danger">{{err}}</ion-item>
+        } }@else {<ion-text color="danger"
+          ><h1>No Error occured yet</h1></ion-text
+        >}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
