@@ -23,16 +23,25 @@ export class AppComponent implements AfterViewInit {
   constructor(
     private preferenceService: PreferenceService,
     private router: Router,
+    private configService: ConfigService,
   ) {
     effect(() => {
       const configured = preferenceService.isConfigured();
 
       if (configured === null) return;
 
-      const target = configured ? '/home' : '/configuration';
+      if (configured) {
+        this.configService.currentPageKey.set('home');
 
-      if (this.router.url !== target) {
-        this.router.navigateByUrl(target, { replaceUrl: true });
+        if (this.router.url !== '/home') {
+          this.router.navigateByUrl('/home', { replaceUrl: true });
+        }
+      } else {
+        this.configService.currentPageKey.set('configuration');
+
+        if (this.router.url !== '/configuration') {
+          this.router.navigateByUrl('/configuration', { replaceUrl: true });
+        }
       }
     });
   }

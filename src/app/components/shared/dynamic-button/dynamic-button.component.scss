@@ -1,0 +1,26 @@
+.dynamicBtn{
+    position: relative;
+    overflow: hidden;
+
+    .imageBtn{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .overlay-wrapper{
+        position: absolute;
+        inset: 0;
+        display: flex;
+        padding:10px;
+        pointer-events: none;
+    }
+
+    .h-left{ justify-content: flex-start;}
+    .h-center{ justify-content: center;}
+    .h-right{ justify-content: flex-end;}
+    
+    .v-top{ align-items: flex-start;}
+    .v-center{ align-items: center;}
+    .v-bottom{ align-items: flex-end;}
+}

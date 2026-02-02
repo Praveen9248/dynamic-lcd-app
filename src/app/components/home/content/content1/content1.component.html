@@ -1,0 +1,19 @@
+<div
+  class="options-wrapper"
+  [style.background-image]="
+    contentData()?.backgroundImage?.data
+      ? 'url(data:' +
+        contentData()?.backgroundImage?.mime +
+        ';base64,' +
+        contentData()?.backgroundImage?.data +
+        ')'
+      : null
+  "
+  style="background-repeat: no-repeat; background-size: cover"
+>
+  <div class="options-inner">
+    @for (cat of categories(); track $index) {
+      <app-dynamic-button (click)="onFilter(cat)">{{ cat }}</app-dynamic-button>
+    }
+  </div>
+</div>

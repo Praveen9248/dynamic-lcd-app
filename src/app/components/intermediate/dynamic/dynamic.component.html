@@ -1,0 +1,13 @@
+<div
+  class="filter-wrapper"
+  [style.background-image]=""
+  style="background-repeat: no-repeat; background-size: cover"
+>
+  <div class="filter-inner">
+    @for (attribute of currentPageAttributes(); track $index) {
+      <app-dynamic-button (click)="handleFilter(attribute)">{{
+        attribute
+      }}</app-dynamic-button>
+    }
+  </div>
+</div>

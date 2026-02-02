@@ -1,13 +1,12 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>intermediate</ion-title>
+    <ion-title class="ion-text-center">Intermediate</ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">intermediate</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ng-template #dynamicView></ng-template>
 </ion-content>
+<ion-footer class="ion-text-center">
+  <ion-button (click)="goToPrevPage()">back</ion-button>
+  <ion-button (click)="goToHome()">Homes</ion-button>
+</ion-footer>

@@ -1,0 +1,20 @@
+.filter-wrapper{
+  height: 100%;
+  width: 100%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.filter-inner{
+  display:flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 10px;
+  gap: 12px;
+}
+
+.filter-inner::-webkit-scrollbar{
+  display: none;
+}

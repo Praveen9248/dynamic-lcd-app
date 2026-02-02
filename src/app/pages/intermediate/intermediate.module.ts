@@ -7,14 +7,18 @@ import { IonicModule } from '@ionic/angular';
 import { IntermediatePageRoutingModule } from './intermediate-routing.module';
 
 import { IntermediatePage } from './intermediate.page';
+import { DynamicButtonModule } from 'src/app/components/shared/dynamic-button/dynamic-button.module';
+import { DynamicButtonComponent } from 'src/app/components/shared/dynamic-button/dynamic-button.component';
+import { DynamicComponent } from 'src/app/components/intermediate/dynamic/dynamic.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    IntermediatePageRoutingModule
+    IntermediatePageRoutingModule,
+    DynamicButtonModule,
   ],
-  declarations: [IntermediatePage]
+  declarations: [IntermediatePage, DynamicComponent],
 })
 export class IntermediatePageModule {}
