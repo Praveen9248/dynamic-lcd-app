@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { computed, Injectable, signal } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -8,15 +8,15 @@ import { Router } from '@angular/router';
 export class ConfigService {
   configData = signal<any>(null);
 
-  flowType = signal<'CATEGORY' | 'ETC'>('CATEGORY');
+  mode = signal<'CATEGORY' | 'ETC'>('CATEGORY');
 
   currentPageKey = signal<
     'home' | 'intermediate' | 'result' | 'configuration' | null
   >(null);
 
-  currentIntermediateIdx = signal(0);
+  currentIntermediateIdx = signal(1);
 
-  intermediateAttributeStatus = signal<any>(null);
+  navigatorStatus = signal<boolean>(false);
 
   constructor(
     private httpClient: HttpClient,
@@ -27,56 +27,69 @@ export class ConfigService {
     return this.httpClient.get<any>('assets/configuration/layoutConfig.json');
   }
 
+  goToHomePage() {
+    this.currentPageKey.set('home');
+    this.router.navigate(['home']);
+  }
+
+  goToIntermediatePage() {
+    this.currentPageKey.set('intermediate');
+    this.router.navigate(['intermediate']);
+  }
+
+  goToResultPage() {
+    this.currentPageKey.set('result');
+    this.router.navigate(['result']);
+  }
+
   goToNextPage() {
-    let nextPageKey = this.configData()?.flow[this.currentPageKey()!]?.nextPage;
+    const current = this.currentPageKey();
+    if (!current) return;
+
+    const nextPageKey = this.configData()?.flow?.[current]?.nextPage;
     console.log(nextPageKey);
-    console.log(!this.intermediateAttributeStatus());
-    if (!this.intermediateAttributeStatus()) {
-      this.router.navigate(['result']);
-      this.currentPageKey.set('result');
+
+    if (
+      nextPageKey === 'intermediate' &&
+      this.configData()?.flow?.intermediate?.enabled === false
+    ) {
+      this.goToResultPage();
       return;
     }
 
-    if (nextPageKey === 'intermediate') {
-      if (this.configData()?.flow[nextPageKey]?.enabled === false) {
-        this.router.navigate(['result']);
-        this.currentPageKey.set('result');
-        return;
-      }
+    if (nextPageKey === 'intermediate' && !this.navigatorStatus()) {
+      this.goToResultPage();
+      return;
     }
-    this.router.navigate([nextPageKey]);
+
     this.currentPageKey.set(nextPageKey);
+    this.router.navigate([nextPageKey]);
   }
 
   goToPrevPage() {
-    const currentPage = this.currentPageKey();
+    const current = this.currentPageKey();
 
-    if (currentPage === 'intermediate') {
-      if (this.currentIntermediateIdx() > 0) {
+    if (current === 'intermediate') {
+      if (this.currentIntermediateIdx() > 1) {
         this.currentIntermediateIdx.update((i) => i - 1);
         return;
       }
+
       this.goToHomePage();
       return;
     }
 
-    if (currentPage === 'result') {
+    if (current === 'result') {
       if (
-        !this.intermediateAttributeStatus() ||
-        this.configData()?.flow['intermediate']?.enabled === false
+        this.configData()?.flow?.intermediate?.enabled === false ||
+        !this.navigatorStatus()
       ) {
         this.goToHomePage();
         return;
       }
-      this.router.navigate(['intermediate']);
-      this.currentPageKey.set('intermediate');
+
+      this.goToIntermediatePage();
       return;
     }
-  }
-
-  goToHomePage() {
-    this.currentIntermediateIdx.set(0);
-    this.router.navigate(['home']);
-    this.currentPageKey.set('home');
   }
 }

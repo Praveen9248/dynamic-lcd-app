@@ -29,21 +29,12 @@ export class HomePage implements OnInit {
   private headerRef?: ComponentRef<any>;
   private contentRef?: ComponentRef<any>;
 
-  flowType = computed(() => this.configService.flowType());
-
-  primaryData = computed(() => this.apiDataService.primaryFeatureData());
+  mode = computed(() => this.configService.mode());
 
   constructor(
     private configService: ConfigService,
     private apiDataService: ApiService,
   ) {
-    effect(() => {
-      const type = this.flowType();
-      const apiData = this.apiDataService.apiData();
-      if (!type || !apiData) return;
-      this.apiDataService.loadPrimaryFeature(type);
-    });
-
     effect(() => {
       const headerCode = this.configService.configData()?.header?.headerType;
       const contentCode = this.configService.configData()?.content?.contentType;
@@ -60,7 +51,7 @@ export class HomePage implements OnInit {
     this.configService.getConfig().subscribe({
       next: (res) => {
         this.configService.configData.set(res);
-        this.configService.flowType.set(res.flowType);
+        this.configService.mode.set(res.flowType);
       },
     });
 

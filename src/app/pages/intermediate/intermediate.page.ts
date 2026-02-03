@@ -23,60 +23,58 @@ export class IntermediatePage implements OnInit {
 
   private componentRef?: ComponentRef<any>;
 
-  currentAttributePageComponent = computed(() => {
-    let code = 'F0001';
-    return IntermediateCodeMap[code];
-  });
+  currentIntermediateIdx = computed(() =>
+    this.configService.currentIntermediateIdx(),
+  );
+
+  mode = computed(() => this.configService.mode());
 
   constructor(
     private configService: ConfigService,
     private apiDataService: ApiService,
   ) {
     effect(() => {
-      const component = this.currentAttributePageComponent();
-      if (component) {
-        this.loadComponent(component);
+      this.vcr.clear();
+      const code = 'F0001';
+      const component = IntermediateCodeMap[code];
+
+      if (!component) return;
+
+      this.componentRef = this.vcr.createComponent(component);
+
+      this.componentRef.instance.stepIndex = this.currentIntermediateIdx();
+
+      if (this.componentRef.instance.action) {
+        this.componentRef.instance.action.subscribe(() => {
+          this.handleNextStep();
+        });
       }
     });
   }
 
-  private loadComponent(component: any) {
-    this.vcr.clear();
-    this.componentRef = this.vcr.createComponent(component);
-
-    if (this.componentRef.instance.action) {
-      this.componentRef.instance.action.subscribe((action: any) => {
-        this.handleFilterNavigate(action);
-      });
-    }
-  }
-
   ngOnInit() {}
 
-  goNextStep() {
-    if (
-      this.apiDataService.intermediateDataTrack()[
-        this.configService.currentIntermediateIdx()
-      ].length > 0 ||
-      this.configService.currentIntermediateIdx() < 2
-    ) {
+  handleNextStep() {
+    const nextOpts = this.apiDataService.getOptionsForStep(
+      this.currentIntermediateIdx() + 1,
+      this.mode(),
+    );
+    if (nextOpts.length > 0) {
       this.configService.currentIntermediateIdx.update((i) => i + 1);
-      console.log(this.configService.currentIntermediateIdx());
       return;
     }
-    console.log(this.configService.currentIntermediateIdx());
     this.configService.goToNextPage();
   }
 
-  handleFilterNavigate(action: any) {
-    this.goNextStep();
+  goToHome() {
+    this.apiDataService.selectedValues = {};
+    this.configService.goToHomePage();
   }
 
   goToPrevPage() {
+    delete this.apiDataService.selectedValues[
+      this.currentIntermediateIdx() - 1
+    ];
     this.configService.goToPrevPage();
-  }
-
-  goToHome() {
-    this.configService.goToHomePage();
   }
 }

@@ -14,48 +14,22 @@ export class Content1Component implements OnInit {
     private configService: ConfigService,
   ) {}
 
-  categories = computed(() => this.apiDataService.primaryFeatureData());
-
   contentData = computed(() => this.configService.configData()?.content);
 
-  flowType = computed(() => this.configService.flowType());
+  categories = computed(() =>
+    this.apiDataService.getOptionsForStep(0, this.mode()),
+  );
+
+  mode = computed(() => this.configService.mode());
 
   ngOnInit() {}
 
   onFilter(filter: any) {
-    let filtered: any[] = [];
-
-    if (this.flowType() === 'CATEGORY') {
-      filtered = this.apiDataService
-        .filteredProducts()
-        .filter((product: any) => product.category1 === filter);
-      this.apiDataService.filteredProducts.set(filtered);
-
-      const data = [
-        ...new Set(
-          filtered.map((item: any) => item?.category2).filter(Boolean),
-        ),
-      ];
-      this.apiDataService.intermediateDataTrack.update((prev) => [
-        ...prev,
-        data,
-      ]);
-      this.configService.intermediateAttributeStatus.set(data.length > 0);
-    } else {
-      filtered = this.apiDataService
-        .filteredProducts()
-        .filter((product: any) => product.etc0 === filter);
-      this.apiDataService.filteredProducts.set(filtered);
-      const data = [
-        ...new Set(filtered.map((item: any) => item?.etc1).filter(Boolean)),
-      ];
-
-      this.apiDataService.intermediateDataTrack.update((prev) => [
-        ...prev,
-        data,
-      ]);
-      this.configService.intermediateAttributeStatus.set(data.length > 0);
-    }
+    this.apiDataService.selectedValues = { 0: filter };
+    const nextOptions = this.apiDataService.getOptionsForStep(1, this.mode());
+    nextOptions.length > 0
+      ? this.configService.navigatorStatus.set(true)
+      : this.configService.navigatorStatus.set(false);
     this.configService.goToNextPage();
   }
 }

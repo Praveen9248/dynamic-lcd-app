@@ -4,9 +4,9 @@
   style="background-repeat: no-repeat; background-size: cover"
 >
   <div class="filter-inner">
-    @for (attribute of currentPageAttributes(); track $index) {
-      <app-dynamic-button (click)="handleFilter(attribute)">{{
-        attribute
+    @for (option of options(); track $index) {
+      <app-dynamic-button (click)="handleFilter(option)">{{
+        option
       }}</app-dynamic-button>
     }
   </div>

@@ -5,45 +5,50 @@ import { Injectable, signal } from '@angular/core';
   providedIn: 'root',
 })
 export class ApiService {
-  apiData = signal<any>(null);
-
-  primaryFeatureData = signal<any[]>([]);
-  secondaryFeatureData = signal<any[]>([]);
-  tertiaryFeatureData = signal<any[]>([]);
-  quaternaryFeatureData = signal<any[]>([]);
-
-  intermediateDataTrack = signal<any[]>([]);
-
-  filteredProducts = signal<any[]>([]);
-
   constructor(private httpClient: HttpClient) {}
 
+  //api data response
+  apiData = signal<any>(null);
+
+  //api call
   getApiData() {
     return this.httpClient.get<any>('assets/api/data.json');
   }
 
-  loadPrimaryFeature(type: 'CATEGORY' | 'ETC') {
-    if (!this.apiData() || !this.apiData().labelList) return;
+  //selected values
+  selectedValues: Record<number, string> = {};
 
-    if (type === 'CATEGORY') {
-      const data = [
-        ...new Set(
-          this.apiData()
-            .labelList.map((item: any) => item?.category1)
-            .filter(Boolean),
-        ),
-      ];
-      this.primaryFeatureData.set(data);
-    } else {
-      const data = [
-        ...new Set(
-          this.apiData()
-            .labelList.map((item: any) => item?.etc0)
-            .filter(Boolean),
-        ),
-      ];
-      this.primaryFeatureData.set(data);
-    }
-    this.filteredProducts.set(this.apiData().labelList);
+  //filter parameters
+  categorySteps = ['category1', 'category2', 'category3', 'category4'];
+  etcSteps = ['etc0', 'etc1', 'etc2', 'etc3'];
+
+  //setting up the steps for the application
+  getSteps(mode: string) {
+    return mode === 'CATEGORY' ? this.categorySteps : this.etcSteps;
+  }
+
+  //extraction of options available for index of getSteps array
+  getOptionsForStep(stepIdx: number, mode: string): any[] {
+    const steps = this.getSteps(mode);
+
+    return [
+      ...new Set(
+        this.apiData()
+          ?.labelList.filter((item: any) => {
+            for (let i = 0; i < stepIdx; i++) {
+              const key = steps[i];
+              if (
+                this.selectedValues[i] &&
+                item[key] !== this.selectedValues[i]
+              ) {
+                return false;
+              }
+            }
+            return true;
+          })
+          .map((item: any) => item[steps[stepIdx]])
+          .filter((v: any) => v && v.trim() !== ''),
+      ),
+    ];
   }
 }

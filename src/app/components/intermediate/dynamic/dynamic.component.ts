@@ -2,6 +2,8 @@ import {
   Component,
   computed,
   EventEmitter,
+  input,
+  Input,
   OnInit,
   Output,
 } from '@angular/core';
@@ -15,73 +17,33 @@ import { ConfigService } from 'src/app/services/configuration/config-service';
   styleUrls: ['./dynamic.component.scss'],
 })
 export class DynamicComponent implements OnInit {
-  @Output() action = new EventEmitter<any>();
+  @Output() action = new EventEmitter<void>();
 
   constructor(
     private configService: ConfigService,
     private apiDataService: ApiService,
   ) {}
 
-  ngOnInit(): void {}
-
   currentIdx = computed(() => this.configService.currentIntermediateIdx());
 
-  flowType = computed(() => this.configService.flowType());
+  ngOnInit(): void {}
 
-  currentPageAttributes = computed(
-    () => this.apiDataService.intermediateDataTrack()[this.currentIdx()],
+  options = computed(() =>
+    this.apiDataService.getOptionsForStep(this.currentIdx(), this.mode()),
   );
 
-  handleFilter(attribute: any) {
+  mode = computed(() => this.configService.mode());
+
+  handleFilter(opt: any) {
     const idx = this.currentIdx();
-    const products = this.apiDataService.filteredProducts();
-    console.log(products);
 
-    if (this.flowType() === 'CATEGORY') {
-      const filterKey = `category${idx + 2}`;
-      const nextKey = `category${idx + 3}`;
+    this.apiDataService.selectedValues[idx] = opt;
 
-      const filtered = products.filter((p: any) => p[filterKey] === attribute);
-      console.log(filtered);
+    Object.keys(this.apiDataService.selectedValues)
+      .map(Number)
+      .filter((i) => i > idx)
+      .forEach((i) => delete this.apiDataService.selectedValues[i]);
 
-      this.apiDataService.filteredProducts.set(filtered);
-
-      const data = [
-        ...new Set(
-          filtered.map((item: any) => item?.[nextKey]).filter(Boolean),
-        ),
-      ];
-      this.apiDataService.intermediateDataTrack.update((prev) => [
-        ...prev,
-        data,
-      ]);
-      this.configService.intermediateAttributeStatus.set(data.length > 0);
-    } else {
-      const filterKey = `etc${idx + 1}`;
-      const nextKey = `etc${idx + 2}`;
-
-      const filtered = products.filter((p: any) => p[filterKey] === attribute);
-
-      console.log(filtered);
-
-      this.apiDataService.filteredProducts.set(filtered);
-      const data = [
-        ...new Set(
-          filtered.map((item: any) => item?.[nextKey]).filter(Boolean),
-        ),
-      ];
-
-      this.apiDataService.tertiaryFeatureData.set(data);
-      this.apiDataService.intermediateDataTrack.update((prev) => [
-        ...prev,
-        data,
-      ]);
-      this.configService.intermediateAttributeStatus.set(data.length > 0);
-    }
-
-    this.action.emit({
-      type: 'Filter Selected',
-      payload: attribute,
-    });
+    this.action.emit();
   }
 }
