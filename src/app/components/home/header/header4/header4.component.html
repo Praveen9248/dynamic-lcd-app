@@ -1,3 +1,7 @@
-<p>
-  header4 works!
-</p>
+<ion-toolbar [style.--background]="headerData()?.backgroundColor">
+  <ion-title class="ion-text-center">
+    <ion-text>
+      <div class="title">{{ headerData()?.title }}</div>
+    </ion-text>
+  </ion-title>
+</ion-toolbar>

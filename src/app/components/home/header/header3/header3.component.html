@@ -1,3 +1,10 @@
-<p>
-  header3 works!
-</p>
+<ion-toolbar [style.--background]="headerData()?.backgroundColor">
+  <ion-img [src]="headerData()?.logoUrl" slot="start"> </ion-img>
+  <ion-title class="ion-text-center">
+    <ion-text class="ion-text-center">
+      <div class="title">
+        {{ headerData()?.title }}
+      </div>
+    </ion-text>
+  </ion-title>
+</ion-toolbar>

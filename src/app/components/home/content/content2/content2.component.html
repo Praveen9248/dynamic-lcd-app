@@ -1,3 +1,26 @@
-<p>
-  content2 works!
-</p>
+<ion-grid
+  class="ion-padding"
+  [style.background-image]="
+    contentData()?.backgroundImage?.data
+      ? 'url(data:' +
+        contentData()?.backgroundImage?.mime +
+        ';base64,' +
+        contentData()?.backgroundImage?.data +
+        ')'
+      : null
+  "
+  style="background-repeat: no-repeat; background-size: cover"
+  class="content-wrapper"
+>
+  <ion-row>
+    @for (cat of categories(); track $index) {
+      <ion-col sizeXs="12" sizeSm="12" sizeMd="6" sizeLg="4" sizeXl="3">
+        <app-dynamic-button
+          style="display: block; width: fit-content; margin: 0 auto"
+          (click)="onFilter(cat)"
+          >{{ cat }}</app-dynamic-button
+        >
+      </ion-col>
+    }
+  </ion-row>
+</ion-grid>
