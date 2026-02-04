@@ -20,7 +20,7 @@
         'v-' + buttonData()?.textVerticalPos,
       ]"
     >
-      <ion-text>
+      <ion-text [ngStyle]="letterStyles()">
         <ng-content></ng-content>
       </ion-text>
     </div>

@@ -1,0 +1,31 @@
+.side-banner{
+    width: 20%;
+    height: 100%;
+}
+
+.results-wrapper{
+    display: flex;
+    flex-direction: row;
+    height: 100%
+}
+
+.productImage{
+    height: 200px;
+}
+
+.side-container{
+    margin:0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.filter-chips{
+    display:flex;
+}
+
+.handle-scroll{
+    flex: 1;
+    overflow-y: scroll;
+}

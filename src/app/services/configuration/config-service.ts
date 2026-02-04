@@ -28,6 +28,7 @@ export class ConfigService {
   }
 
   goToHomePage() {
+    this.currentIntermediateIdx.set(1);
     this.currentPageKey.set('home');
     this.router.navigate(['home']);
   }

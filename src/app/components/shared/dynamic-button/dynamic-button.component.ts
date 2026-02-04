@@ -20,14 +20,26 @@ export class DynamicButtonComponent implements OnInit {
       width: this.buttonData()?.width + 'px',
       height: this.buttonData()?.height + 'px',
       'border-radius': this.buttonData()?.borderRadius + 'px',
-      'border-width': this.buttonData()?.borderWidth + 'px',
+      'border-width': 10 + 'px',
       'border-color': this.buttonData()?.borderColor,
+      'border-style': 'solid',
       color: this.buttonData()?.textColor,
 
       background:
         this.buttonData().buttonType === 'text-only'
           ? this.buttonData().backgroundColor
           : 'transparent',
+    };
+  });
+
+  letterStyles = computed(() => {
+    return {
+      color: '#ffffff',
+      'font-size': '48px',
+      'font-weight': 800,
+      'line-height': 1.05,
+      'letter-spacing': '-0.5px',
+      'font-family': 'Inter',
     };
   });
 }
