@@ -2,6 +2,7 @@ import { AfterViewInit, Component, effect, HostListener } from '@angular/core';
 import { ConfigService } from './services/configuration/config-service';
 import { Router } from '@angular/router';
 import { PreferenceService } from './services/storage/preference-service';
+import { ScreenSaverService } from './services/screen-saver/screen-saver-service';
 
 const BASE_A = {
   BASE_WIDTH: 1920,
@@ -24,6 +25,7 @@ export class AppComponent implements AfterViewInit {
     private preferenceService: PreferenceService,
     private router: Router,
     private configService: ConfigService,
+    public screenSaverService: ScreenSaverService,
   ) {
     effect(() => {
       const configured = preferenceService.isConfigured();
@@ -44,6 +46,10 @@ export class AppComponent implements AfterViewInit {
         }
       }
     });
+  }
+
+  ngOnInit() {
+    this.screenSaverService.start();
   }
 
   ngAfterViewInit(): void {

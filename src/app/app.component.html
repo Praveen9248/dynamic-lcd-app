@@ -1,5 +1,8 @@
 <div class="lcd-root">
   <ion-app id="lcd-app">
     <ion-router-outlet></ion-router-outlet>
+    @if (screenSaverService.isActive()) {
+      <app-screen-saver (click)="screenSaverService.reset()"></app-screen-saver>
+    }
   </ion-app>
 </div>

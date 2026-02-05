@@ -51,7 +51,9 @@ export class HomePage implements OnInit {
     this.configService.getConfig().subscribe({
       next: (res) => {
         this.configService.configData.set(res);
-        this.configService.mode.set(res.flowType);
+        console.log(res);
+
+        this.configService.mode.set(res?.template?.flowType);
       },
     });
 

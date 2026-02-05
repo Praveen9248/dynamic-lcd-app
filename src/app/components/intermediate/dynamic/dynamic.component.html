@@ -1,13 +1,34 @@
 <div
   class="filter-wrapper"
-  [style.background-image]=""
+  [style.background]="
+    intermediateData()?.backgroundStyle === 'color'
+      ? intermediateData()?.backgroundColor
+      : intermediateData()?.backgroundStyle === 'gradient'
+        ? 'linear-gradient(' +
+          intermediateData()?.backgroundGradient?.angle +
+          'deg, ' +
+          intermediateData()?.backgroundGradient?.startColor +
+          ', ' +
+          intermediateData()?.backgroundGradient?.endColor +
+          ')'
+        : intermediateData()?.backgroundStyle === 'image' &&
+            intermediateData()?.backgroundImage?.data
+          ? 'url(data:' +
+            intermediateData()?.backgroundImage?.mime +
+            ';base64,' +
+            intermediateData()?.backgroundImage?.data +
+            ')'
+          : null
+  "
   style="background-repeat: no-repeat; background-size: cover"
 >
   <div class="filter-inner">
     @for (option of options(); track $index) {
-      <app-dynamic-button (click)="handleFilter(option)">{{
-        option
-      }}</app-dynamic-button>
+      <app-dynamic-button
+        (click)="handleFilter(option)"
+        [buttonImageData]="categoryImages()?.[option]?.data"
+        >{{ option }}</app-dynamic-button
+      >
     }
   </div>
 </div>

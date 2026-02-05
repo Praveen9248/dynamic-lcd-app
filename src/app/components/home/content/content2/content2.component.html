@@ -1,13 +1,21 @@
 <ion-grid
   class="ion-padding"
-  [style.background-image]="
-    contentData()?.backgroundImage?.data
-      ? 'url(data:' +
-        contentData()?.backgroundImage?.mime +
-        ';base64,' +
-        contentData()?.backgroundImage?.data +
+  [style.background]="
+    contentData()?.backgroundStyle === 'gradient'
+      ? 'linear-gradient(' +
+        contentData()?.backgroundGradient?.angle +
+        'deg, ' +
+        contentData()?.backgroundGradient?.startColor +
+        ', ' +
+        contentData()?.backgroundGradient?.endColor +
         ')'
-      : null
+      : contentData()?.backgroundImage?.data
+        ? 'url(data:' +
+          contentData()?.backgroundImage?.mime +
+          ';base64,' +
+          contentData()?.backgroundImage?.data +
+          ')'
+        : null
   "
   style="background-repeat: no-repeat; background-size: cover"
   class="content-wrapper"

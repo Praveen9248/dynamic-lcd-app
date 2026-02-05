@@ -16,6 +16,8 @@ export class Content1Component implements OnInit {
 
   contentData = computed(() => this.configService.configData()?.content);
 
+  categoryImages = computed(() => this.configService.configData()?.images[0]);
+
   categories = computed(() =>
     this.apiDataService.getOptionsForStep(0, this.mode()),
   );

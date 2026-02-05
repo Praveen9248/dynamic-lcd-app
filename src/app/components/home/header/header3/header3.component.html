@@ -1,8 +1,18 @@
 <ion-toolbar [style.--background]="headerData()?.backgroundColor">
   <ion-img [src]="headerData()?.logoUrl" slot="start"> </ion-img>
-  <ion-title class="ion-text-center">
+  <ion-title [class.ion-text-center]="headerData()?.textPosition === 'center'">
     <ion-text class="ion-text-center">
-      <div class="title">
+      <div
+        class="title"
+        [ngStyle]="{
+          color: headerData()?.textColor,
+          fontSize: headerData()?.textSize + 'px',
+          fontWeight: headerData()?.fontWeight,
+          lineHeight: headerData()?.lineHeight,
+          letterSpacing: headerData()?.letterSpacing + 'px',
+          fontFamily: headerData()?.fontFamily,
+        }"
+      >
         {{ headerData()?.title }}
       </div>
     </ion-text>

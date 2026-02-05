@@ -49,7 +49,7 @@ export class Result1Component implements OnInit {
 
     Object.keys(selected)
       .map(Number)
-      .sort((a, b) => a - b) // 👈 important
+      .sort((a, b) => a - b)
       .forEach((index) => {
         const key = keys[index];
         const value = selected[index];

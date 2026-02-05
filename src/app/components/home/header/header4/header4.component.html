@@ -1,7 +1,19 @@
 <ion-toolbar [style.--background]="headerData()?.backgroundColor">
   <ion-title class="ion-text-center">
     <ion-text>
-      <div class="title">{{ headerData()?.title }}</div>
+      <div
+        class="title"
+        [ngStyle]="{
+          color: headerData()?.textColor,
+          fontSize: headerData()?.textSize + 'px',
+          fontWeight: headerData()?.fontWeight,
+          lineHeight: headerData()?.lineHeight,
+          letterSpacing: headerData()?.letterSpacing + 'px',
+          fontFamily: headerData()?.fontFamily,
+        }"
+      >
+        {{ headerData()?.title }}
+      </div>
     </ion-text>
   </ion-title>
 </ion-toolbar>

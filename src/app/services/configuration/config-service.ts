@@ -21,7 +21,7 @@ export class ConfigService {
   constructor(
     private httpClient: HttpClient,
     private router: Router,
-  ) {}
+  ) { }
 
   getConfig() {
     return this.httpClient.get<any>('assets/configuration/layoutConfig.json');

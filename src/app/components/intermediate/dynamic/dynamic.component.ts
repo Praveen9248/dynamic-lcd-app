@@ -26,6 +26,14 @@ export class DynamicComponent implements OnInit {
 
   currentIdx = computed(() => this.configService.currentIntermediateIdx());
 
+  intermediateData = computed(
+    () => this.configService.configData()?.intermediate,
+  );
+
+  categoryImages = computed(
+    () => this.configService.configData()?.images[this.currentIdx()],
+  );
+
   ngOnInit(): void {}
 
   options = computed(() =>

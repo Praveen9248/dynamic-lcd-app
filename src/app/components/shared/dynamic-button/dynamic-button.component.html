@@ -1,28 +1,29 @@
-<ion-card button class="dynamicBtn" [ngStyle]="dynamicStyles()">
-  @if (
-    buttonData()?.buttonType === "image-only" ||
-    buttonData()?.buttonType === "textImage"
-  ) {
-    <ion-img
-      [src]="'https://picsum.photos/500'"
-      [alt]="'any'"
-      class="imgBtn"
-    ></ion-img>
-  }
-  @if (
-    buttonData()?.buttonType === "text-only" ||
-    buttonData()?.buttonType === "textImage"
-  ) {
-    <div
-      class="overlay-wrapper"
-      [ngClass]="[
-        'h-' + buttonData()?.textHorizontalPos,
-        'v-' + buttonData()?.textVerticalPos,
-      ]"
-    >
-      <ion-text [ngStyle]="letterStyles()">
-        <ng-content></ng-content>
-      </ion-text>
-    </div>
-  }
-</ion-card>
+<div>
+  <ion-card button class="dynamicBtn" [ngStyle]="dynamicStyles()">
+    @if (
+      buttonData()?.buttonType === "image-only" ||
+      buttonData()?.buttonType === "textImage"
+    ) {
+      <ion-img [src]="buttonImageData" [alt]="'any'" class="imgBtn"></ion-img>
+    }
+    @if (
+      buttonData()?.buttonType === "text-only" ||
+      buttonData()?.buttonType === "textImage"
+    ) {
+      <div
+        class="overlay-wrapper"
+        [ngClass]="[
+          'h-' + buttonData()?.textHorizontalPos,
+          'v-' + buttonData()?.textVerticalPos,
+        ]"
+      >
+        <ion-text [ngStyle]="letterStyles()">
+          <ng-content></ng-content>
+        </ion-text>
+      </div>
+    }
+  </ion-card>
+  <!-- <ion-text [ngStyle]="letterStyles()">
+    <ng-content></ng-content>
+  </ion-text> -->
+</div>

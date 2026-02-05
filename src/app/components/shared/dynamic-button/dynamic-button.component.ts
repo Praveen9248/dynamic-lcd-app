@@ -1,4 +1,4 @@
-import { Component, computed, OnInit } from '@angular/core';
+import { Component, computed, Input, OnInit } from '@angular/core';
 import { ConfigService } from 'src/app/services/configuration/config-service';
 
 @Component({
@@ -9,6 +9,7 @@ import { ConfigService } from 'src/app/services/configuration/config-service';
 })
 export class DynamicButtonComponent implements OnInit {
   constructor(private configService: ConfigService) {}
+  @Input() buttonImageData?: any;
 
   buttonData = computed(() => this.configService.configData()?.button);
   ngOnInit() {}
@@ -16,30 +17,30 @@ export class DynamicButtonComponent implements OnInit {
   dynamicStyles = computed(() => {
     const btn = this.buttonData();
     if (!btn) return {};
-    return {
-      width: this.buttonData()?.width + 'px',
-      height: this.buttonData()?.height + 'px',
-      'border-radius': this.buttonData()?.borderRadius + 'px',
-      'border-width': 10 + 'px',
-      'border-color': this.buttonData()?.borderColor,
-      'border-style': 'solid',
-      color: this.buttonData()?.textColor,
 
+    return {
+      width: btn.width + 'px',
+      height: btn.height + 'px',
+      borderRadius: btn.borderRadius + 'px',
+      borderWidth: btn.borderWidth + 'px',
+      borderColor: btn.borderColor,
+      borderStyle: 'solid',
       background:
-        this.buttonData().buttonType === 'text-only'
-          ? this.buttonData().backgroundColor
-          : 'transparent',
+        btn.buttonType === 'text-only' ? btn.backgroundColor : 'transparent',
     };
   });
 
   letterStyles = computed(() => {
+    const btn = this.buttonData();
+    if (!btn) return {};
+
     return {
-      color: '#ffffff',
-      'font-size': '48px',
-      'font-weight': 800,
-      'line-height': 1.05,
-      'letter-spacing': '-0.5px',
-      'font-family': 'Inter',
+      color: btn.textColor,
+      fontSize: btn.fontSize + 'px',
+      fontWeight: btn.fontWeight,
+      lineHeight: btn.lineHeight,
+      letterSpacing: btn.letterSpacing + 'px',
+      fontFamily: btn.fontFamily,
     };
   });
 }
