@@ -17,6 +17,7 @@ export class LanTransferService {
   successLogs = signal<any[]>([]);
   errorLogs = signal<any[]>([]);
   receiveProgress = signal<number>(0);
+  receivedFilePath = signal<any>(null);
 
   private statusListener?: { remove: () => Promise<void> };
   private progressListener?: { remove: () => Promise<void> };
@@ -75,6 +76,7 @@ export class LanTransferService {
         if (e.role !== 'server') return;
         this.receiveProgress.set(100);
         this.pushSuccessMessage(`File received (${e.totalBytes}) bytes`);
+        this.receivedFilePath.set(e.filePath);
       },
     );
 

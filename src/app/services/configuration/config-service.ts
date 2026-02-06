@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { Filesystem, Encoding } from '@capacitor/filesystem';
 
 @Injectable({
   providedIn: 'root',
@@ -18,13 +18,27 @@ export class ConfigService {
 
   navigatorStatus = signal<boolean>(false);
 
+  configFilePath = signal<any>(null);
+
   constructor(
-    private httpClient: HttpClient,
     private router: Router,
   ) { }
 
-  getConfig() {
-    return this.httpClient.get<any>('assets/configuration/layoutConfig.json');
+
+  async loadConfigFromFilePath(filePath: string) {
+    try {
+      const contents = await Filesystem.readFile({
+        path: filePath,
+        encoding: Encoding.UTF8,
+      });
+      console.log(contents);
+      console.log(JSON.parse(contents.data as string));
+
+      return JSON.parse(contents.data as string);
+    } catch (error) {
+      console.error('Error reading config file:', error);
+      throw error;
+    }
   }
 
   goToHomePage() {

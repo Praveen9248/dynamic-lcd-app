@@ -6,8 +6,10 @@ import { Preferences } from '@capacitor/preferences';
 })
 export class PreferenceService {
   private readonly _isConfigured = signal<boolean | null>(null);
+  private readonly _filePath = signal<string | null>(null);
 
   readonly isConfigured = computed(() => this._isConfigured());
+  readonly filePath = computed(() => this._filePath());
 
   constructor() {
     this.loadPreference();
@@ -16,6 +18,9 @@ export class PreferenceService {
   private async loadPreference() {
     const { value } = await Preferences.get({ key: 'isConfigured' });
     this._isConfigured.set(value === 'true');
+
+    const { value: filePath } = await Preferences.get({ key: 'filePath' });
+    this._filePath.set(filePath);
   }
 
   async setConfigured(value: boolean) {
@@ -25,4 +30,13 @@ export class PreferenceService {
     });
     this._isConfigured.set(value);
   }
+
+  async setFilePath(value: string) {
+    await Preferences.set({
+      key: 'filePath',
+      value: value,
+    });
+    this._filePath.set(value);
+  }
+
 }

@@ -37,17 +37,17 @@
 @import "@ionic/angular/css/palettes/dark.system.css";
 
 
-.lcd-root{
+.lcd-root {
     width: 100vw;
     height: 100vh;
     overflow: hidden;
     display: flex;
     justify-content: center;
-    align-items:center ;
-    background:black;
+    align-items: center;
+    background: black;
 }
 
-#lcd-app{
+#lcd-app {
     width: 1920px;
     height: 540px;
     transform-origin: top left;

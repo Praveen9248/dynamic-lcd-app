@@ -34,22 +34,19 @@ export class AppComponent implements AfterViewInit {
 
       if (configured) {
         this.configService.currentPageKey.set('home');
+        this.router.navigate(['home'])
 
-        if (this.router.url !== '/home') {
-          this.router.navigateByUrl('/home', { replaceUrl: true });
-        }
       } else {
+        this.screenSaverService.isEnabled.set(false);
+        this.screenSaverService.stop();
         this.configService.currentPageKey.set('configuration');
-
-        if (this.router.url !== '/configuration') {
-          this.router.navigateByUrl('/configuration', { replaceUrl: true });
-        }
+        this.router.navigate(['configuration'])
       }
     });
   }
 
   ngOnInit() {
-    this.screenSaverService.start();
+
   }
 
   ngAfterViewInit(): void {

@@ -1,3 +1,47 @@
-<div class="screensaver">
-  <h1>Screen Saver Works</h1>
+<div>
+  @if (screenSaverType() === "multiImage") {
+    <swiper-container [loop]="true" autoplay-delay="3000">
+      @for (slide of screenSaverData()?.imageUrls; track $index) {
+        <swiper-slide class="slide">
+          <ion-img
+            [src]="`data:${slide?.mime};${slide?.encoding},${slide?.data}`"
+          ></ion-img>
+        </swiper-slide>
+      }
+    </swiper-container>
+  }
+
+  @if (screenSaverType() === "singleImage") {
+    <swiper-container>
+      <swiper-slide class="slide">
+        <ion-img
+          [src]="
+            `data:${screenSaverData()?.imageUrl?.mime};${screenSaverData()?.imageUrl?.encoding},${screenSaverData()?.imageUrl?.data}`
+          "
+        ></ion-img>
+      </swiper-slide>
+    </swiper-container>
+  }
+
+  @if (screenSaverType() === "video") {
+    <h1>All is well</h1>
+    <div class="video-wrapper">
+      <video
+        #videoPlayer
+        class="video-player"
+        autoplay
+        muted
+        playsinline
+        loop
+        preload="auto"
+      >
+        <source
+          [src]="
+            `data:${screenSaverData()?.videoUrl?.mime};${screenSaverData()?.videoUrl?.encoding},${screenSaverData()?.videoUrl?.data}`
+          "
+          [type]="screenSaverData()?.videoUrl?.mime"
+        />
+      </video>
+    </div>
+  }
 </div>
