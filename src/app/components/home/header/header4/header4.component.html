@@ -1,19 +1,6 @@
 <ion-toolbar [style.--background]="headerData()?.backgroundColor">
-  <ion-title class="ion-text-center">
-    <ion-text>
-      <div
-        class="title"
-        [ngStyle]="{
-          color: headerData()?.textColor,
-          fontSize: headerData()?.textSize + 'px',
-          fontWeight: headerData()?.fontWeight,
-          lineHeight: headerData()?.lineHeight,
-          letterSpacing: headerData()?.letterSpacing + 'px',
-          fontFamily: headerData()?.fontFamily,
-        }"
-      >
-        {{ headerData()?.title }}
-      </div>
-    </ion-text>
-  </ion-title>
+  <div class="logo-container"
+    [style.justify-content]="headerData()?.textPosition === 'center' ? 'center' : (headerData()?.textPosition === 'right' ? 'flex-end' : 'flex-start')">
+    <ion-img [src]="logoSrc()" class="header-logo-only"></ion-img>
+  </div>
 </ion-toolbar>

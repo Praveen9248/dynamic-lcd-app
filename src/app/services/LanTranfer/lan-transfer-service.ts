@@ -111,6 +111,7 @@ export class LanTransferService {
   async onStopServer() {
     await LanTransfer.stopServer();
     this.serverInfo.set(null);
+    this.serverStatus.set(false)
   }
 
   pushSuccessMessage(message: any) {

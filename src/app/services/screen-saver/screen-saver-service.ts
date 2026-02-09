@@ -8,15 +8,10 @@ export class ScreenSaverService {
   private listeners: (() => void)[] = [];
   private isStarted = false;
 
-  // Signals for reactive state
   isEnabled = signal(false);
   isActive = signal(false);
-  IDLE_TIME = signal<number>(10000); // Default 10 seconds
+  IDLE_TIME = signal<number>(10000);
 
-  /**
-   * Configure and enable the screen saver
-   * Call this when you want to set up the screen saver (e.g., on home page)
-   */
   configure(enabled: boolean, idleTimeMs: number) {
     this.isEnabled.set(enabled);
     this.IDLE_TIME.set(idleTimeMs);
@@ -28,10 +23,6 @@ export class ScreenSaverService {
     }
   }
 
-  /**
-   * Start listening for user activity
-   * Only works if screen saver is enabled
-   */
   start() {
     if (!this.isEnabled() || this.isStarted) return;
 
@@ -47,10 +38,6 @@ export class ScreenSaverService {
     });
   }
 
-  /**
-   * Stop and disable the screen saver completely
-   * Call this when entering pages that shouldn't have screen saver
-   */
   stop() {
     clearTimeout(this.timeoutId);
     this.isActive.set(false);
@@ -59,17 +46,11 @@ export class ScreenSaverService {
     this.listeners = [];
   }
 
-  /**
-   * Disable and stop - convenience method for pages that shouldn't have screen saver
-   */
   disable() {
     this.isEnabled.set(false);
     this.stop();
   }
 
-  /**
-   * Reset the idle timer (called on user activity)
-   */
   reset() {
     if (!this.isEnabled()) return;
 

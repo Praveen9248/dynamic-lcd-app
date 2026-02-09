@@ -8,9 +8,17 @@ import { ConfigService } from 'src/app/services/configuration/config-service';
   styleUrls: ['./header2.component.scss'],
 })
 export class Header2Component implements OnInit {
-  constructor(private configService: ConfigService) {}
+  constructor(private configService: ConfigService) { }
 
   headerData = computed(() => this.configService.configData()?.header);
 
-  ngOnInit() {}
+  logoSrc = computed(() => {
+    const logo = this.headerData()?.logoUrl;
+    if (logo && typeof logo === 'object' && logo.data) {
+      return `data:${logo.mime};${logo.encoding},${logo.data}`;
+    }
+    return logo;
+  });
+
+  ngOnInit() { }
 }

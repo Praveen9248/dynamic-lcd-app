@@ -3,6 +3,7 @@ import {
   ComponentRef,
   computed,
   effect,
+  OnDestroy,
   OnInit,
   ViewChild,
   ViewContainerRef,
@@ -22,7 +23,7 @@ import { PreferenceService } from 'src/app/services/storage/preference-service';
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, OnDestroy {
   @ViewChild('headerHost', { read: ViewContainerRef })
   headerVcr!: ViewContainerRef;
 
@@ -31,6 +32,7 @@ export class HomePage implements OnInit {
 
   private headerRef?: ComponentRef<any>;
   private contentRef?: ComponentRef<any>;
+  private isDestroyed = false;
 
   mode = computed(() => this.configService.mode());
 
@@ -79,7 +81,14 @@ export class HomePage implements OnInit {
     });
   }
 
+  ngOnDestroy() {
+    this.isDestroyed = true;
+    this.screenSaverService.disable();
+  }
+
   setConfig(res: any) {
+    if (this.isDestroyed) return;
+
     this.configService.configData.set(res);
     console.log(res);
 

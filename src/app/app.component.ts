@@ -14,6 +14,9 @@ const BASE_B = {
   BASE_HEIGHT: 1080,
 };
 
+import { GestureService } from './services/gesture/gesture-service';
+import { StatusBar } from '@capacitor/status-bar';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -26,6 +29,7 @@ export class AppComponent implements AfterViewInit {
     private router: Router,
     private configService: ConfigService,
     public screenSaverService: ScreenSaverService,
+    private gestureService: GestureService,
   ) {
     effect(() => {
       const configured = preferenceService.isConfigured();
@@ -45,8 +49,8 @@ export class AppComponent implements AfterViewInit {
     });
   }
 
-  ngOnInit() {
-
+  async ngOnInit() {
+    await StatusBar.hide();
   }
 
   ngAfterViewInit(): void {

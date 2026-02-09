@@ -39,4 +39,9 @@ export class PreferenceService {
     this._filePath.set(value);
   }
 
+  async clearPreferences() {
+    await this.setConfigured(false)
+    await Preferences.remove({ key: 'filePath' });
+    this._filePath.set(null);
+  }
 }

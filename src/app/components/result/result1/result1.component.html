@@ -1,48 +1,42 @@
 <div class="result-wrapper">
-  <ion-img
-    [src]="
+  <ion-img [src]="
       'https://image2url.com/r2/bucket1/images/1767863662103-54cbdb90-ab14-4677-84dc-d4b810ee3a18.png'
-    "
-    alt="random-location"
-    class="location-map"
-  >
+    " alt="random-location" class="location-map">
   </ion-img>
   <ion-card class="side-container">
     <ion-card-header>
       <ion-card-title>Products of particular filter</ion-card-title>
       <ion-card-subtitle>
-        <ion-text><h1>Selected Filters</h1></ion-text>
+        <ion-text>
+          <h1>Selected Filters</h1>
+        </ion-text>
         @for (filter of selectedOptions(); track $index) {
-          <ion-chip color="danger">{{ filter }}</ion-chip>
+        <ion-chip color="danger">{{ filter }}</ion-chip>
         }
       </ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
       <div class="product-list">
         @if (filterData().length > 0) {
-          @for (prod of filterData(); track $index) {
-            <ion-item>
-              <ion-thumbnail
-                ><ion-img [src]="'https://picsum.photos/500'"></ion-img
-              ></ion-thumbnail>
-              <ion-text class="ion-padding-horizontal"
-                ><h1>{{ prod?.articleList[0]?.articleName }}</h1></ion-text
-              >
-              <ion-badge
-                slot="end"
-                size="large"
-                [color]="prod ? 'success' : 'danger'"
-                >in Stock</ion-badge
-              >
-              <ion-button slot="end" color="danger" size="large"
-                >Blink LED</ion-button
-              >
-            </ion-item>
-          }
+        @for (prod of filterData(); track $index) {
+        <ion-item lines="full">
+          <ion-thumbnail slot="start">
+            <img [src]="'https://picsum.photos/500'" alt="product" />
+          </ion-thumbnail>
+          <ion-label>
+            <h2>{{ prod?.articleList[0]?.articleName }}</h2>
+            <p>Location: Floor {{ prod?.position[0]?.floor }} - Shelf {{ prod?.position[0]?.shelfId }}</p>
+          </ion-label>
+          <ion-badge slot="end" color="success">
+            F{{ prod?.position[0]?.floor }}-S{{ prod?.position[0]?.shelfId }}
+          </ion-badge>
+          <ion-button slot="end" color="danger" size="small">Blink</ion-button>
+        </ion-item>
+        }
         } @else {
-          <ion-text color="danger"
-            ><h1>No products found for matched filter</h1></ion-text
-          >
+        <ion-text color="danger">
+          <h1>No products found for matched filter</h1>
+        </ion-text>
         }
       </div>
     </ion-card-content>

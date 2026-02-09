@@ -12,7 +12,7 @@ export class Result2Component implements OnInit {
   constructor(
     private configService: ConfigService,
     private apiService: ApiService,
-  ) {}
+  ) { }
 
   CATEGORY_KEYS = ['category1', 'category2', 'category3', 'category4'];
   ETC_KEYS = ['etc0', 'etc1', 'etc2', 'etc3'];
@@ -21,11 +21,6 @@ export class Result2Component implements OnInit {
     this.filterData();
   }
 
-  filterKeys = computed(() => {
-    const keys = this.selectedOptions().slice(1, 3);
-
-    return keys;
-  });
 
   filterData = computed(() => {
     const keys =

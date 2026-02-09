@@ -1,9 +1,12 @@
-ion-img{
-    width: 60px;
-    height: max-content;
+.header-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 0 16px;
 }
 
-.title{
+.title {
     font-size: 18px;
-    font-weight:600;
+    font-weight: 600;
 }
