@@ -1,36 +1,53 @@
-.result-wrapper{
-    display:flex;
-    flex-direction: row;
-    height: 100%
+.result-container {
+  padding: 0;
+  width: 100%;
+  height: 540px;
 }
 
-.location-map{
-    width:40%;
-    height: 100%
+.map-container {
+  padding: 0;
 }
 
-.side-container{
-    margin:0;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
+.map-container ion-img {
+  height: 540px;
+  object-fit: cover;
 }
 
-ion-card-content {
+.right-panel {
+  padding: 0;
+}
+
+.right-panel ion-grid {
+  padding: 0;
+}
+
+.right-panel ion-col {
+  height: 540px;
+  background-color: gray;
+  padding: 0;
+}
+
+.right-panel ion-col ion-list {
+  padding: 0;
+}
+
+.right-panel ion-col ion-list ion-item {
+  --background: gray;
+  --inner-border-width: 0;
+}
+
+.option-column {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
+  min-width: 100px;
+  border-right: 1px solid #ddd;
 }
 
-ion-segment-view {
-  flex: 1;
-  min-height: 0;
+.option-item {
+  padding: 12px;
+  font-size: 18px;
 }
 
-
-.product-list{
-    flex: 1;
-    overflow-y: auto;
+.product-column {
+  flex: 2;
+  overflow-y: auto;
 }

@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { Filesystem, Encoding } from '@capacitor/filesystem';
@@ -6,25 +7,33 @@ import { Filesystem, Encoding } from '@capacitor/filesystem';
   providedIn: 'root',
 })
 export class ConfigService {
+
+  //config data store
   configData = signal<any>(null);
 
+  //mode of application
   mode = signal<'CATEGORY' | 'ETC'>('CATEGORY');
 
+  //key of the current page
   currentPageKey = signal<
     'home' | 'intermediate' | 'result' | 'configuration' | null
   >(null);
 
+  //tracking variables for intermediate page
   currentIntermediateIdx = signal(1);
 
+  //status variable for which denotes whether navigator for intermediate page is enabled or not
   navigatorStatus = signal<boolean>(false);
 
+  //path of the config file
   configFilePath = signal<any>(null);
 
   constructor(
     private router: Router,
+    private http: HttpClient
   ) { }
 
-
+  //method for loading the received file from file system
   async loadConfigFromFilePath(filePath: string) {
     try {
       const contents = await Filesystem.readFile({
@@ -41,22 +50,31 @@ export class ConfigService {
     }
   }
 
+  //just for the development purpose
+  // loadConfigFromAssets() {
+  //   return this.http.get<any>('assets/configuration/layoutConfig.json');
+  // }
+
+  //method for navigating to home page
   goToHomePage() {
     this.currentIntermediateIdx.set(1);
     this.currentPageKey.set('home');
     this.router.navigate(['home']);
   }
 
+  //method for navigating to intermediate page
   goToIntermediatePage() {
     this.currentPageKey.set('intermediate');
     this.router.navigate(['intermediate']);
   }
 
+  //method for navigating to result page
   goToResultPage() {
     this.currentPageKey.set('result');
     this.router.navigate(['result']);
   }
 
+  //method for navigating to next page
   goToNextPage() {
     const current = this.currentPageKey();
     if (!current) return;
@@ -81,6 +99,7 @@ export class ConfigService {
     this.router.navigate([nextPageKey]);
   }
 
+  //method for navigating to previous page
   goToPrevPage() {
     const current = this.currentPageKey();
 

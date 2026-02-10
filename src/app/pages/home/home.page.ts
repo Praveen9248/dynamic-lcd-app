@@ -79,6 +79,12 @@ export class HomePage implements OnInit, OnDestroy {
         console.log(res);
       },
     });
+
+    // this.configService.loadConfigFromAssets().subscribe({
+    //   next: (res) => {
+    //     this.setConfig(res);
+    //   },
+    // });
   }
 
   ngOnDestroy() {

@@ -15,6 +15,7 @@ export class ScreenSaverService {
   configure(enabled: boolean, idleTimeMs: number) {
     this.isEnabled.set(enabled);
     this.IDLE_TIME.set(idleTimeMs);
+    console.log(this.IDLE_TIME());
 
     if (enabled) {
       this.start();

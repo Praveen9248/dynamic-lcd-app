@@ -1,59 +1,24 @@
-<div class="results-wrapper">
-  <img [src]="
-      'https://image2url.com/r2/bucket2/images/1767593523540-575f4ab4-c8c1-49ea-92b3-e1a6c1301e0c.png'
-    " class="side-banner" />
-  <ion-card class="side-container">
-    <ion-card-header class="filter-chips">
-      <ion-item lines="full">
-        <ion-card-title slot="start">Product Filters</ion-card-title>
-        @if (selectedOptions().length > 0) {
-        <ion-card-subtitle slot="end">
-          @for (item of selectedOptions(); track $index) {
-          <ion-chip>{{ item }}</ion-chip>
-          }
-        </ion-card-subtitle>
-        }
-      </ion-item>
-    </ion-card-header>
-
-    <ion-card-content class="handle-scroll">
-      <ion-grid>
-        <ion-row>
-          @if (filterData()?.length > 0) {
-          @for (prod of filterData(); track $index) {
-          <ion-col sizeXs="12" sizeSm="6" sizeMd="4" sizeLg="3" sizeXl="2">
-            <ion-card>
-              <div class="image-container">
-                <ion-img [src]="'https://picsum.photos/500'" [alt]="" class="productImage" />
-              </div>
-              <ion-card-header>
-                <ion-item lines="full">
-                  <ion-card-title slot="start">{{
-                    prod?.articleList[0]?.articleName
-                    }}</ion-card-title>
-                  <ion-chip [color]="prod ? 'success' : 'danger'" slot="end">Available</ion-chip>
-                </ion-item>
-                <ion-item lines="full">
-                  <ion-card-subtitle slot="start">{{
-                    prod?.brand || 'Brand'
-                    }}</ion-card-subtitle>
-                  <ion-text slot="end">
-                    <h3>Price : $ 12445</h3>
-                  </ion-text>
-                </ion-item>
-              </ion-card-header>
-              <ion-card-content> </ion-card-content>
-              <ion-button color="danger" expand="block">Blink LED</ion-button>
-            </ion-card>
-          </ion-col>
-          }
-          } @else {
-          <ion-text color="danger">
-            <h1>No Products Found for selected filters</h1>
-          </ion-text>
-          }
-        </ion-row>
-      </ion-grid>
-    </ion-card-content>
-  </ion-card>
-</div>
+<ion-grid>
+    <ion-row>
+        <ion-col size="3">
+            <ion-img [src]="'https://picsum.photos/500'"></ion-img>
+        </ion-col>
+        <ion-col size="9">
+            <h1>List of selected Products</h1>
+            <ion-row>
+                @for (prod of filterData(); track $index) {
+                <ion-col>
+                    <ion-card class="product-card">
+                        <ion-img [src]="'https://picsum.photos/250'"></ion-img>
+                        <ion-card-header>
+                            <ion-card-title>{{prod?.articleList[0]?.articleName}}</ion-card-title>
+                            <ion-card-subtitle>Floor {{ prod?.position[0]?.floor }} - Shelf {{
+                                prod?.position[0]?.shelfId }}</ion-card-subtitle>
+                        </ion-card-header>
+                    </ion-card>
+                </ion-col>
+                }
+            </ion-row>
+        </ion-col>
+    </ion-row>
+</ion-grid>

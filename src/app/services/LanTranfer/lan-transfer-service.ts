@@ -12,6 +12,8 @@ import {
   providedIn: 'root',
 })
 export class LanTransferService {
+
+  //variables for tracking the server status and other details
   serverStatus = signal<boolean>(false);
   serverInfo = signal<any>(null);
   successLogs = signal<any[]>([]);
@@ -19,15 +21,18 @@ export class LanTransferService {
   receiveProgress = signal<number>(0);
   receivedFilePath = signal<any>(null);
 
+  //listeners for tracking the events
   private statusListener?: { remove: () => Promise<void> };
   private progressListener?: { remove: () => Promise<void> };
   private receiveListener?: { remove: () => Promise<void> };
   private errorListener?: { remove: () => Promise<void> };
 
+  //method for initializing the listeners
   initOnce() {
     this.registerEventListeners();
   }
 
+  //method for registering the event listeners
   async registerEventListeners() {
     this.statusListener = await LanTransfer.addListener(
       'status',
@@ -95,6 +100,7 @@ export class LanTransferService {
     );
   }
 
+  //method for starting the server
   async onStartServer() {
     this.errorLogs.set([]);
     this.successLogs.set([]);
@@ -108,22 +114,26 @@ export class LanTransferService {
     this.serverInfo.set(info);
   }
 
+  //method for stopping the server
   async onStopServer() {
     await LanTransfer.stopServer();
     this.serverInfo.set(null);
     this.serverStatus.set(false)
   }
 
+  //method for pushing the success messages
   pushSuccessMessage(message: any) {
     if (!message) return;
     this.successLogs.update((prev) => [message, ...prev]);
   }
 
+  //method for pushing the error messages
   pushErrorMessage(message: any) {
     if (!message) return;
     this.errorLogs.update((prev) => [message, ...prev]);
   }
 
+  //method for destroying the listeners
   async destroyOnce() {
     await this.statusListener?.remove();
     await this.errorListener?.remove();

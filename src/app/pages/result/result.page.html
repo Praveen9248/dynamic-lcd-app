@@ -1,12 +1,7 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title class="ion-text-center">Result</ion-title>
-  </ion-toolbar>
-</ion-header>
 <ion-content>
   <ng-template #resultHost></ng-template>
 </ion-content>
-<ion-footer class="ion-text-center">
-  <ion-button (click)="goToPrevPage()">back</ion-button>
-  <ion-button (click)="goToHome()">Homes</ion-button>
-</ion-footer>
+<ion-fab vertical="bottom" horizontal="center" class="ion-display-flex">
+  <ion-fab-button (click)="goToPrevPage()"><ion-icon name="arrow-back-circle" size="large"></ion-icon></ion-fab-button>
+  <ion-fab-button (click)="goToHome()"><ion-icon name="home" size="large"></ion-icon></ion-fab-button>
+</ion-fab>

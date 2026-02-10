@@ -1,4 +1,4 @@
-import { Component, computed, OnInit } from '@angular/core';
+import { Component, computed, OnInit, signal } from '@angular/core';
 import { ApiService } from 'src/app/services/api/api-service';
 import { ConfigService } from 'src/app/services/configuration/config-service';
 
@@ -12,7 +12,7 @@ export class Result1Component implements OnInit {
   constructor(
     private configService: ConfigService,
     private apiService: ApiService,
-  ) {}
+  ) { }
 
   CATEGORY_KEYS = ['category1', 'category2', 'category3', 'category4'];
   ETC_KEYS = ['etc0', 'etc1', 'etc2', 'etc3'];
@@ -20,6 +20,25 @@ export class Result1Component implements OnInit {
   ngOnInit() {
     this.filterData();
   }
+
+  currentStep = signal(1);
+
+  optionColumns = computed(() => {
+    const mode = this.configService.mode();
+    const selectedDepth = Object.keys(this.apiService.selectedValues).length;
+
+    const columns: string[][] = [];
+
+    for (let step = 1; step <= selectedDepth; step++) {
+      const options = this.apiService.getOptionsForStep(step, mode);
+
+      if (options && options.length > 0) {
+        columns.push(options);
+      }
+    }
+
+    return columns;
+  });
 
   filterData = computed(() => {
     const keys =
