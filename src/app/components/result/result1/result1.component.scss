@@ -1,53 +1,263 @@
-.result-container {
-  padding: 0;
-  width: 100%;
-  height: 540px;
-}
+// .result-container {
+//   height: 540px;
+//   overflow: hidden;
+//   padding: 0;
+//   margin: 0;
+//   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+// }
 
-.map-container {
-  padding: 0;
-}
+// ion-row {
+//   height: 100%;
+//   margin: 0;
+// }
 
-.map-container ion-img {
-  height: 540px;
-  object-fit: cover;
-}
+// .map-container {
+//   height: 100%;
+//   padding: 15px;
+//   background-color: #fff;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05);
 
-.right-panel {
-  padding: 0;
-}
+//   ion-img {
+//     height: 100%;
+//     width: 100%;
+//     object-fit: contain;
+//     border-radius: 12px;
+//     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+//   }
+// }
 
-.right-panel ion-grid {
-  padding: 0;
-}
+// ion-col[size="6"]:last-child {
+//   height: 100%;
+//   display: flex;
+//   flex-direction: column;
+//   padding: 25px;
+//   overflow: hidden;
+// }
 
-.right-panel ion-col {
-  height: 540px;
-  background-color: gray;
-  padding: 0;
-}
+// h1.ion-text-center {
+//   color: #fff;
+//   font-size: 28px;
+//   font-weight: 700;
+//   margin: 0 0 25px 0;
+//   flex-shrink: 0;
+//   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+//   letter-spacing: 0.5px;
+// }
 
-.right-panel ion-col ion-list {
-  padding: 0;
-}
+// .right-pane {
+//   display: flex;
+//   flex-direction: row;
+//   gap: 15px;
+//   flex: 1;
+//   overflow: hidden;
+//   background: rgba(255, 255, 255, 0.05);
+//   border-radius: 16px;
+//   padding: 15px;
+//   backdrop-filter: blur(10px);
+// }
 
-.right-panel ion-col ion-list ion-item {
-  --background: gray;
-  --inner-border-width: 0;
-}
+// .option-column {
+//   width: 200px;
+//   height: 100%;
+//   background: linear-gradient(145deg, #ffffff 0%, #f0f0f0 100%);
+//   border-radius: 12px;
+//   padding: 12px;
+//   overflow-y: auto;
+//   flex-shrink: 0;
+//   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+//   border: 1px solid rgba(255, 255, 255, 0.3);
 
-.option-column {
-  flex: 1;
-  min-width: 100px;
-  border-right: 1px solid #ddd;
-}
+//   ion-item {
+//     --background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+//     --color: #fff;
+//     --border-radius: 10px;
+//     --padding-start: 16px;
+//     --padding-end: 16px;
+//     --min-height: 48px;
+//     margin-bottom: 8px;
+//     cursor: pointer;
+//     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+//     box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+//     position: relative;
+//     overflow: hidden;
 
-.option-item {
-  padding: 12px;
-  font-size: 18px;
-}
+//     &::before {
+//       content: '';
+//       position: absolute;
+//       top: 0;
+//       left: -100%;
+//       width: 100%;
+//       height: 100%;
+//       background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+//       transition: left 0.5s;
+//     }
 
-.product-column {
-  flex: 2;
-  overflow-y: auto;
-}
+//     &:hover {
+//       --background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+//       transform: translateY(-2px) scale(1.02);
+//       box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+
+//       &::before {
+//         left: 100%;
+//       }
+//     }
+
+//     &.selected {
+//       --background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+//       box-shadow: 0 6px 25px rgba(245, 87, 108, 0.4);
+//       transform: scale(1.05);
+//     }
+
+//     h3 {
+//       color: #fff;
+//       font-size: 14px;
+//       font-weight: 600;
+//       margin: 0;
+//       text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+//     }
+//   }
+
+//   &::-webkit-scrollbar {
+//     width: 6px;
+//   }
+
+//   &::-webkit-scrollbar-track {
+//     background: rgba(0, 0, 0, 0.05);
+//     border-radius: 10px;
+//   }
+
+//   &::-webkit-scrollbar-thumb {
+//     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+//     border-radius: 10px;
+
+//     &:hover {
+//       background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+//     }
+//   }
+// }
+
+// .product-list {
+//   flex: 1;
+//   overflow: hidden;
+//   background: rgba(255, 255, 255, 0.95);
+//   border-radius: 12px;
+//   padding: 15px;
+//   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+
+//   ion-list {
+//     height: 100%;
+//     overflow-y: auto;
+//     background-color: transparent;
+//     padding: 0;
+
+//     ion-item {
+//       --background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+//       --color: #2c3e50;
+//       --border-radius: 10px;
+//       --padding-start: 16px;
+//       --padding-end: 16px;
+//       --min-height: 60px;
+//       margin-bottom: 10px;
+//       transition: all 0.3s ease;
+//       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+//       border: 1px solid rgba(255, 255, 255, 0.5);
+
+//       &:hover {
+//         --background: linear-gradient(135deg, #e0e7ff 0%, #cfd9df 100%);
+//         transform: translateX(8px) scale(1.02);
+//         box-shadow: 0 4px 16px rgba(102, 126, 234, 0.2);
+//       }
+
+//       ion-label {
+//         h1 {
+//           color: #2c3e50;
+//           font-size: 16px;
+//           font-weight: 600;
+//           margin: 0;
+//           display: flex;
+//           align-items: center;
+//           gap: 8px;
+//         }
+//       }
+
+//       ion-button {
+//         --border-width: 2px;
+//         --border-radius: 8px;
+//         --padding-start: 12px;
+//         --padding-end: 12px;
+//         margin-left: 10px;
+//         transition: all 0.3s ease;
+
+//         &:hover {
+//           transform: scale(1.1) rotate(5deg);
+//         }
+
+//         ion-icon {
+//           font-size: 24px;
+//           transition: all 0.3s ease;
+//         }
+
+//         &:hover ion-icon {
+//           filter: drop-shadow(0 0 8px currentColor);
+//         }
+//       }
+//     }
+
+//     &::-webkit-scrollbar {
+//       width: 8px;
+//     }
+
+//     &::-webkit-scrollbar-track {
+//       background: rgba(0, 0, 0, 0.05);
+//       border-radius: 10px;
+//       margin: 5px;
+//     }
+
+//     &::-webkit-scrollbar-thumb {
+//       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+//       border-radius: 10px;
+
+//       &:hover {
+//         background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+//       }
+//     }
+//   }
+// }
+
+// // Animations
+// @keyframes fadeInUp {
+//   from {
+//     opacity: 0;
+//     transform: translateY(20px);
+//   }
+
+//   to {
+//     opacity: 1;
+//     transform: translateY(0);
+//   }
+// }
+
+// .option-column,
+// .product-list {
+//   animation: fadeInUp 0.5s ease-out;
+// }
+
+// // Responsive adjustments
+// @media (max-width: 768px) {
+//   .right-pane {
+//     gap: 10px;
+//     padding: 10px;
+//   }
+
+//   .option-column {
+//     width: 160px;
+//   }
+
+//   h1.ion-text-center {
+//     font-size: 22px;
+//     margin-bottom: 15px;
+//   }
+// }

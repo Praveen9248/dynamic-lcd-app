@@ -1,4 +1,4 @@
-import { Component, computed, OnInit } from '@angular/core';
+import { Component, computed, OnInit, signal } from '@angular/core';
 import { ApiService } from 'src/app/services/api/api-service';
 import { ConfigService } from 'src/app/services/configuration/config-service';
 
@@ -13,6 +13,8 @@ export class Result4Component implements OnInit {
     private configService: ConfigService,
     private apiService: ApiService,
   ) { }
+
+
 
   CATEGORY_KEYS = ['category1', 'category2', 'category3', 'category4'];
   ETC_KEYS = ['etc0', 'etc1', 'etc2', 'etc3'];
@@ -34,6 +36,26 @@ export class Result4Component implements OnInit {
       Object.entries(result).every(([key, value]) => label[key] === value),
     );
   });
+
+  columns = computed(() => {
+    const selectedCount = Object.keys(this.apiService.selectedValues).length;
+    const cols = [];
+
+    for (let i = 0; i < selectedCount; i++) {
+      const options = this.apiService.getOptionsForStep(i, this.configService.mode());
+      cols.push({
+        stepIndex: i,
+        options: options,
+        selectedValue: this.apiService.selectedValues[i]
+      });
+    }
+
+    return cols;
+  });
+
+  isSelected(stepIndex: number, option: string): boolean {
+    return this.apiService.selectedValues[stepIndex] === option;
+  }
 
   selectedOptions = computed(() =>
     Object.values(this.apiService.selectedValues),

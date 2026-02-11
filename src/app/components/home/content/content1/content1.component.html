@@ -1,31 +1,9 @@
-<div
-  class="options-wrapper"
-  [style.background]="
-    contentData()?.backgroundStyle === 'gradient'
-      ? 'linear-gradient(' +
-        contentData()?.backgroundGradient?.angle +
-        'deg, ' +
-        contentData()?.backgroundGradient?.startColor +
-        ', ' +
-        contentData()?.backgroundGradient?.endColor +
-        ')'
-      : contentData()?.backgroundImage?.data
-        ? 'url(data:' +
-          contentData()?.backgroundImage?.mime +
-          ';base64,' +
-          contentData()?.backgroundImage?.data +
-          ')'
-        : null
-  "
-  style="background-repeat: no-repeat; background-size: cover"
->
+<div class="options-wrapper" [style.background]="backgroundStyle"
+  style="background-repeat: no-repeat; background-size: cover;">
   <div class="options-inner">
     @for (cat of categories(); track $index) {
-      <app-dynamic-button
-        (click)="onFilter(cat)"
-        [buttonImageData]="categoryImages()?.[cat]?.data"
-        >{{ cat }}</app-dynamic-button
-      >
+    <app-dynamic-button (click)="onFilter(cat)" [buttonImageData]="categoryImages()?.[cat]?.data">{{ cat
+      }}</app-dynamic-button>
     }
   </div>
 </div>

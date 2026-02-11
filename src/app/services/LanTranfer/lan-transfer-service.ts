@@ -111,6 +111,7 @@ export class LanTransferService {
       receiveFileName: 'configuration.json',
     });
     let info = await LanTransfer.getServerInfo();
+    this.pushSuccessMessage(`Server started on ${info.ip} and ${info.port}`);
     this.serverInfo.set(info);
   }
 

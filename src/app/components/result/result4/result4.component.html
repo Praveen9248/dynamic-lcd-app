@@ -2,9 +2,13 @@
   <ion-row>
     <ion-col size="8" class="left-pan">
       <ion-row class="full-height">
-        @for (col of selectedOptions(); track $index) {
+        @for (col of columns(); track col.stepIndex) {
         <ion-col class="option-box">
-          <h1>{{col}}</h1>
+          @for (opt of col.options; track opt) {
+          <div class="option-item" [class.selected]="isSelected(col.stepIndex, opt)">
+            <h3>{{opt}}</h3>
+          </div>
+          }
         </ion-col>
         }
       </ion-row>

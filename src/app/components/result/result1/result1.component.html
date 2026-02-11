@@ -5,18 +5,36 @@
       </ion-img></ion-col>
     <ion-col size="6">
       <h1 class="ion-text-center">Selected Products List</h1>
-      <ion-row>
-
-        @for (column of optionColumns(); track $index) {
-        <ion-col class="option-column">
-          @for (opt of column; track $index) {
-          <ion-col>
+      <div class="right-pane">
+        <div class="option-column">
+          @for (opt of column1Options(); track $index) {
+          <ion-item button (click)="selectOption1(opt)" [class.selected]="selectedStep1() === opt">
             <h3>{{opt}}</h3>
-          </ion-col>
+          </ion-item>
           }
-        </ion-col>
+        </div>
+        @if (column2Options()) {
+        <div class="option-column">
+          @for (opt of column2Options(); track $index) {
+          <ion-item button (click)="selectOption2(opt)" [class.selected]="selectedStep2() === opt">
+            <h3>{{opt}}</h3>
+          </ion-item>
+          }
+        </div>
         }
-        <ion-col size="4"><ion-list>
+
+        @if (column3Options()) {
+        <div class="option-column">
+          @for (opt of column3Options(); track $index) {
+          <ion-item button (click)="selectOption3(opt)" [class.selected]="selectedStep3() === opt">
+            <h3>{{opt}}</h3>
+          </ion-item>
+          }
+        </div>
+        }
+
+        <div class="product-list">
+          <ion-list>
             @for (prod of filterData(); track $index) {
             <ion-item>
               <ion-label>
@@ -25,11 +43,9 @@
               <ion-button color="danger" fill="outline"><ion-icon name="bulb" size="large"></ion-icon></ion-button>
             </ion-item>
             }
-
-          </ion-list></ion-col>
-      </ion-row>
+          </ion-list>
+        </div>
+      </div>
     </ion-col>
   </ion-row>
-
-
 </ion-grid>

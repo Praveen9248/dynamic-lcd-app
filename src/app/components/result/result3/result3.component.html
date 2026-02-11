@@ -1,42 +1,43 @@
-<ion-grid class="result-container">
-  <ion-row>
-    <ion-col size="6" class="map-container"><ion-img
-        [src]="'https://image2url.com/r2/bucket1/images/1767863662103-54cbdb90-ab14-4677-84dc-d4b810ee3a18.png'">
-      </ion-img></ion-col>
+<ion-grid class="result-container" [style.background-color]="'#555555'">
+  <ion-row class="full-height-row">
+    <ion-col size="6" class="map-container">
+      <ion-img [src]="'https://image2url.com/r2/bucket1/images/1767863662103-54cbdb90-ab14-4677-84dc-d4b810ee3a18.png'">
+      </ion-img>
+    </ion-col>
     <ion-col size="6" class="right-panel">
-
-      <ion-text class="ion-text-center">
+      <ion-text class="ion-text-center header-title">
         <h1>Selected Products List</h1>
       </ion-text>
-      <ion-grid>
-        <ion-row>
-          <ion-col size="8">
-            <ion-list>
-              @for (prod of filterData(); track $index) {
-              <ion-item>
-                <ion-label>{{$index}}</ion-label>
-                <ion-label>
-                  <h1>{{prod?.articleList[0]?.articleName}}</h1>
-                </ion-label>
-                <ion-label>
-                  <h1>Floor {{ prod?.position[0]?.floor }} - Shelf {{ prod?.position[0]?.shelfId }}</h1>
-                </ion-label>
-              </ion-item>
-              }
-            </ion-list>
-          </ion-col>
-          <ion-col size="4">
-            <ion-list lines="none">
-              @for (select of selectedOptions(); track $index) {
+      <div class="lists-wrapper">
+        <div class="list-column-left">
+          <ion-list class="list-container">
+            @for (prod of filterData(); track $index) {
+            <ion-item>
+              <ion-label>
+                <h1>{{$index}}</h1>
+              </ion-label>
+              <ion-label>
+                <h1>{{prod?.articleList[0]?.articleName}}</h1>
+                <h3>Floor {{ prod?.position[0]?.floor }} - Shelf {{ prod?.position[0]?.shelfId }}</h3>
+              </ion-label>
 
-              <ion-item button>
-                <h1>{{"# "}} {{select}}</h1>
-              </ion-item>
-              }
-            </ion-list>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+              <ion-button color="danger" fill="outline"><ion-icon name="bulb" size="large"></ion-icon></ion-button>
+
+            </ion-item>
+            }
+
+          </ion-list>
+        </div>
+        <div class="list-column-right">
+          <ion-list lines="none" class="list-container">
+            @for (select of selectedOptions(); track $index) {
+            <ion-item button>
+              <h1>{{"# "}} {{select}}</h1>
+            </ion-item>
+            }
+          </ion-list>
+        </div>
+      </div>
     </ion-col>
   </ion-row>
 </ion-grid>

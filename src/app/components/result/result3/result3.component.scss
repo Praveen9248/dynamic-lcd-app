@@ -1,37 +1,93 @@
 .result-container {
-    padding: 0;
-    width: 100%;
     height: 540px;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+ion-row {
+    height: 100%;
+    margin: 0;
+}
+
+.full-height-row {
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .map-container {
-    padding: 0;
-}
+    height: 100%;
+    padding: 15px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05);
 
-.map-container ion-img {
-    height: 540px;
-    object-fit: cover;
+    ion-img {
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
 }
 
 .right-panel {
-    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    flex: 1;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 15px;
+    backdrop-filter: blur(10px);
 }
 
-.right-panel ion-grid {
-    padding: 0;
+.header-title {
+    flex-shrink: 0;
+    margin: 0;
+    padding: 10px 0;
 }
 
-.right-panel ion-col {
-    height: 540px;
-    background-color: gray;
-    padding: 0;
+.lists-wrapper {
+    flex: 1;
+    display: flex;
+    gap: 10px;
+    min-height: 0;
+    overflow: hidden;
 }
 
-.right-panel ion-col ion-list {
-    padding: 0;
+.list-column-left {
+    width: 100%;
+    flex: 1;
+    overflow: hidden;
+
+    ion-list {
+        background: white;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
 }
 
-.right-panel ion-col ion-list ion-item {
-    --background: gray;
-    --inner-border-width: 0;
+.list-column-right {
+    width: 320px;
+    overflow: hidden;
+
+    ion-list {
+        background: white;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+}
+
+.list-container {
+    height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 0;
+    margin: 0;
 }

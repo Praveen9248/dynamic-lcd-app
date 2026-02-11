@@ -10,55 +10,89 @@ import { ConfigService } from 'src/app/services/configuration/config-service';
 })
 export class Result1Component implements OnInit {
   constructor(
-    private configService: ConfigService,
-    private apiService: ApiService,
+    public configService: ConfigService,
+    public apiService: ApiService,
   ) { }
 
   CATEGORY_KEYS = ['category1', 'category2', 'category3', 'category4'];
   ETC_KEYS = ['etc0', 'etc1', 'etc2', 'etc3'];
+  selectedValuesMini = signal<Record<number, string>>({})
+
+  selectedStep1 = signal<string | null>(null);
+  selectedStep2 = signal<string | null>(null);
+  selectedStep3 = signal<string | null>(null);
 
   ngOnInit() {
-    this.filterData();
+    const existingValues = { ...this.apiService.selectedValues };
+    this.selectedValuesMini.set(existingValues);
+
+    if (existingValues[1]) this.selectedStep1.set(existingValues[1]);
+    if (existingValues[2]) this.selectedStep2.set(existingValues[2]);
+    if (existingValues[3]) this.selectedStep3.set(existingValues[3]);
   }
 
   currentStep = signal(1);
 
-  optionColumns = computed(() => {
-    const mode = this.configService.mode();
-    const selectedDepth = Object.keys(this.apiService.selectedValues).length;
-
-    const columns: string[][] = [];
-
-    for (let step = 1; step <= selectedDepth; step++) {
-      const options = this.apiService.getOptionsForStep(step, mode);
-
-      if (options && options.length > 0) {
-        columns.push(options);
-      }
-    }
-
-    return columns;
-  });
-
-  filterData = computed(() => {
-    const keys =
-      this.configService.mode() === 'CATEGORY'
-        ? this.CATEGORY_KEYS
-        : this.ETC_KEYS;
-    const result = this.mapIndexSelections(
-      this.apiService.selectedValues,
-      keys,
-    );
-    return this.labels().filter((label: any) =>
-      Object.entries(result).every(([key, value]) => label[key] === value),
-    );
-  });
-
-  selectedOptions = computed(() =>
-    Object.values(this.apiService.selectedValues),
+  column1Options = computed(() =>
+    this.apiService.getOptionsForStep(1, this.configService.mode())
   );
 
-  labels = computed(() => this.apiService.apiData()?.labelList);
+  column2Options = computed(() => {
+    if (!this.selectedStep1()) return null;
+    return this.apiService.getOptionsForStep(2, this.configService.mode());
+  });
+
+  column3Options = computed(() => {
+    if (!this.selectedStep2()) return null;
+    return this.apiService.getOptionsForStep(3, this.configService.mode());
+  })
+
+
+  selectOption1(opt: string) {
+    this.selectedStep1.set(opt);
+    this.selectedStep2.set(null);
+    this.selectedStep3.set(null);
+    this.selectedValuesMini.set({ 1: opt });
+  }
+
+  selectOption2(opt: string) {
+    this.selectedStep2.set(opt);
+    this.selectedStep3.set(null);
+    const current = { ...this.selectedValuesMini() };
+    current[2] = opt;
+    delete current[3];
+    this.selectedValuesMini.set(current);
+
+  }
+
+  selectOption3(opt: string) {
+    this.selectedStep3.set(opt);
+    const current = { ...this.selectedValuesMini() };
+    current[3] = opt;
+    this.selectedValuesMini.set(current);
+  }
+
+  filterData = computed(() => {
+    const keys = this.configService.mode() === 'CATEGORY'
+      ? this.CATEGORY_KEYS
+      : this.ETC_KEYS;
+
+    const selectedValues = this.selectedValuesMini();
+    console.log(selectedValues)
+    const labels = this.labels();
+
+    if (!labels || labels.length === 0) return [];
+
+    const result = this.mapIndexSelections(selectedValues, keys);
+
+    if (Object.keys(result).length === 0) return labels;
+
+    return labels.filter((label: any) =>
+      Object.entries(result).every(([key, value]) => label[key] === value)
+    );
+  });
+
+  labels = computed(() => this.apiService.apiData()?.labelList || []);
 
   mapIndexSelections(
     selected: Record<number, string>,
