@@ -21,6 +21,22 @@ export class Result3Component implements OnInit {
     this.filterData();
   }
 
+  containerStyle = computed(() => {
+    const styleData = this.configService.configData()?.result?.container;
+    const res = styleData.backgroundStyle === 'gradient' ? `linear-gradient(${styleData.backgroundGradient.angle}deg,${styleData.backgroundGradient.startColor},${styleData.backgroundGradient.endColor})` : styleData.backgroundColor;
+    return res;
+  })
+  activeStyle = computed(() => {
+    const styleData = this.configService.configData()?.result?.active;
+    const res = styleData.backgroundStyle === 'gradient' ? `linear-gradient(${styleData.backgroundGradient.angle}deg,${styleData.backgroundGradient.startColor},${styleData.backgroundGradient.endColor})` : styleData.backgroundColor;
+    return res;
+  })
+  outputStyle = computed(() => {
+    const styleData = this.configService.configData()?.result?.output;
+    const res = styleData.backgroundStyle === 'gradient' ? `linear-gradient(${styleData.backgroundGradient.angle}deg,${styleData.backgroundGradient.startColor},${styleData.backgroundGradient.endColor})` : styleData.backgroundColor;
+    return res;
+  })
+
   filterData = computed(() => {
     const keys =
       this.configService.mode() === 'CATEGORY'

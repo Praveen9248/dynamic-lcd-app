@@ -1,4 +1,4 @@
-<ion-grid class="result-container">
+<ion-grid class="result-container" [style.background]="containerStyle()">
   <ion-row>
     <ion-col size="6" class="map-container"><ion-img
         [src]="'https://image2url.com/r2/bucket1/images/1767863662103-54cbdb90-ab14-4677-84dc-d4b810ee3a18.png'">
@@ -8,7 +8,8 @@
       <div class="right-pane">
         <div class="option-column">
           @for (opt of column1Options(); track $index) {
-          <ion-item button (click)="selectOption1(opt)" [class.selected]="selectedStep1() === opt">
+          <ion-item button (click)="selectOption1(opt)" [class.selected]="selectedStep1() === opt"
+            [style.--background]="selectedStep1() !== opt ? inactiveStyle() : activeStyle()">
             <h3>{{opt}}</h3>
           </ion-item>
           }
@@ -16,7 +17,8 @@
         @if (column2Options()) {
         <div class="option-column">
           @for (opt of column2Options(); track $index) {
-          <ion-item button (click)="selectOption2(opt)" [class.selected]="selectedStep2() === opt">
+          <ion-item button (click)="selectOption2(opt)" [class.selected]="selectedStep2() === opt"
+            [style.--background]="selectedStep2() !== opt ? inactiveStyle() : activeStyle()">
             <h3>{{opt}}</h3>
           </ion-item>
           }
@@ -26,7 +28,8 @@
         @if (column3Options()) {
         <div class="option-column">
           @for (opt of column3Options(); track $index) {
-          <ion-item button (click)="selectOption3(opt)" [class.selected]="selectedStep3() === opt">
+          <ion-item button (click)="selectOption3(opt)" [class.selected]="selectedStep3() === opt" [style.--background]="selectedStep3() !== opt ? inactiveStyle() :
+            activeStyle()">
             <h3>{{opt}}</h3>
           </ion-item>
           }
@@ -36,13 +39,14 @@
         <div class="product-list">
           <ion-list>
             @for (prod of filterData(); track $index) {
-            <ion-item>
+            <ion-item [style.--background]="outputStyle()">
               <ion-label>
                 <h1>{{$index }}{{" : "}}{{prod?.articleList[0]?.articleName}}</h1>
               </ion-label>
               <ion-button color="danger" fill="outline"><ion-icon name="bulb" size="large"></ion-icon></ion-button>
             </ion-item>
             }
+
           </ion-list>
         </div>
       </div>

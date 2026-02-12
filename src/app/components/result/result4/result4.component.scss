@@ -3,7 +3,7 @@
     overflow: hidden;
     padding: 0;
     margin: 0;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
 }
 
 ion-row {
@@ -33,23 +33,11 @@ ion-row {
     justify-content: center;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 
-    &::-webkit-scrollbar {
-        width: 6px;
-    }
 
-    &::-webkit-scrollbar-track {
-        background: rgba(0, 0, 0, 0.05);
-        border-radius: 10px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border-radius: 10px;
-    }
 }
 
 .option-item {
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+
     border-radius: 10px;
     padding: 12px 16px;
     margin-bottom: 10px;
@@ -65,21 +53,18 @@ ion-row {
     }
 
     &.selected {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         border-color: #f5576c;
-        box-shadow: 0 6px 25px rgba(102, 126, 234, 0.4);
-        transform: scale(1.05);
 
         h3 {
             color: #fff;
-            font-weight: 700;
+            font-weight: 800;
         }
     }
 
     h3 {
-        color: #2c3e50;
+        color: #f0f4f7;
         font-size: 15px;
-        font-weight: 600;
+        font-weight: 500;
         margin: 0;
         transition: color 0.3s ease;
     }
@@ -110,7 +95,7 @@ ion-list {
     padding: 0;
 
     ion-item {
-        --background: rgba(255, 255, 255, 0.95);
+
         --color: #2c3e50;
         --border-radius: 10px;
         --padding-start: 16px;
@@ -152,21 +137,4 @@ ion-list {
         }
     }
 
-    &::-webkit-scrollbar {
-        width: 8px;
-    }
-
-    &::-webkit-scrollbar-track {
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 10px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.3);
-        border-radius: 10px;
-
-        &:hover {
-            background: rgba(255, 255, 255, 0.5);
-        }
-    }
 }

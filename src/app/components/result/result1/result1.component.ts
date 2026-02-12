@@ -18,6 +18,27 @@ export class Result1Component implements OnInit {
   ETC_KEYS = ['etc0', 'etc1', 'etc2', 'etc3'];
   selectedValuesMini = signal<Record<number, string>>({})
 
+  containerStyle = computed(() => {
+    const styleData = this.configService.configData()?.result?.container;
+    const res = styleData.backgroundStyle === 'gradient' ? `linear-gradient(${styleData.backgroundGradient.angle}deg,${styleData.backgroundGradient.startColor},${styleData.backgroundGradient.endColor})` : styleData.backgroundColor;
+    return res;
+  })
+  activeStyle = computed(() => {
+    const styleData = this.configService.configData()?.result?.active;
+    const res = styleData.backgroundStyle === 'gradient' ? `linear-gradient(${styleData.backgroundGradient.angle}deg,${styleData.backgroundGradient.startColor},${styleData.backgroundGradient.endColor})` : styleData.backgroundColor;
+    return res;
+  })
+  inactiveStyle = computed(() => {
+    const styleData = this.configService.configData()?.result?.inactive;
+    const res = styleData.backgroundStyle === 'gradient' ? `linear-gradient(${styleData.backgroundGradient.angle}deg,${styleData.backgroundGradient.startColor},${styleData.backgroundGradient.endColor})` : styleData.backgroundColor;
+    return res;
+  })
+  outputStyle = computed(() => {
+    const styleData = this.configService.configData()?.result?.output;
+    const res = styleData.backgroundStyle === 'gradient' ? `linear-gradient(${styleData.backgroundGradient.angle}deg,${styleData.backgroundGradient.startColor},${styleData.backgroundGradient.endColor})` : styleData.backgroundColor;
+    return res;
+  })
+
   selectedStep1 = signal<string | null>(null);
   selectedStep2 = signal<string | null>(null);
   selectedStep3 = signal<string | null>(null);
@@ -73,6 +94,7 @@ export class Result1Component implements OnInit {
   }
 
   filterData = computed(() => {
+    console.log("worked on init only");
     const keys = this.configService.mode() === 'CATEGORY'
       ? this.CATEGORY_KEYS
       : this.ETC_KEYS;

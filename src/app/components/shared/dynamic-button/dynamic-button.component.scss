@@ -1,26 +1,56 @@
-.dynamicBtn{
+.dynamicBtn {
     position: relative;
     overflow: hidden;
 
-    .imageBtn{
+    .imageBtn {
         width: 100%;
         height: 100%;
         object-fit: cover;
     }
 
-    .overlay-wrapper{
+    .overlay-wrapper {
         position: absolute;
         inset: 0;
         display: flex;
-        padding:10px;
+        padding: 10px;
         pointer-events: none;
     }
 
-    .h-left{ justify-content: flex-start;}
-    .h-center{ justify-content: center;}
-    .h-right{ justify-content: flex-end;}
-    
-    .v-top{ align-items: flex-start;}
-    .v-center{ align-items: center;}
-    .v-bottom{ align-items: flex-end;}
+    .h-left {
+        justify-content: flex-start;
+    }
+
+    .h-center {
+        justify-content: center;
+    }
+
+    .h-right {
+        justify-content: flex-end;
+    }
+
+    .v-top {
+        align-items: flex-start;
+    }
+
+    .v-center {
+        align-items: center;
+    }
+
+    .v-bottom {
+        align-items: flex-end;
+    }
+}
+
+.glass-text {
+    padding: 8px 14px;
+    border-radius: 12px;
+
+    background: rgba(30, 0, 10, 0.35);
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
 }

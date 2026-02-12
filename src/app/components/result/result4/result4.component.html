@@ -1,11 +1,12 @@
-<ion-grid class="result-container">
+<ion-grid class="result-container" [style.background]="containerStyle()">
   <ion-row>
     <ion-col size="8" class="left-pan">
       <ion-row class="full-height">
         @for (col of columns(); track col.stepIndex) {
         <ion-col class="option-box">
           @for (opt of col.options; track opt) {
-          <div class="option-item" [class.selected]="isSelected(col.stepIndex, opt)">
+          <div class="option-item" [class.selected]="isSelected(col.stepIndex, opt)"
+            [style.background]="isSelected(col.stepIndex,opt)===true ? activeStyle() : inactiveStyle()">
             <h3>{{opt}}</h3>
           </div>
           }
@@ -18,7 +19,7 @@
       <ion-list>
 
         @for (prod of filterData(); track $index) {
-        <ion-item>
+        <ion-item [style.--background]="outputStyle()">
           <ion-label>
             <h1>{{$index }}{{" : "}}{{prod?.articleList[0]?.articleName}}</h1>
           </ion-label>

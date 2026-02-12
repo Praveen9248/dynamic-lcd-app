@@ -24,7 +24,7 @@ export class ResultPage implements OnInit {
   resultsRef!: ComponentRef<any>;
 
   resultComponent = computed(() => {
-    let code = this.configService.configData()?.flow?.result?.code;
+    let code = this.configService.configData()?.result?.template;
     console.log(code);
     return ResultComponentCodeMap[code];
   });

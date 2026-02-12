@@ -14,14 +14,33 @@ export class Result4Component implements OnInit {
     private apiService: ApiService,
   ) { }
 
-
-
   CATEGORY_KEYS = ['category1', 'category2', 'category3', 'category4'];
   ETC_KEYS = ['etc0', 'etc1', 'etc2', 'etc3'];
 
   ngOnInit() {
     this.filterData();
   }
+
+  containerStyle = computed(() => {
+    const styleData = this.configService.configData()?.result?.container;
+    const res = styleData.backgroundStyle === 'gradient' ? `linear-gradient(${styleData.backgroundGradient.angle}deg,${styleData.backgroundGradient.startColor},${styleData.backgroundGradient.endColor})` : styleData.backgroundColor;
+    return res;
+  })
+  activeStyle = computed(() => {
+    const styleData = this.configService.configData()?.result?.active;
+    const res = styleData.backgroundStyle === 'gradient' ? `linear-gradient(${styleData.backgroundGradient.angle}deg,${styleData.backgroundGradient.startColor},${styleData.backgroundGradient.endColor})` : styleData.backgroundColor;
+    return res;
+  })
+  inactiveStyle = computed(() => {
+    const styleData = this.configService.configData()?.result?.inactive;
+    const res = styleData.backgroundStyle === 'gradient' ? `linear-gradient(${styleData.backgroundGradient.angle}deg,${styleData.backgroundGradient.startColor},${styleData.backgroundGradient.endColor})` : styleData.backgroundColor;
+    return res;
+  })
+  outputStyle = computed(() => {
+    const styleData = this.configService.configData()?.result?.output;
+    const res = styleData.backgroundStyle === 'gradient' ? `linear-gradient(${styleData.backgroundGradient.angle}deg,${styleData.backgroundGradient.startColor},${styleData.backgroundGradient.endColor})` : styleData.backgroundColor;
+    return res;
+  })
 
   filterData = computed(() => {
     const keys =

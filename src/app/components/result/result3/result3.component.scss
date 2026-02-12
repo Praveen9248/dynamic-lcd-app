@@ -1,20 +1,24 @@
+:host {
+    display: block;
+    height: 100%;
+}
+
 .result-container {
-    height: 540px;
+    height: 100%;
     overflow: hidden;
     padding: 0;
     margin: 0;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
-ion-row {
-    height: 100%;
-    margin: 0;
-}
-
+ion-row,
 .full-height-row {
     height: 100%;
     margin: 0;
     padding: 0;
+}
+
+ion-col {
+    height: 100%;
 }
 
 .map-container {
@@ -39,8 +43,7 @@ ion-row {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    flex: 1;
-    overflow: hidden;
+
     background: rgba(255, 255, 255, 0.05);
     border-radius: 16px;
     padding: 15px;
@@ -58,36 +61,72 @@ ion-row {
     display: flex;
     gap: 10px;
     min-height: 0;
-    overflow: hidden;
 }
 
 .list-column-left {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     flex: 1;
-    overflow: hidden;
+    min-height: 0;
 
-    ion-list {
+
+    .list-container {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        height: 100%;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        margin: 0;
         background: white;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
         border: 1px solid rgba(255, 255, 255, 0.3);
+        padding: 20px;
+        border-radius: 12px;
+
+        ion-item {
+            flex-shrink: 0;
+            min-height: auto;
+        }
+
+        ion-item::part(native) {
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            margin: 20px 0;
+        }
     }
 }
 
 .list-column-right {
+    display: flex;
+    flex-direction: column;
     width: 320px;
-    overflow: hidden;
+    min-height: 0;
 
-    ion-list {
+    .list-container {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        height: 100%;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        margin: 0;
         background: white;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
         border: 1px solid rgba(255, 255, 255, 0.3);
-    }
-}
+        padding: 20px;
+        border-radius: 12px;
 
-.list-container {
-    height: 100%;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    padding: 0;
-    margin: 0;
+        ion-item {
+            flex-shrink: 0;
+            min-height: auto;
+        }
+
+        ion-item::part(native) {
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            margin: 10px 0;
+        }
+    }
 }

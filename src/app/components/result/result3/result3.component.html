@@ -1,4 +1,4 @@
-<ion-grid class="result-container" [style.background-color]="'#555555'">
+<ion-grid class="result-container" [style.background]="containerStyle()">
   <ion-row class="full-height-row">
     <ion-col size="6" class="map-container">
       <ion-img [src]="'https://image2url.com/r2/bucket1/images/1767863662103-54cbdb90-ab14-4677-84dc-d4b810ee3a18.png'">
@@ -12,7 +12,7 @@
         <div class="list-column-left">
           <ion-list class="list-container">
             @for (prod of filterData(); track $index) {
-            <ion-item>
+            <ion-item [style.--background]="outputStyle()">
               <ion-label>
                 <h1>{{$index}}</h1>
               </ion-label>
@@ -31,7 +31,7 @@
         <div class="list-column-right">
           <ion-list lines="none" class="list-container">
             @for (select of selectedOptions(); track $index) {
-            <ion-item button>
+            <ion-item button [style.--background]="activeStyle()">
               <h1>{{"# "}} {{select}}</h1>
             </ion-item>
             }
