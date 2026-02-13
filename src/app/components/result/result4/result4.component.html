@@ -6,7 +6,8 @@
         <ion-col class="option-box">
           @for (opt of col.options; track opt) {
           <div class="option-item" [class.selected]="isSelected(col.stepIndex, opt)"
-            [style.background]="isSelected(col.stepIndex,opt)===true ? activeStyle() : inactiveStyle()">
+            [style.background]="isSelected(col.stepIndex,opt)===true ? activeStyle() : inactiveStyle()"
+            (click)="goToOptions(col.stepIndex)" button>
             <h3>{{opt}}</h3>
           </div>
           }
@@ -26,7 +27,8 @@
           <ion-label>
             <h1>Floor {{ prod?.position[0]?.floor }} - Shelf {{ prod?.position[0]?.shelfId }}</h1>
           </ion-label>
-          <ion-button color="danger" fill="outline"><ion-icon name="bulb" size="large"></ion-icon></ion-button>
+          <ion-button color="danger" fill="outline" (click)="onBlink(prod?.labelCode)"><ion-icon name="bulb"
+              size="large"></ion-icon></ion-button>
         </ion-item>
         }
 

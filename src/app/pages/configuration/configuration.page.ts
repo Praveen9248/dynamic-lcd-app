@@ -56,7 +56,7 @@ export class ConfigurationPage implements OnInit, OnDestroy {
       this.onStopServer();
       this.preferenceService.setConfigured(true);
       this.preferenceService.setFilePath(path);
-      this.router.navigate(['']);
+      this.router.navigate(['home']);
     } catch (error) {
       console.error('Error loading received configuration:', error);
 

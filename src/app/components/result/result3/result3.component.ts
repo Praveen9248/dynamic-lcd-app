@@ -1,4 +1,5 @@
 import { Component, computed, OnInit } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 import { ApiService } from 'src/app/services/api/api-service';
 import { ConfigService } from 'src/app/services/configuration/config-service';
 
@@ -12,6 +13,7 @@ export class Result3Component implements OnInit {
   constructor(
     private configService: ConfigService,
     private apiService: ApiService,
+    private alertController: AlertController
   ) { }
 
   CATEGORY_KEYS = ['category1', 'category2', 'category3', 'category4'];
@@ -36,6 +38,17 @@ export class Result3Component implements OnInit {
     const res = styleData.backgroundStyle === 'gradient' ? `linear-gradient(${styleData.backgroundGradient.angle}deg,${styleData.backgroundGradient.startColor},${styleData.backgroundGradient.endColor})` : styleData.backgroundColor;
     return res;
   })
+
+
+  goToOptions(index: number) {
+    if (index === 0) {
+      this.configService.goToHomePage();
+      return;
+    }
+
+    this.configService.currentIntermediateIdx.set(index);
+    this.configService.goToIntermediatePage();
+  }
 
   filterData = computed(() => {
     const keys =
@@ -76,5 +89,24 @@ export class Result3Component implements OnInit {
       });
 
     return result;
+  }
+
+  async onBlink(labelCode: string) {
+    const alert = await this.alertController.create({
+      header: 'Blink LED',
+      subHeader: 'LED will blink for 30 seconds',
+      message: 'Label ' + labelCode + ' LED is Blinking',
+      buttons: [
+        {
+          text: 'TAKE ME HOME',
+          cssClass: 'alert-button-confirm',
+          handler: () => {
+            console.log('Confirm clicked');
+            this.configService.goToHomePage();
+          }
+        }
+      ],
+    });
+    await alert.present();
   }
 }

@@ -10,9 +10,9 @@ export class GestureService {
     private tapTimeout: any;
 
     //constants for tap limit, tap window and corner size
-    private readonly TAP_LIMIT = 7;
+    private readonly TAP_LIMIT = 14;
     private readonly TAP_WINDOW = 4000;
-    private readonly CORNER_SIZE = 150;
+    private readonly CORNER_SIZE = 100;
 
     constructor(
         private preferenceService: PreferenceService,
@@ -42,13 +42,13 @@ export class GestureService {
             ? (event as TouchEvent).touches[0].clientY
             : (event as MouseEvent).clientY;
 
-        const screenWidth = window.innerWidth;
+        // const screenWidth = window.innerWidth;
 
-        const isTopRight =
-            x > screenWidth - this.CORNER_SIZE &&
+        const isTopLeft =
+            x < this.CORNER_SIZE &&
             y < this.CORNER_SIZE;
 
-        if (!isTopRight) return;
+        if (!isTopLeft) return;
 
         this.tapCount++;
 

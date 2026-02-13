@@ -16,7 +16,7 @@ export class Result1Component implements OnInit {
 
   CATEGORY_KEYS = ['category1', 'category2', 'category3', 'category4'];
   ETC_KEYS = ['etc0', 'etc1', 'etc2', 'etc3'];
-  selectedValuesMini = signal<Record<number, string>>({})
+  selectedValuesMini = signal<Record<number, string>>({});
 
   containerStyle = computed(() => {
     const styleData = this.configService.configData()?.result?.container;
@@ -60,12 +60,16 @@ export class Result1Component implements OnInit {
 
   column2Options = computed(() => {
     if (!this.selectedStep1()) return null;
-    return this.apiService.getOptionsForStep(2, this.configService.mode());
+    const options = this.apiService.getOptionsForStep(2, this.configService.mode());
+    if (!(options.length > 0)) return null;
+    return options;
   });
 
   column3Options = computed(() => {
     if (!this.selectedStep2()) return null;
-    return this.apiService.getOptionsForStep(3, this.configService.mode());
+    const options = this.apiService.getOptionsForStep(3, this.configService.mode());
+    if (!(options.length > 0)) return null;
+    return options;
   })
 
 

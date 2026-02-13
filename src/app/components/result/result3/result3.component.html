@@ -21,7 +21,8 @@
                 <h3>Floor {{ prod?.position[0]?.floor }} - Shelf {{ prod?.position[0]?.shelfId }}</h3>
               </ion-label>
 
-              <ion-button color="danger" fill="outline"><ion-icon name="bulb" size="large"></ion-icon></ion-button>
+              <ion-button color="danger" fill="outline" (click)="onBlink(prod?.labelCode)"><ion-icon name="bulb"
+                  size="large"></ion-icon></ion-button>
 
             </ion-item>
             }
@@ -31,7 +32,7 @@
         <div class="list-column-right">
           <ion-list lines="none" class="list-container">
             @for (select of selectedOptions(); track $index) {
-            <ion-item button [style.--background]="activeStyle()">
+            <ion-item button [style.--background]="activeStyle()" (click)="goToOptions($index)">
               <h1>{{"# "}} {{select}}</h1>
             </ion-item>
             }

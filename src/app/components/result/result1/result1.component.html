@@ -6,6 +6,7 @@
     <ion-col size="6">
       <h1 class="ion-text-center">Selected Products List</h1>
       <div class="right-pane">
+        @if (column1Options().length > 0) {
         <div class="option-column">
           @for (opt of column1Options(); track $index) {
           <ion-item button (click)="selectOption1(opt)" [class.selected]="selectedStep1() === opt"
@@ -14,6 +15,7 @@
           </ion-item>
           }
         </div>
+        }
         @if (column2Options()) {
         <div class="option-column">
           @for (opt of column2Options(); track $index) {
@@ -38,12 +40,20 @@
 
         <div class="product-list">
           <ion-list>
+            @if(filterData().length>0){
             @for (prod of filterData(); track $index) {
             <ion-item [style.--background]="outputStyle()">
               <ion-label>
                 <h1>{{$index }}{{" : "}}{{prod?.articleList[0]?.articleName}}</h1>
               </ion-label>
               <ion-button color="danger" fill="outline"><ion-icon name="bulb" size="large"></ion-icon></ion-button>
+            </ion-item>
+            }
+            }@else {
+            <ion-item [style.--background]="outputStyle()">
+              <ion-label>
+                <h1>No Products Found</h1>
+              </ion-label>
             </ion-item>
             }
 
