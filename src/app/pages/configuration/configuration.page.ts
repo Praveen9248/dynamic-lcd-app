@@ -1,5 +1,6 @@
 import { Component, computed, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { ConfigService } from 'src/app/services/configuration/config-service';
 import { LanTransferService } from 'src/app/services/LanTranfer/lan-transfer-service';
 import { ScreenSaverService } from 'src/app/services/screen-saver/screen-saver-service';
@@ -18,6 +19,7 @@ export class ConfigurationPage implements OnInit, OnDestroy {
     private preferenceService: PreferenceService,
     private router: Router,
     private screenSaverService: ScreenSaverService,
+
   ) { }
 
   serverStatus = computed(() => this.LanService.serverStatus());

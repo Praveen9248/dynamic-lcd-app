@@ -1,11 +1,28 @@
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .dynamicBtn {
     position: relative;
     overflow: hidden;
+    width: 100%;
+    height: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    --padding-start: 0;
+    --padding-end: 0;
+    --padding-top: 0;
+    --padding-bottom: 0;
 
     .imageBtn {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        display: block;
+        margin: 0;
+        padding: 0;
     }
 
     .overlay-wrapper {

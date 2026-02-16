@@ -1,4 +1,5 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
+import { LoadingController } from '@ionic/angular';
 
 import {
   ErrorEvent,
@@ -21,6 +22,7 @@ export class LanTransferService {
   receiveProgress = signal<number>(0);
   receivedFilePath = signal<any>(null);
 
+
   //listeners for tracking the events
   private statusListener?: { remove: () => Promise<void> };
   private progressListener?: { remove: () => Promise<void> };
@@ -30,6 +32,25 @@ export class LanTransferService {
   //method for initializing the listeners
   initOnce() {
     this.registerEventListeners();
+  }
+
+  loadingController = inject(LoadingController);
+
+  private loader = signal<HTMLIonLoadingElement | null>(null);
+
+  async show(message: string = "Please wait...") {
+    if (this.loader()) return;
+    this.loader.set(await this.loadingController.create({
+      message,
+      spinner: 'crescent',
+      backdropDismiss: false,
+    }));
+    await this.loader()?.present();
+  }
+
+  async hide() {
+    await this.loader()?.dismiss();
+    this.loader.set(null);
   }
 
   //method for registering the event listeners
@@ -55,6 +76,10 @@ export class LanTransferService {
             this.pushSuccessMessage('Client Connected');
             break;
 
+          case 'receive_started':
+            this.show('Receiving file...');
+            break;
+
           case 'client_disconnected':
             this.pushSuccessMessage('Client Disconnected');
             break;
@@ -70,7 +95,6 @@ export class LanTransferService {
       'progress',
       (e: ProgressEvent) => {
         if (e.role !== 'server' || e.direction !== 'receive') return;
-
         this.receiveProgress.set(e.percent);
       },
     );
@@ -80,6 +104,7 @@ export class LanTransferService {
       async (e: ReceiveCompleteEvent) => {
         if (e.role !== 'server') return;
         this.receiveProgress.set(100);
+        this.hide();
         this.pushSuccessMessage(`File received (${e.totalBytes}) bytes`);
         this.receivedFilePath.set(e.filePath);
       },
@@ -94,7 +119,7 @@ export class LanTransferService {
           e.message?.includes('Socket')
         )
           return;
-
+        this.hide();
         this.pushErrorMessage(`Error : ${e.message}`);
       },
     );
