@@ -39,29 +39,32 @@ export class ConfigurationPage implements OnInit, OnDestroy {
     this.LanService.initOnce();
   }
 
-  onStartServer() {
-    this.LanService.onStartServer();
+  async onStartServer() {
+    await this.LanService.onStartServer();
   }
 
-  onStopServer() {
-    this.LanService.onStopServer();
+  async onStopServer() {
+    await this.LanService.onStopServer();
   }
 
   async activateConfiguration() {
     const path = this.LanService.receivedFilePath();
-    if (!path) return;
+    if (!path) {
+      this.LanService.show('No file path available yet, Try again');
+      return;
+    }
     try {
 
       const config = await this.configService.loadConfigFromFilePath(path);
       this.configService.configData.set(config);
 
-      this.onStopServer();
+      await this.onStopServer();
       this.preferenceService.setConfigured(true);
       this.preferenceService.setFilePath(path);
-      this.router.navigate(['home']);
+      await this.router.navigate(['home']);
     } catch (error) {
       console.error('Error loading received configuration:', error);
-
+      this.LanService.pushErrorMessage(`Failed to activate config: ${(error as Error).message}`);
     }
   }
 
