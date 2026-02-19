@@ -46,7 +46,8 @@
               <ion-label>
                 <h1>{{$index }}{{" : "}}{{prod?.articleList[0]?.articleName}}</h1>
               </ion-label>
-              <ion-button color="danger" fill="outline"><ion-icon name="bulb" size="large"></ion-icon></ion-button>
+              <ion-button color="danger" fill="outline" (click)="onBlink(prod?.labelCode)"><ion-icon name="bulb"
+                  size="large"></ion-icon></ion-button>
             </ion-item>
             }
             }@else {

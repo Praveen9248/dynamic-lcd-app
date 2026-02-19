@@ -1,4 +1,4 @@
-<ion-card button class="dynamicBtn" [ngStyle]="dynamicStyles()">
+<div class="dynamicBtn ion-activatable" [ngStyle]="dynamicStyles()">
   @if (
   buttonData()?.buttonType === "image-only" ||
   buttonData()?.buttonType === "textImage"
@@ -18,4 +18,5 @@
     </ion-text>
   </div>
   }
-</ion-card>
+  <ion-ripple-effect></ion-ripple-effect>
+</div>

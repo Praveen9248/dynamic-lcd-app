@@ -2,7 +2,7 @@
   style="background-repeat: no-repeat; background-size: cover;" class="content-wrapper">
   <ion-row class="ion-justify-content-center">
     @for (cat of categories(); track $index) {
-    <ion-col sizeXs="12" sizeSm="6" sizeMd="4" sizeLg="3" sizeXl="2">
+    <ion-col size="3">
       <app-dynamic-button style="display: block; width: fit-content; margin: 0 auto"
         [buttonImageData]="categoryImages()?.[cat]?.data" (click)="onFilter(cat)">
         {{cat}}

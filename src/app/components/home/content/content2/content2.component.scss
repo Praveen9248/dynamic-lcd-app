@@ -1,6 +1,12 @@
-.content-wrapper{
+.content-wrapper {
     height: 100%;
     width: 100%;
     display: grid;
     align-items: center;
+    overflow-y: auto;
+}
+
+ion-col {
+    display: flex;
+    justify-content: center;
 }

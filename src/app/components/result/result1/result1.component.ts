@@ -1,4 +1,5 @@
 import { Component, computed, OnInit, signal } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 import { ApiService } from 'src/app/services/api/api-service';
 import { ConfigService } from 'src/app/services/configuration/config-service';
 
@@ -12,6 +13,7 @@ export class Result1Component implements OnInit {
   constructor(
     public configService: ConfigService,
     public apiService: ApiService,
+    private alertController: AlertController
   ) { }
 
   CATEGORY_KEYS = ['category1', 'category2', 'category3', 'category4'];
@@ -139,5 +141,24 @@ export class Result1Component implements OnInit {
       });
 
     return result;
+  }
+
+  async onBlink(labelCode: string) {
+    const alert = await this.alertController.create({
+      header: 'Blink LED',
+      subHeader: 'LED will blink for 30 seconds',
+      message: 'Label ' + labelCode + ' LED is Blinking',
+      buttons: [
+        {
+          text: 'TAKE ME HOME',
+          cssClass: 'alert-button-confirm',
+          handler: () => {
+            console.log('Confirm clicked');
+            this.configService.goToHomePage();
+          }
+        }
+      ],
+    });
+    await alert.present();
   }
 }

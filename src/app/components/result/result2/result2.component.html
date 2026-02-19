@@ -34,7 +34,7 @@
             <div class="products-container">
                 @for (prod of filterData(); track $index) {
 
-                <ion-card class="product-card">
+                <ion-card class="product-card" (click)="onBlink(prod?.labelCode)">
                     <ion-img [src]="'https://picsum.photos/250'"></ion-img>
                     <ion-card-header>
                         <ion-card-title>{{prod?.articleList[0]?.articleName}}</ion-card-title>

@@ -11,6 +11,7 @@
       <div class="lists-wrapper">
         <div class="list-column-left">
           <ion-list class="list-container">
+            @if (filterData().length>0) {
             @for (prod of filterData(); track $index) {
             <ion-item [style.--background]="outputStyle()">
               <ion-label>
@@ -26,7 +27,13 @@
 
             </ion-item>
             }
-
+            }@else {
+            <ion-item [style.--background]="outputStyle()">
+              <ion-label>
+                <h1>No Products Found</h1>
+              </ion-label>
+            </ion-item>
+            }
           </ion-list>
         </div>
         <div class="list-column-right">

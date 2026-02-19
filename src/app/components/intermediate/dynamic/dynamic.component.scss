@@ -1,20 +1,24 @@
-.filter-wrapper{
+.filter-wrapper {
   height: 100%;
   width: 100%;
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.filter-inner{
-  display:flex;
+.filter-inner {
+  display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   padding: 10px;
   gap: 12px;
+
+  app-dynamic-button {
+    flex: 0 0 auto;
+  }
 }
 
-.filter-inner::-webkit-scrollbar{
+.filter-inner::-webkit-scrollbar {
   display: none;
 }
